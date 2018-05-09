@@ -1,0 +1,194 @@
+@extends('admin.layouts.main')
+
+@section('content')
+  <form action="{{ route('settingsave') }}" role="form" id="form_advanced_validation" class="masked-input" method="POST" autocomplete="off" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Basic Examples -->
+        <div class="row clearfix">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  {{ trans('modulesettings.contact') }}
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label for="address" class="col-sm-2 col-form-label">{{ trans('modulesettings.address') }}</label>
+                  <div class="col-sm-10">
+                    <input required type="text" name="address" class="form-control" placeholder="{{ trans('modulesettings.address') }}" value="{{ (!empty(old('address'))) ? old('address') : $settings->address }}" />
+                    @if ($errors->has('address'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('address') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{{ trans('modulesettings.phone') }}</label>
+                  <div class="col-sm-10">
+                    <input required type="phone" name="phone" class="form-control phone-number" placeholder="{{ trans('modulesettings.phone') }}" value="{{ (!empty(old('phone'))) ? old('phone') : $settings->phone }}" />
+                    @if ($errors->has('phone'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('phone') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{{ trans('modulesettings.emailname') }}</label>
+                  <div class="col-sm-10">
+                    <input required type="text" name="emailname" class="form-control" placeholder="{{ trans('modulesettings.emailcontact') }}" value="{{ (!empty(old('emailname'))) ? old('emailname') : $settings->emailname }}" />
+                    @if ($errors->has('emailname'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('emailname') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{{ trans('modulesettings.emailcontact') }}</label>
+                  <div class="col-sm-10">
+                    <input required type="email" name="emailaddress" class="form-control" placeholder="{{ trans('modulesettings.emailcontact') }}" value="{{ (!empty(old('emailaddress'))) ? old('emailaddress') : $settings->emailaddress }}" />
+                    @if ($errors->has('emailaddress'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('emailaddress') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="text-right">
+                  <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row clearfix">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  {{ trans('modulesettings.site.title') }}
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.site.sitename') !!}</label>
+                  <div class="col-sm-10">
+                    <input required type="text" name="sitename" class="form-control" placeholder="{{ trans('modulesettings.site.sitename') }}" value="{{ (!empty(old('sitename'))) ? old('sitename') : $settings->sitename }}" />
+                    @if ($errors->has('sitename'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('sitename') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.site.sitedescription') !!}</label>
+                  <div class="col-sm-10">
+                    <textarea name="sitedescription" rows="4" class="form-control no-resize" placeholder="{{ trans('modulesettings.site.sitedescription') }}">{{ (!empty(old('sitedescription'))) ? old('sitedescription') : $settings->sitedescription }}</textarea>
+                    @if ($errors->has('sitedescription'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('sitedescription') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.site.sitekeywords') !!}</label>
+                  <div class="col-sm-10">
+                    <textarea name="sitekeywords" rows="4" class="form-control no-resize" placeholder="{{ trans('modulesettings.site.sitekeywords') }}">{{ (!empty(old('sitekeywords'))) ? old('sitekeywords') : $settings->sitekeywords }}</textarea>
+                    @if ($errors->has('sitekeywords'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('sitekeywords') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <fieldset class="form-group">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2">{{ trans('modulesettings.site.timeformat') }}</label>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input id="radio1" type="radio" name="timeformat" class="form-check-input" value="h:i a"@if($settings->timeformat == 'h:i a') checked @endif />
+                        <label class="form-check-label" for="radio1">
+                          {{ date('h:i a') }}
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input id="radio2" type="radio" name="timeformat" class="form-check-input" value="h:i A"@if($settings->timeformat == 'h:i A') checked @endif />
+                        <label class="form-check-label" for="radio2">{{ date('h:i A') }}</label>
+                      </div>
+                      <div class="form-check">
+                        <input id="radio3" type="radio" name="timeformat" class="form-check-input" value="H:I"@if($settings->timeformat == 'H:i') checked @endif />
+                        <label class="form-check-label" for="radio3">{{ date('H:i') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="form-group">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2">{{ trans('modulesettings.site.dateformat') }}</label>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input id="radio4" type="radio" name="dateformat" class="form-check-input" value="Y-m-d"@if($settings->dateformat == 'Y-m-d') checked @endif />
+                        <label class="form-check-label" for="radio4">{{ date('Y-m-d') }}</label>
+                      </div>
+                      <div class="form-check">
+                        <input id="radio5" type="radio" name="dateformat" class="form-check-input" value="F d, Y"@if($settings->dateformat == 'F d, Y') checked @endif />
+                        <label class="form-check-label" for="radio5">{{ date('F d, Y') }}</label>
+                      </div>
+                      <div class="form-check">
+                        <input id="radio6" type="radio" name="dateformat" class="form-check-input" value="Y/m/d"@if($settings->dateformat == 'Y/m/d') checked @endif />
+                        <label class="form-check-label" for="radio6">{{ date('Y/m/d') }}</label>
+                      </div>
+                      <div class="form-check">
+                        <input id="radio7" type="radio" name="dateformat" class="form-check-input" value="d/m/y"@if($settings->dateformat == 'd/m/y') checked @endif />
+                        <label class="form-check-label" for="radio7">{{ date('d/m/y') }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="text-right">
+                  <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row clearfix">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  {{ trans('modulesettings.downloads.title') }}
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.downloads.maxsize') !!}</label>
+                  <div class="col-sm-10">
+                    <input required type="number" min="0" step="1" name="maxsize" class="form-control" placeholder="{{ trans('modulesettings.downloads.maxsize') }}" value="{{ (!empty(old('maxsize'))) ? old('maxsize') : $settings->maxsize }}" />
+                    @if ($errors->has('maxsize'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('maxsize') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+                <div class="text-right">
+                  <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+@endsection

@@ -1,0 +1,42 @@
+{
+    "name": "cogroup/cms",
+    "description": "CMS for all laravel projects",
+    "keywords" : ["cms", "admin"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "COgroup",
+            "email": "support@cogroupsas.com",
+            "homepage": "https://cogroupsas.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/socialite": "^3.0",
+    },
+    "autoload": {
+        "psr-4": {
+            "Cogroup\\Cms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cogroup\\Cms\\Tests": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Cogroup\\Cms\\CmsServiceProvider"
+            ],
+            "aliases": {
+                "Cms": "Cogroup\\Cms\\Facades\\Cms"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false
+}
