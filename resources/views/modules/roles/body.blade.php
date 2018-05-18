@@ -1,4 +1,4 @@
-﻿@extends('admin.layouts.main')
+﻿@extends('cogroupcms::layouts.main')
 
 @section('content')
   <section class="content">
@@ -9,37 +9,42 @@
           <div class="card">
             <div class="card-header">
               <h2 class="float-left">
-                {{ mb_strtoupper(trans('modules.roles')) }}
+                {{ mb_strtoupper(trans('moduleroles.title')) }}
                 <small>{{ mb_strtoupper(trans('cms.list')) }}</small>
               </h2>
               <div class="float-right">
-                @if(App\Http\Controllers\CmsController::checkPermission($user, 'roles', 'create') == true)
-                  <a id="rolesadd" href="{{ route('roladd') }}" class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.addrol') }}">
-                    <i class="fas fa-plus-circle fa-2x"></i>
+                @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'roles', 'create') == true)
+                  <a id="add" href="{{ route('cogroupcms.roladd') }}" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.add') }}">
+                    <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
-                @if(App\Http\Controllers\CmsController::checkPermission($user, 'roles', 'update') == true)
-                  <a id="rolesedit" href="{{ route('roledit') }}" class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.editrol') }}">
-                    <i class="far fa-edit fa-2x"></i>
+                @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'roles', 'update') == true)
+                  <a id="edit" href="{{ route('cogroupcms.roledit') }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.edit') }}">
+                    <i class="far fa-edit"></i>
                   </a>
                 @endif
-                @foreach(App\Http\Controllers\CmsController::getModules('roles', 'N') as $mod)
-                  @if($user->roles_id == 1 || App\Http\Controllers\CmsController::checkPermission($user, $mod->modulename, 'view') == true)
-                  <a id="{{ mb_strtolower($mod->modulename) }}" href="{{ URL::to($mod->url) }}" class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{ trans($mod->modulename) }}">
-                    <i class="{{ $mod->icon }} fa-2x"></i>
+                @foreach(Cogroup\Cms\Http\Controllers\CmsController::getModules('roles', 'N') as $mod)
+                  @if($user->roles_id == 1 || Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, $mod->modulename, 'view') == true)
+                  <a id="{{ mb_strtolower($mod->modulename) }}" href="{{ URL::to($mod->url) }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans($mod->modulename) }}">
+                    <i class="{{ $mod->icon }}"></i>
                   </a>
                   @endif
                 @endforeach
               </div>
             </div>
             <div class="card-body">
-              <form role="form" id="form_advanced_validation" class="masked-input rolesform" method="POST" action="{{ route('roleshome')."/" }}">
+              <form role="form" id="form_advanced_validation" class="masked-input form" method="POST" action="{{ route('cogroupcms.roleshome')."/" }}">
                 {{ csrf_field() }}
-                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                <table class="table table-bordered table-striped table-hover js-basic dataTable">
                   <thead>
                     <tr>
                       <th>
-                        <input type="checkbox" id="select_all" class="">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input allcheck">
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
                         <label for="select_all"></label>
                       </th>
                       <th>{{ trans('moduleroles.name') }}</th>
@@ -49,8 +54,12 @@
                   <tfoot>
                     <tr>
                       <th>
-                        <input type="checkbox" id="select_all2" class="">
-                        <label for="select_all2"></label>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input allcheck">
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
                       </th>
                       <th>{{ trans('moduleroles.name') }}</th>
                       <th>{{ trans('moduleroles.description') }}</th>
@@ -60,10 +69,14 @@
                   @foreach($roles as $rol)
                     <tr>
                       <th>
-                        @if(App\Http\Controllers\CmsController::checkPermission($user, 'roles', 'update') == true || 
-                        App\Http\Controllers\CmsController::checkPermission($user, 'Permisos', 'update') == true)
-                        <input type="checkbox" id="chk_{{ $rol->id }}" class=" check-rol" name="id" value="{{ $rol->id }}">
-                        <label for="chk_{{ $rol->id }}"></label>
+                        @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'roles', 'update') == true || 
+                        Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'Permisos', 'update') == true)
+                        <div class="form-check">
+                          <label class="form-check-label" for="chk_{{ $rol->id }}">
+                            <input type="checkbox" class="form-check-input check" id="chk_{{ $rol->id }}" name="id" value="{{ $rol->id }}">
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
                         @endif
                       </th>
                       <td>{{ $rol->rolname }}</td>

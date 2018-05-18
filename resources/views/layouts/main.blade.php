@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>{{ env("APP_NAME") }}</title>
   <!-- Favicon-->
-  <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+  <link rel="shortcut icon" href="{{ asset('vendor/cogroup/cms/images/favicon.png') }}" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,8 +22,7 @@
     @endforeach
   @endif
 
-  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
-  <link rel="stylesheet" href="{{ asset('themecms/plugins/bootstrap-jasny/css/jasny-bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
   <!-- Scripts -->
   <script>
       window.Laravel = {!! json_encode([
@@ -31,22 +30,18 @@
       ]) !!};
   </script>
 </head>
-<body class="adminpanel">
-  @include('admin.partials.header')
-  @include('admin.partials.content')
-  
-  <footer class="container-fluid">
-    <div class="row">
-      <div class="col-12 text-center">© {{ date("Y") }} {{ trans('cms.rights') }}</div>
-      <div class="col-6 offset-md-3">
-        <div class="row">
-          <div class="col-4"><i class="fa fa-phone"></i> {{ $settings->phone }}</div>
-          <div class="col-4"><i class="fa fa-map-marker"></i> {{ $settings->address }}</div>
-          <div class="col-4"><i class="fa fa-envelope"></i> {{ $settings->emailaddress }}</div>
-        </div>
+<body class="{{ config('cogroupcms.color_theme', 'light-blue') }}">
+  @include('cogroupcms::partials.preloader')
+  <div class="wrapper">
+    @include('cogroupcms::partials.sidebar')
+    <div class="main-panel">
+      @include('cogroupcms::partials.header')
+      <div class="content">
+        @yield('content')
       </div>
+      @include('cogroupcms::partials.footer')
     </div>
-  </footer>
+  </div>
 
   @if(Session::has('status'))
   <div class="hidden notification"
@@ -62,11 +57,12 @@
   <script>
     var lang = '{{ Session::get('applocale') }}';
     var SITE_URL = "{{ URL::to('/') }}/";
+    var CMS_SITE = "{{ config('cogroupcms.uri', 'cms') }}";
   </script>
-  <script src="{{ asset('js/app.js?'.time()) }}"></script>
-  <script src="{{ asset('js/datatables.net/js/jquery.dataTables.js?'.time()) }}"></script>
-  <script src="{{ asset('js/datatables.net-bs4/js/dataTables.bootstrap4.js?'.time()) }}"></script>
-  <script src="{{ asset('themecms/js/jquery-datatable.js?'.time()) }}"></script>
+  <script src="{{ asset('vendor/cogroup/cms/js/app.js?'.time()) }}"></script>
+  <script src="{{ asset('vendor/cogroup/cms/js/datatables.net/js/jquery.dataTables.js?'.time()) }}"></script>
+  <script src="{{ asset('vendor/cogroup/cms/js/datatables.net-bs4/js/dataTables.bootstrap4.js?'.time()) }}"></script>
+  <script src="{{ asset('vendor/cogroup/cms/js/jquery-datatable.js?'.time()) }}"></script>
 
   @if (!empty($scripts))
   @foreach ($scripts as $js)

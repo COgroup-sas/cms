@@ -1,21 +1,15 @@
-$body-bg: #ebebeb;
-$font-family-base: Lato;
-$font-size-base: 0.95rem;
-
-$primary: #7746ec;
-
-$card-border-width: 0;
-$card-inner-border-radius: 5px;
-$card-cap-bg: #fff;
-$card-bg: #fafafa;
-
-$table-hover-bg: #f5f8fc;
-
-$modal-content-border-width: 0;
-$modal-backdrop-opacity: .7;
-
-$input-box-shadow: 0;
-$input-btn-focus-box-shadow: 0;
-$input-border-radius: 0;
-
-$tooltip-max-width: 500px;
+//Colors COgroup
+$cog-purple: rgba(124,23,127,1);
+$cog-light-purple: rgba(175,0,83,1);
+$cog-orange: rgba(219,150,18,1);
+$cog-light-green: rgba(163,189,53,1);
+$cog-blue: rgba(73,80,151,1);
+$cog-light-blue: rgba(119,171,220,1);
+$cog-green: rgba(113,168,60,1);
+$cog-yellow: rgba(203,200,61,1);
+$cog-text-blue: rgba(67,109,174,1);
+$cog-grey: rgba(53,53,53,1);
+//Font
+$cog-font-path: "../fonts" !default;
+$font-family-base: "Museo Sans 300";
+$font-size-base: 1rem;

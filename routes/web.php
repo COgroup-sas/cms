@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web'],
+              'namespace' => 'Cogroup\Cms\Http\Controllers'
+  ], function () {
   Auth::routes();
 
   Route::prefix('login')->group(function () {
@@ -10,7 +12,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('{service}/callback', 'Auth\LoginController@handleProviderCallback');
   });
 
-  Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
+  Route::group(['prefix' => config('cogroupcms.uri', 'cms'),
+                'middleware' => ['admin', 'auth']
+    ], function () {
       Route::get('/', 'DashboardController@index')->name('cogroupcms.home');
 
       Route::group(['prefix' => 'settings'], function () {

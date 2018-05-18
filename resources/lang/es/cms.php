@@ -22,11 +22,11 @@ return [
   'rememberme' => 'Recuerdeme',
   'textbtnsignin' => 'Ingresar',
   'linkforgotpassword' => '¿Olvido su contraseña?',
+  'titleresetpassword' => 'Restablecer la contraseña',
   'msgforgotpassword' => 'Introduzca la dirección de correo electrónico que utilizó para registrarse. Le enviaremos un correo electrónico con su nombre de usuario y un enlace para restablecer la contraseña.',
   'textlinksignin' => '¡Ingresar!',
   'textbtnresetpassword' => 'RESTABLEZCA MI CONTRASEÑA',
   'textbtnsubmit' => 'ENVIAR',
-  'plasewait' => 'Please wait...',
   'viewallnotifications' => 'Ver todas las notificaciones',
   'signout' => 'Salir',
   'mainnavigation' => 'MENÚ PRINCIPAL',
@@ -82,5 +82,6 @@ return [
   'designedby' => 'Diseñado por',
   'developedby' => 'Desarrollado por',
   'login' => 'Acceder',
-  'register' => 'Registrarse'
+  'register' => 'Registrarse',
+  'back' => 'Regresar',
 ];

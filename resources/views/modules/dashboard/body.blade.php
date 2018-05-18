@@ -1,316 +1,267 @@
-@extends('cms.layouts.app')
+@extends('cogroupcms::layouts.main')
 
 @section('content')
-<body class="theme-{{ $settings->admincolor }}">
-  @include('cms.partials.pageloader')
-  @include('cms.partials.navbar')
-  @include('cms.partials.leftsidebar')
-  
-  <section class="content">
-    <div class="container-fluid">
-      <div class="block-header">
-          <h2>DASHBOARD</h2>
-      </div>
-
-      <!-- Widgets -->
-      <div class="row clearfix">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-pink hover-expand-effect">
-                  <div class="icon">
-                      <i class="material-icons">playlist_add_check</i>
+  <div class="row">
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Global Sales</h5>
+                <h4 class="card-title">Shipped Products</h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
                   </div>
-                  <div class="content">
-                      <div class="text">NEW TASKS</div>
-                      <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
-                  </div>
+                </div>
               </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-cyan hover-expand-effect">
-                  <div class="icon">
-                      <i class="material-icons">help</i>
-                  </div>
-                  <div class="content">
-                      <div class="text">NEW TICKETS</div>
-                      <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
-                  </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="lineChartExample"></canvas>
+                </div>
               </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-light-green hover-expand-effect">
-                  <div class="icon">
-                      <i class="material-icons">forum</i>
-                  </div>
-                  <div class="content">
-                      <div class="text">NEW COMMENTS</div>
-                      <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
-                  </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                </div>
               </div>
+            </div>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box bg-orange hover-expand-effect">
-                  <div class="icon">
-                      <i class="material-icons">person_add</i>
+          <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">2018 Sales</h5>
+                <h4 class="card-title">All products</h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
                   </div>
-                  <div class="content">
-                      <div class="text">NEW VISITORS</div>
-                      <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
-                  </div>
+                </div>
               </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                </div>
+              </div>
+            </div>
           </div>
-      </div>
-      <!-- #END# Widgets -->
-      <!-- CPU Usage -->
-      <div class="row clearfix">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="card">
-                  <div class="header">
-                      <h2>CPU USAGE (%)</h2>
-                      <div class="pull-right">
-                          <div class="switch panel-switch-btn">
-                              <span class="m-r-10 font-12">REAL TIME</span>
-                              <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
+          <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Email Statistics</h5>
+                <h4 class="card-title">24 Hours Performance</h4>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="barChartSimpleGradientsNumbers"></canvas>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card  card-tasks">
+              <div class="card-header ">
+                <h5 class="card-category">Backend development</h5>
+                <h4 class="card-title">Tasks</h4>
+              </div>
+              <div class="card-body ">
+                <div class="table-full-width table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" checked>
+                              <span class="form-check-sign"></span>
+                            </label>
                           </div>
-                      </div>
-                      <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                  <i class="material-icons">more_vert</i>
-                              </a>
-                              <ul class="dropdown-menu pull-right">
-                                  <li><a href="javascript:void(0);">Action</a></li>
-                                  <li><a href="javascript:void(0);">Another action</a></li>
-                                  <li><a href="javascript:void(0);">Something else here</a></li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </div>
-                  <div class="card-body">
-                      <div id="real_time_chart" class="dashboard-flot-chart"></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- #END# CPU Usage -->
-      <div class="row clearfix">
-          <!-- Visitors -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-pink">
-                      <div class="sparkline" data-type="line" data-spot-Radius="4" data-highlight-Spot-Color="rgb(233, 30, 99)" data-highlight-Line-Color="#fff"
-                           data-min-Spot-Color="rgb(255,255,255)" data-max-Spot-Color="rgb(255,255,255)" data-spot-Color="rgb(255,255,255)"
-                           data-offset="90" data-width="100%" data-height="92px" data-line-Width="2" data-line-Color="rgba(255,255,255,0.7)"
-                           data-fill-Color="rgba(0, 188, 212, 0)">
-                          12,10,9,6,5,6,10,5,7,5,12,13,7,12,11
-                      </div>
-                      <ul class="dashboard-stat-list">
-                          <li>
-                              TODAY
-                              <span class="pull-right"><b>1 200</b> <small>USERS</small></span>
-                          </li>
-                          <li>
-                              YESTERDAY
-                              <span class="pull-right"><b>3 872</b> <small>USERS</small></span>
-                          </li>
-                          <li>
-                              LAST WEEK
-                              <span class="pull-right"><b>26 582</b> <small>USERS</small></span>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <!-- #END# Visitors -->
-          <!-- Latest Social Trends -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-cyan">
-                      <div class="m-b--35 font-bold">LATEST SOCIAL TRENDS</div>
-                      <ul class="dashboard-stat-list">
-                          <li>
-                              #socialtrends
-                              <span class="pull-right">
-                                  <i class="material-icons">trending_up</i>
-                              </span>
-                          </li>
-                          <li>
-                              #materialdesign
-                              <span class="pull-right">
-                                  <i class="material-icons">trending_up</i>
-                              </span>
-                          </li>
-                          <li>#adminbsb</li>
-                          <li>#freeadmintemplate</li>
-                          <li>#bootstraptemplate</li>
-                          <li>
-                              #freehtmltemplate
-                              <span class="pull-right">
-                                  <i class="material-icons">trending_up</i>
-                              </span>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <!-- #END# Latest Social Trends -->
-          <!-- Answered Tickets -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="body bg-teal">
-                      <div class="font-bold m-b--35">ANSWERED TICKETS</div>
-                      <ul class="dashboard-stat-list">
-                          <li>
-                              TODAY
-                              <span class="pull-right"><b>12</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              YESTERDAY
-                              <span class="pull-right"><b>15</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              LAST WEEK
-                              <span class="pull-right"><b>90</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              LAST MONTH
-                              <span class="pull-right"><b>342</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              LAST YEAR
-                              <span class="pull-right"><b>4 225</b> <small>TICKETS</small></span>
-                          </li>
-                          <li>
-                              ALL
-                              <span class="pull-right"><b>8 752</b> <small>TICKETS</small></span>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-          <!-- #END# Answered Tickets -->
-      </div>
+                        </td>
 
-      <div class="row clearfix">
-          <!-- Task Info -->
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-              <div class="card">
-                  <div class="header">
-                      <h2>TASK INFOS</h2>
-                      <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                  <i class="material-icons">more_vert</i>
-                              </a>
-                              <ul class="dropdown-menu pull-right">
-                                  <li><a href="javascript:void(0);">Action</a></li>
-                                  <li><a href="javascript:void(0);">Another action</a></li>
-                                  <li><a href="javascript:void(0);">Something else here</a></li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table table-hover dashboard-task-infos">
-                              <thead>
-                                  <tr>
-                                      <th>#</th>
-                                      <th>Task</th>
-                                      <th>Status</th>
-                                      <th>Manager</th>
-                                      <th>Progress</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>1</td>
-                                      <td>Task A</td>
-                                      <td><span class="label bg-green">Doing</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-green" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="width: 62%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>2</td>
-                                      <td>Task B</td>
-                                      <td><span class="label bg-blue">To Do</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-blue" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>3</td>
-                                      <td>Task C</td>
-                                      <td><span class="label bg-light-blue">On Hold</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-light-blue" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>4</td>
-                                      <td>Task D</td>
-                                      <td><span class="label bg-orange">Wait Approvel</span></td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>5</td>
-                                      <td>Task E</td>
-                                      <td>
-                                          <span class="label bg-red">Suspended</span>
-                                      </td>
-                                      <td>John Doe</td>
-                                      <td>
-                                          <div class="progress">
-                                              <div class="progress-bar bg-red" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" style="width: 87%"></div>
-                                          </div>
-                                      </td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
+                        <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox">
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                        </td>
+
+                        <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" checked>
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                        </td>
+                        
+                        <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-          </div>
-          <!-- #END# Task Info -->
-          <!-- Browser Usage -->
-          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-              <div class="card">
-                  <div class="header">
-                      <h2>BROWSER USAGE</h2>
-                      <ul class="header-dropdown m-r--5">
-                          <li class="dropdown">
-                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                  <i class="material-icons">more_vert</i>
-                              </a>
-                              <ul class="dropdown-menu pull-right">
-                                  <li><a href="javascript:void(0);">Action</a></li>
-                                  <li><a href="javascript:void(0);">Another action</a></li>
-                                  <li><a href="javascript:void(0);">Something else here</a></li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </div>
-                  <div class="card-body">
-                      <div id="donut_chart" class="dashboard-donut-chart"></div>
-                  </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                </div>
               </div>
+            </div>
           </div>
-          <!-- #END# Browser Usage -->
-      </div>
-    </div>
-  </section>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-category">All Persons List</h5>
+                <h4 class="card-title"> Employees Stats</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Name
+                      </th>
+                      <th>
+                        Country
+                      </th>
+                      <th>
+                        City
+                      </th>
+                      <th class="text-right">
+                        Salary
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Dakota Rice
+                        </td>
+                        <td>
+                          Niger
+                        </td>
+                        <td>
+                          Oud-Turnhout
+                        </td>
+                        <td class="text-right">
+                          $36,738
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Minerva Hooper
+                        </td>
+                        <td>
+                          Curaçao
+                        </td>
+                        <td>
+                          Sinaai-Waas
+                        </td>
+                        <td class="text-right">
+                          $23,789
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Sage Rodriguez
+                        </td>
+                        <td>
+                          Netherlands
+                        </td>
+                        <td>
+                          Baileux
+                        </td>
+                        <td class="text-right">
+                          $56,142
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Doris Greene
+                        </td>
+                        <td>
+                          Malawi
+                        </td>
+                        <td>
+                          Feldkirchen in Kärnten
+                        </td>
+                        <td class="text-right">
+                          $63,542
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Mason Porter
+                        </td>
+                        <td>
+                          Chile
+                        </td>
+                        <td>
+                          Gloucester
+                        </td>
+                        <td class="text-right">
+                          $78,615
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 @endsection

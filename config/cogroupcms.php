@@ -7,9 +7,7 @@ return [
     | COgroup CMS Prefix
     |--------------------------------------------------------------------------
     |
-    | This prefix will be used when storing all Horizon data in Redis. You
-    | may modify the prefix when you are running multiple installations
-    | of Horizon on the same server so that they don't have problems.
+    | This prefix will be used for cms route.
     |
     */
 
@@ -20,12 +18,10 @@ return [
     | COgroup CMS color theme
     |--------------------------------------------------------------------------
     |
-    | This prefix will be used when storing all Horizon data in Redis. You
-    | may modify the prefix when you are running multiple installations
-    | of Horizon on the same server so that they don't have problems.
+    | This prefix will be used for set default theme in all cms sections.
     |
     */
 
-    'color_theme' => env('COGROUPCMS_COLORTHEME', 'light-blue-skin'),
+    'color_theme' => env('COGROUPCMS_COLORTHEME', 'light-blue'),
 
 ];

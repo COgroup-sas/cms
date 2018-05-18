@@ -3,7 +3,9 @@
 namespace Cogroup\Cms;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -14,14 +16,13 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'cms');
-        $this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/cogroupcms'),
-        ]);
-        $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/cogroup/cms'),
-        ], 'public');
+        $this->registerRoutes();
+        $this->registerResources();
+        $this->registerMigrations();
+        $this->registerTranslations();
+        $this->defineAssetPublishing();
+        $this->registerViewComposer();
+        $this->registerValidationRules();
     }
 
     /**
@@ -31,13 +32,7 @@ class CmsServiceProvider extends ServiceProvider
      */
     protected function registerRoutes()
     {
-        Route::group([
-            'prefix' => config('cogroupcms.uri', 'cms'),
-            'namespace' => 'Cogroup\Cms\Http\Controllers',
-            'middleware' => ['admin', 'auth'],
-        ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 
     /**
@@ -51,21 +46,46 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the Horizon resources.
+     *
+     * @return void
+     */
+    protected function registerMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    }
+
+    /**
+     * Register the Horizon resources.
+     *
+     * @return void
+     */
+    protected function registerTranslations()
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'cms');
+
+        $this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/'),
+        ]);
+    }
+
+    /**
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
-        if (! defined('HORIZON_PATH')) {
-            define('HORIZON_PATH', realpath(__DIR__.'/../'));
+        if (! defined('COGROUPCMS_PATH')) {
+            define('COGROUPCMS_PATH', realpath(__DIR__.'/../'));
         }
 
         $this->configure();
         $this->offerPublishing();
-        $this->registerServices();
-        $this->registerCommands();
-        $this->registerQueueConnectors();
+        /*$this->registerCommands();
+        $this->registerQueueConnectors();*/
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('admin', Http\Middleware\AdminMiddleware::class);
     }
 
     /**
@@ -92,5 +112,54 @@ class CmsServiceProvider extends ServiceProvider
                 __DIR__.'/../config/cogroupcms.php' => config_path('cogroupcms.php'),
             ], 'cogroupcms-config');
         }
+    }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function defineAssetPublishing()
+    {
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/cogroup/cms'),
+        ], 'cogroupcms-assets');
+
+        $this->publishes([
+            __DIR__.'/../public/fonts' => public_path('fonts'),
+        ], 'cogroupcms-assets');
+    }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function registerViewComposer()
+    {
+        View::composer(
+          '*', 'Cogroup\Cms\Http\ViewComposers\CmsComposer'
+        );
+    }
+
+    /**
+     * Define the asset publishing configuration.
+     *
+     * @return void
+     */
+    public function registerValidationRules()
+    {
+        Validator::extend('phone', function($attribute, $value, $parameters) {
+            return is_string($value) && preg_match("/\(\d{2}\)[ ]\d{1}[ ]\d{3}-\d{4}/", $value);
+        });
+
+        Validator::extend('mobilephone', function($attribute, $value, $parameters) {
+            if(!empty($value)) return is_string($value) && preg_match("/\(\d{2}\)[ ]\d{3}-\d{3}-\d{4}/", $value);
+            else return true;
+        });
+
+        Validator::replacer('mobilephone', function ($message, $attribute, $rule, $parameters) {
+            return trans("validation.custom.mobilephone");
+        });
     }
 }

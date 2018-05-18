@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('cogroupcms::layouts.main')
 
 @section('content')
   <section class="content">
@@ -9,30 +9,29 @@
           <div class="card">
             <div class="card-header">
               <h2>
-                  {{ trans('modules.permissions') }}
+                  {{ trans('moduleroles.permissions') }}
                   <small>
                     {{ $rolpermissions->rolname }}
                   </small>
               </h2>
             </div>
             <div class="card-body">
-              @foreach($modulesrol as $module)
               {{ csrf_field() }}
-              <input type="hidden" id="rolurl" value="{{ route('rolsetpermission') }}">
+              @foreach($modulesrol as $module)
+              <input type="hidden" id="rolurl" value="{{ route('cogroupcms.rolsetpermission') }}">
               <div class="demo-switch">
                 <div class="row clearfix">
                   <div class="col-sm-12">
                     <h4>{{ trans($module->modulename) }}</h4>
                     <div class="row">
                     @foreach(explode(",", $module->permissions) as $perm)
-                      <div class="col-sm-2">
-                        <div class="form-group">  
-                          <span class="switch switch-sm">
-                            <input type="checkbox"<?php
-                          echo (App\Http\Controllers\CmsController::checkPermission($rolpermissions, $module->moduleslug, $perm)) ? ' checked' : '';
-                          ?> class="switch" id="{{ $module->id.'-'.$perm }}">
-                            <label for="switch-sm" data-id="{{ $module->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">{{ trans('cms.txt'.$perm) }}</label>
-                          </span>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="switch-sm" data-id="{{ $module->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
+                            <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
+                              echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $module->moduleslug, $perm)) ? ' checked' : '';
+                              ?> id="{{ $module->id.'-'.$perm }}"> {{ trans('cms.txt'.$perm) }}
+                          </label>
                         </div>
                       </div>
                     @endforeach
@@ -45,10 +44,12 @@
                       <div class="col-sm-2">
                         <div class="form-group">  
                           <span class="switch switch-sm">
-                            <input type="checkbox"<?php
-                            echo (App\Http\Controllers\CmsController::checkPermission($rolpermissions, $submod->moduleslug, $perm)) ? ' checked' : '';
+                            <label for="switch-sm" data-id="{{ $submod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
+                              <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
+                            echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $submod->moduleslug, $perm)) ? ' checked' : '';
                           ?> class="switch" id="{{ $submod->id.'-'.$perm }}">
-                            <label for="switch-sm" data-id="{{ $submod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">{{ trans('cms.txt'.$perm) }}</label>
+                              {{ trans('cms.txt'.$perm) }}
+                            </label>
                           </span>
                         </div>
                       </div>
@@ -62,9 +63,12 @@
                       <div class="col-sm-2">
                         <div class="switch">
                           {{ trans('cms.txt'.$perm) }}
-                          <label><input type="checkbox"<?php
-                            echo (App\Http\Controllers\CmsController::checkPermission($rolpermissions, $ssubmod->moduleslug, $perm)) ? ' checked' : '';
-                          ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm"><span class="lever switch-col-red"></span></label>
+                          <label>
+                            <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
+                              echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $ssubmod->moduleslug, $perm)) ? ' checked' : '';
+                            ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
+                            {{ trans('cms.txt'.$perm) }}
+                        </label>
                         </div>
                       </div>
                             @endforeach
@@ -79,7 +83,7 @@
                             <div class="switch">
                               {{ trans('cms.txt'.$perm) }}
                               <label><input type="checkbox"<?php
-                                echo (App\Http\Controllers\CmsController::checkPermission($rolpermissions, $sssubmod->moduleslug, $perm)) ? ' checked' : '';
+                                echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $sssubmod->moduleslug, $perm)) ? ' checked' : '';
                               ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm"><span class="lever switch-col-red"></span></label>
                             </div>
                           </div>

@@ -1,4 +1,4 @@
-﻿@extends('admin.layouts.main')
+﻿@extends('cogroupcms::layouts.main')
 
 @section('content')<section class="content">
     <div class="container-fluid">
@@ -8,56 +8,64 @@
           <div class="card">
             <div class="card-header">
               <h2 class="float-left">
-                {{ mb_strtoupper(trans('modules.users')) }}
+                {{ mb_strtoupper($title) }}
                 <small>{{ mb_strtoupper(trans('cms.list')) }}</small>
               </h2>
               <div class="float-right">
-                @if(App\Http\Controllers\CmsController::checkPermission($user, 'users', 'create') == true)
-                  <a id="usersadd" href="{{ route('usersadd') }}" class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.adduser') }}">
-                    <i class="fas fa-plus-circle fa-2x"></i>
+                @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'create') == true)
+                  <a id="add" href="{{ route('cogroupcms.usersadd') }}" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.add') }}">
+                    <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
-                @if(App\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
-                  <a id="usersedit" href="{{ route('usersedit') }}" class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.edituser') }}">
-                    <i class="far fa-edit fa-2x"></i>
+                @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
+                  <a id="edit" href="{{ route('cogroupcms.usersedit') }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.edit') }}">
+                    <i class="far fa-edit"></i>
                   </a>
                 @endif
-                @foreach(App\Http\Controllers\CmsController::getModules('Usuarios', 'N') as $mod)
-                  @if(App\Http\Controllers\CmsController::checkPermission($user, $mod->modulename, 'view') == true)
-                  <a id="{{ $mod->modulename }}" href="{{ $mod->url }}" class="badge badge-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.'.$mod->modulename) }}">
-                    <i class="{{ $mod->icon }} fa-2x"></i>
+                @foreach(Cogroup\Cms\Http\Controllers\CmsController::getModules('Usuarios', 'N') as $mod)
+                  @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, $mod->modulename, 'view') == true)
+                  <a id="{{ $mod->modulename }}" href="{{ $mod->url }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.'.$mod->modulename) }}">
+                    <i class="{{ $mod->icon }}"></i>
                   </a>
                   @endif
                 @endforeach
               </div>
             </div>
-            <div class="body table-responsive">
-              <form role="form" id="form_advanced_validation" class="masked-input usersform" method="POST" action="{{ route('usershome')."/" }}">
+            <div class="card-body">
+              <form role="form" id="form_advanced_validation" class="masked-input form" method="POST" action="{{ route('cogroupcms.usershome')."/" }}">
                 {{ csrf_field() }}
-                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                <table class="table table-bordered table-striped table-hover js-basic dataTable">
                   <thead>
                     <tr>
                       <th>
-                        <input type="checkbox" id="select_all" class="">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input allcheck">
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
                         <label for="select_all"></label>
                       </th>
                       <th>{{ trans('moduleusers.name') }}</th>
                       <th>{{ trans('cms.email') }}</th>
-                      <th>cliente</th>
-                      <th>{{ trans('moduleusers.rol') }}</th>
+                      <th>{{ trans('moduleroles.rol') }}</th>
                       <th>{{ trans('cms.active') }}</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>
-                        <input type="checkbox" id="select_all2" class="">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input allcheck">
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
                         <label for="select_all2"></label>
                       </th>
                       <th>{{ trans('moduleusers.name') }}</th>
                       <th>{{ trans('cms.email') }}</th>
-                      <th>cliente</th>
-                      <th>{{ trans('moduleusers.rol') }}</th>
+                      <th>{{ trans('moduleroles.rol') }}</th>
                       <th>{{ trans('cms.active') }}</th>
                     </tr>
                   </tfoot>
@@ -65,24 +73,25 @@
                   @foreach($users as $usr)
                     <tr>
                       <th>
-                        @if($usr->roles_id != 1)
-                        <input type="checkbox" id="chk_{{ $usr->id }}" class=" check-usr" name="id" value="{{ $usr->id }}">
-                        <label for="chk_{{ $usr->id }}"></label>
+                        @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
+                        <div class="form-check">
+                          <label class="form-check-label" for="chk_{{ $usr->id }}">
+                            <input type="checkbox" class="form-check-input check" id="chk_{{ $usr->id }}" name="id" value="{{ $usr->id }}">
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
                         @endif
                       </th>
                       <td>{{ $usr->name }} {{ $usr->lastname }}</td>
                       <td>{{ $usr->email }}</td>
-                      <td>{{ $usr->clients->name }}</td>
                       <td>{{ $usr->roles->rolname }}</td>
                       <td>
-                        @if($usr->id != $user->id and ( $user->roles_id == 1 || App\Http\Controllers\CmsController::checkPermission($user, 'Usuarios', 'update') == true) )
-                        <a class="user-active" data-id="{{ $usr->id }}" data-active="{{ $usr->active }}" href="{{ route('usersactive') }}">
+                        @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
+                        <a class="user-active" data-id="{{ $usr->id }}" data-active="{{ $usr->active }}" href="{{ route('cogroupcms.usersactive') }}">
                           <i class="{{ ($usr->active == 'Y') ? 'far fa-check-circle' : 'far fa-circle' }}"></i>
                         </a>
                         @else
-                        <i class="material-icons">
-                          {{ ($usr->active == "Y") ? 'done' : 'highlight_off' }}
-                        </i>
+                        <i class="{{ ($usr->active == 'Y') ? 'far fa-check-circle' : 'far fa-circle' }}"></i>
                         @endif
                       </td>
                     </tr>

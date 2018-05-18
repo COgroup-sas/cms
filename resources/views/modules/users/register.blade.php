@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('cogroupcms::layouts.main')
 
 @section('content')
 <section class="content">
@@ -10,15 +10,15 @@
             <div class="card-header">
               <h2>
                 @if(isset($useredit))
-                {{ trans('modules.edituser') }}
+                {{ trans('moduleusers.edit') }}
                 @else
-                {{ trans('modules.adduser') }}
+                {{ trans('moduleusers.add') }}
                 @endif
                 <small>{{ trans('moduleusers.basicinformation') }}</small>
               </h2>
             </div>
             <div class="card-body">
-              <form role="form" id="form_advanced_validation" class="masked-input" method="POST" action="{{ route('userspost') }}">
+              <form role="form" id="form_advanced_validation" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.userspost') }}" novalidate="novalidate">
                 {{ csrf_field() }}
                 @if(isset($useredit))
                 <input name="id" type="hidden" value="{{ $useredit->id }}" />
@@ -30,36 +30,6 @@
                     @if ($errors->has('name'))
                       <span class="form-text text-danger">
                         <strong>{{ $errors->first('name') }}</strong>
-                      </span>
-                    @endif
-                  </div>
-                </div>
-                <label for="name">{{ trans('moduleusers.lastname') }}</label>
-                <div class="form-group">
-                  <div class="form-line">
-                    <input required name="lastname" type="text" class="form-control" placeholder="{{ trans('moduleusers.lastname') }}" value="{{ (!isset($useredit)) ? old('lastname') : $useredit->lastname }}" />
-                    @if ($errors->has('lastname'))
-                      <span class="form-text text-danger">
-                        <strong>{{ $errors->first('lastname') }}</strong>
-                      </span>
-                    @endif
-                  </div>
-                </div>
-                <label for="clients_id">Cliente</label>
-                <div class="form-group">
-                  <div class="form-line">
-                    <select name="clients_id" class="form-control show-tick">
-                    @foreach($clients as $client)
-                      <option 
-                      @if(old('clients_id') == $client->id || (isset($useredit) and $useredit->clients_id == $client->id ) )
-                        selected="selected" 
-                      @endif
-                      value="{{ $client->id }}">{{ $client->name }}{{ (!empty($client->lastname)) ? " ".$client->lastname : '' }}</option>
-                    @endforeach
-                    </select>
-                    @if ($errors->has('clients_id'))
-                      <span class="form-text text-danger">
-                        <strong>{{ $errors->first('clients_id') }}</strong>
                       </span>
                     @endif
                   </div>
@@ -103,16 +73,21 @@
                     @endif
                   </div>
                 </div>
-                <label for="roles_id">{{ trans('moduleusers.rol') }}</label>
+                <label for="roles_id">{{ trans('moduleroles.rol') }}</label>
                 <div class="form-group">
                   <div class="form-line">
                     @foreach($roles as $rol)
-                      <input required type="radio" name="roles_id" id="{{ mb_strtolower($rol->rolname) }}" value="{{ $rol->id }}" class=""
+                      <div class="form-check form-check-radio">
+                        <label class="form-check-label" for="{{ mb_strtolower($rol->rolname) }}">
+                          <input class="form-check-input" required type="radio" name="roles_id" id="{{ mb_strtolower($rol->rolname) }}" value="{{ $rol->id }}" class=""
                       @if(old('roles_id') == $rol->id || (isset($useredit) and $useredit->roles_id == $rol->id))
                         checked="checked" 
                       @endif
                       >
-                      <label for="{{ mb_strtolower($rol->rolname) }}">{{ $rol->rolname }}</label>
+                          <span class="form-check-sign"></span>
+                          {{ $rol->rolname }}
+                        </label>
+                      </div>
                     @endforeach
                     @if ($errors->has('roles_id'))
                       <span class="form-text text-danger">
@@ -123,10 +98,10 @@
                 </div>
                 <div class="row">
                   <div class="col-6 text-right">
-                    <a class="btn btn-danger waves-effect" href="{{ route('usershome') }}">{{ trans('cms.txtbtncancel') }} <i class="fas fa-ban"></i></a>
+                    <a class="btn btn-danger waves-effect" href="{{ route('cogroupcms.usershome') }}">{{ trans('cms.txtbtncancel') }} <i class="fas fa-ban"></i></a>
                   </div>
                   <div class="col-6 text-left">
-                    <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.textbtnsubmit') }}</button>
+                    <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fa fa-cloud"></i></button>
                   </div>
                 </div>
               </form>
