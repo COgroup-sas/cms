@@ -6,14 +6,14 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ env("APP_NAME") }}</title>
+  <title>{{ cms_settings()->sitename }}</title>
   <!-- Favicon-->
   <link rel="shortcut icon" href="{{ asset('vendor/cogroup/cms/images/favicon.png') }}" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  @php /*<meta name="description" content="{{ $settings->sitedescription }}" />
-  <meta name="keywords" content="{{ $settings->sitekeywords   }}" />*/ @endphp
+  @php /*<meta name="description" content="{{ cms_settings()->sitedescription }}" />
+  <meta name="keywords" content="{{ cms_settings()->sitekeywords   }}" />*/ @endphp
   <meta name="author" content="www.cogroupsas.com" />
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
   <!-- Scripts -->

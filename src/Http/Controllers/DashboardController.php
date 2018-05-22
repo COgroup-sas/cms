@@ -34,9 +34,6 @@ class DashboardController extends CmsController
             'user' => Auth::user(),
             'scripts' => $this->scripts,
             'csss' => $this->csss,
-            'modules' => $this->modules,
-            'routePrefix' => $this->prefix,
-            'route' => $this->route,
             'breadcrumb' => $breadcrumb,
             'title' => trans('cms.home')
           )
@@ -56,9 +53,6 @@ class DashboardController extends CmsController
         'user' => Auth::user(),
         'scripts' => $this->scripts,
         'csss' => $this->csss,
-        'modules' => $this->modules,
-        'routePrefix' => $this->prefix,
-        'route' => $this->route,
         'breadcrumb' => $breadcrumb,
         'title' => trans('admin.home')
       )

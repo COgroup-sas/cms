@@ -22,7 +22,7 @@
                     <i class="far fa-edit"></i>
                   </a>
                 @endif
-                @foreach(Cogroup\Cms\Http\Controllers\CmsController::getModules('Usuarios', 'N') as $mod)
+                @foreach(cms_get_modules('Usuarios', 'N') as $mod)
                   @if(cms_roles_check($user, $mod->modulename, 'view') == true)
                   <a id="{{ $mod->modulename }}" href="{{ $mod->url }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.'.$mod->modulename) }}">
                     <i class="{{ $mod->icon }}"></i>

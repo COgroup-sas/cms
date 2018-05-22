@@ -39,7 +39,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 2) Run the command below to publish the package config file `config/cogroupcms.php`:
 
 ```shell
-php artisan vendor:publish
+php artisan vendor:publish --provider="Cogroup\Cms\CmsServiceProvider"
 ```
 
 3)  Run the command below to execute migrations
@@ -175,7 +175,33 @@ cms_roles_check($check, $moduleslug, $type);
 
 `check` is a Auth::user info or module id.
 `moduleslug` is a slug of the module to check permission.
-`type` is optional permission, by default is `view`.
+`type` is optional permission, by default it is `view`.
+
+## Helpers
+
+Cogroup - CMS includes a two "helper" PHP functions. These functions are used by the package itself; however, you are free to use them in your own applications if you find them convenient.
+
+### cms_get_modules
+
+This function return a modules of the system, register into table `modules`.
+
+```php
+cms_get_modules($modulename, $inmenu, $idrol);
+```
+
+`modulename` is optional parameter. If is NULL return all modules.
+`inmenu` By default it is `Y`. The other option is `N`.
+`idrol` is optional parameter, by default it is `NULL`. When present, it returns the modules associated with the role that have permission `view`
+
+### cms_settings
+
+This function return a object with settings values
+
+```php
+cms_settings();
+```
+
+Example: `cms_settings()->sitename`
 
 ## License
 

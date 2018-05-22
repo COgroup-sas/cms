@@ -3,9 +3,6 @@ namespace Cogroup\Cms\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Cogroup\Cms\Models\Settings;
-use Cogroup\Cms\Http\Controllers\CmsController;
 
 class CmsComposer {
   /**
@@ -17,10 +14,8 @@ class CmsComposer {
   public function compose(View $view) {
     $view->with('user', Auth::user());
 
-    $cms = new CmsController();
-
     if(Auth::check()) :
-      $modules = $cms->getModules();
+      $modules = cms_get_modules();
     else :
       $modules = array();
     endif;
@@ -38,7 +33,5 @@ class CmsComposer {
     else :
       $tmp = NULL;
     endif;
-
-    $view->with('settings', $cms->defaultsettings);
   }
 }
