@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Cogroup\Cms\Models\User;
 use Cogroup\Cms\Models\Roles\Roles;
 use Cogroup\Cms\Http\Controllers\CmsController;
-
+use Cogroup\Cms\Http\Controllers\FilesController;
 
 class UsersController extends CmsController {
 	/**
@@ -143,5 +143,60 @@ class UsersController extends CmsController {
       return response()->json(['status' => true]);
     else
       return response()->json(['status' => false]);
+  }
+
+  /**
+   * Show the application form add user.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function profile() {
+    $breadcrumb = array(trans('cms.home'), trans('moduleusers.title'), trans('moduleusers.profile'));
+
+    $user = User::with('Roles')->findOrFail(Auth::id());
+
+    return view('cogroupcms::modules.users.profile')->with(
+      array(
+        'profile' => $user,
+        'breadcrumb' => $breadcrumb,
+        'title' => trans('moduleusers.profile')
+      )
+    );
+  }
+
+  public function profilesave(Request $request) {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:255',
+        'password' => 'confirmed',
+        'photo' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml'
+    ]);
+
+    if ($validator->fails()) :
+      dd($validator->messages());
+      return redirect(route('cogroupcms.usersprofile'))
+              ->withErrors($validator)
+              ->withInput();
+    endif;
+
+    $user = User::findOrFail(Auth::id());
+    $data = $request->all();
+    if(empty($data['password'])) :
+      $data['password'] = $user->password;
+    elseif(!empty($data['password'])) :
+      $data['password'] = bcrypt($data['password']);
+    endif;
+    $user->fill($data);
+    if ($request->hasFile('photo')) :
+      $image = FilesController::upload($request, 'photo');
+      if($image['status'] == true) :
+        $user->image_id = $image['id'];
+      endif;
+    endif;
+    // Guardamos el usuario
+    $user->save();
+
+    $request->session()->flash('status', '1');
+    $request->session()->flash('msg', trans('moduleusers.profileok'));
+    return redirect(route('cogroupcms.usersprofile'));
   }
 }

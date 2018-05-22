@@ -13,6 +13,7 @@ return [
   |
   */
 
+  'title' => 'Ajustes',
   'contact' => 'Datos de contácto',
   'address' => 'Dirección',
   'phone' => 'Teléfono fijo',

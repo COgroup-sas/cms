@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'roles_id'
+        'name', 'email', 'password', 'roles_id', 'image_id'
     ];
 
     /**
@@ -28,8 +28,8 @@ class User extends Authenticatable
     ];
 
     /**
-   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-   **/
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
     public function Roles()
     {
         return $this->belongsTo("Cogroup\Cms\Models\Roles\Roles", 'roles_id');

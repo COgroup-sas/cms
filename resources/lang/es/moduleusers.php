@@ -17,7 +17,6 @@ return [
     'add' => 'Agregar usuario',
     'edit' => 'Editar usuario',
     'name' => 'Nombre',
-    'lastname' => 'Apellidos',
     'nousers' => 'No hay usuarios',
     'basicinformation' => 'Información básica',
     'password' => 'Contraseña',
@@ -29,5 +28,8 @@ return [
     'modalerrormoreedit' => 'Por favor seleccione solo un usuario para editar',
     'msgpermissionsdontexist' => 'El cliente no tiene módulos activos',
     'modalerrormorepermissions' => 'Por favor seleccione solo un usuario',
-    'active.fail' => 'El usuario no esta activo'
+    'active.fail' => 'El usuario no esta activo',
+    'profile' => 'Mi perfil',
+    'photo' => 'Foto',
+    'profileok' => 'Su perfil se actualizó correctamente.'
 ];

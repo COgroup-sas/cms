@@ -34,9 +34,7 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="{{ route('cogroupcms.usersprofile') }}"><i class="fa fa-user-circle"></i>{{ trans('moduleusers.profile') }}</a>
             <a class="dropdown-item" href="{{ route('logout') }}" 
 		            onclick="event.preventDefault();
 		                     document.getElementById('logout-form').submit();">

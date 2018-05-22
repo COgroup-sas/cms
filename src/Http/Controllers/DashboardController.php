@@ -54,7 +54,7 @@ class DashboardController extends CmsController
         'scripts' => $this->scripts,
         'csss' => $this->csss,
         'breadcrumb' => $breadcrumb,
-        'title' => trans('admin.home')
+        'title' => trans('modulesettings.title')
       )
     );
   }

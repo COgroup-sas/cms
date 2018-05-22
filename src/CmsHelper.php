@@ -45,3 +45,17 @@ if (! function_exists('cms_settings')) {
         return $cms->defaultsettings;
     }
 }
+
+if (! function_exists('cms_print_submenu')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  string  $abstract
+     * @param  array   $parameters
+     * @return mixed|\Illuminate\Foundation\Application
+     */
+    function cms_print_submenu($submenu, $route)
+    {
+        return CmsController::printSubmenu($submenu, $route);
+    }
+}

@@ -102,25 +102,33 @@ class CmsController extends Controller
     if($permission->{$type} == 1) return true;
   }
 
-  public static function printSubmenu($submenu, $prefix, $route) {
+  public static function printSubmenu($submenu, $route) {
     if(!empty($submenu)) :
-      echo '<ul class="ml-menu">';
+      echo '<ul class="nav">';
       foreach($submenu as $submodule) :
-        if(CmsController::checkPermission(Auth::user(), $submodule->modulename) == true) :
-      echo '<li';
-      //echo (($prefix == $submodule->url and count($submodule->submod) > 0) || $route == $submodule->url) ? ' class="active"' : '';
-      echo (stripos($route, $submodule->url)) ? ' class="active"' : '';
-      echo '>';
-      if(!empty($submodule->submod) and count($submodule->submod) > 0) :
-        echo '<a href="javascript:void(0);" class="menu-toggle">';
-      else :
-        echo '<a href="' . url($submodule->url) . '">';
-      endif;
-      echo ($route != $submodule->url) ? '<i class="material-icons">' . $submodule->icon . '</i>' : '';
-      echo '<span>' . trans('modules.'.$submodule->modulename) .'</span>';
-      echo'</a>' ;
-      if(isset($submodule->submod) and !empty($submodule->submod) and count($submodule->submod) > 0) self::printSubmenu($submodule->submod, $prefix, $route);
-      echo '</li>';
+        if(cms_roles_check(Auth::user(), $submodule->modulename) == true) :
+          echo '<li';
+          echo (starts_with($route, $submodule->url)) ? ' class="active"' : '';
+          echo '>';
+          if(!empty($submodule->submod) and count($submodule->submod) > 0) :
+            echo '<a href="#'.str_slug($submodule->moduleslug).'" data-toggle="collapse" aria-expanded="false" aria-controls="'.str_slug($module->moduleslug).'">';
+          else :
+            echo '<a href="' . url($submodule->url) . '">';
+          endif;
+          echo ($route != $submodule->url) ? '<i class="sidebar-mini-icon ' . $submodule->icon . '"></i>' : '';
+          echo '<span class="sidebar-normal">';
+          echo $submodule->modulename;
+          if(isset($submodule->submod) and !empty($submodule->submod) and count($submodule->submod) > 0) :
+            echo ' <b class="caret"></b>';
+          endif;
+          echo '</span>';
+          echo'</a>' ;
+          if(isset($submodule->submod) and !empty($submodule->submod) and count($submodule->submod) > 0) :
+            echo '<div class="collapse" id="'.str_slug($submodule->moduleslug).'">';
+            self::printSubmenu($submodule->submod, $route);
+            echo '</div>';
+          endif;
+          echo '</li>';
         endif;
       endforeach;
       echo '</ul>';

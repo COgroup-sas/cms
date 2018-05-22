@@ -23,6 +23,7 @@ class CreateCogFilesTable extends Migration
                 $table->string('extension');
                 $table->string('size');
                 $table->string('mimetype');
+                $table->text('alt');
                 $table->integer('width');
                 $table->integer('height');
                 $table->enum('ispublic', ['0', '1'])->default('1');

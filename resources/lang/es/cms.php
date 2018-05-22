@@ -34,6 +34,7 @@ return [
   'version' => 'Versión',
   'pleasewait' => 'Por favor espere...',
   'pleaseselect' => 'Seleccione una opción',
+  'pleaseselectfile' => 'Seleccione un archivo',
   'red' => 'Rojo',
   'pink' => 'Rosa',
   'purple' => 'Púrpura',

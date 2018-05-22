@@ -21,6 +21,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
         - [Roles Access](#rolesaccess)
         - [Settings](#settings)
         - [User](#user)
+    - [Intervention Image](#interventionimage)
 - [Usage](#usage)
     - [Middleware](#middleware)
     - [Helper](#helper)
@@ -149,6 +150,26 @@ The `Settings` model has two main attributes:
 This will enable the relation with `Role`.
 
 **And you are ready to go.**
+
+### InterventionImage
+
+After you have installed Intervention Image, open your Laravel config file `config/app.php` and add the following lines.
+
+In the `$providers` array add the service providers for this package.
+  
+`Intervention\Image\ImageServiceProvider::class`
+
+Add the facade of this package to the $aliases array.
+  
+`'ImageManager' => Intervention\Image\Facades\Image::class`
+
+Now the Image Class will be auto-loaded by Laravel.
+
+#### Publish configuration in Laravel 5
+
+```php
+$ php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"
+```
 
 ## Usage
 

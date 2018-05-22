@@ -18,92 +18,79 @@ class FilesController extends Controller {
     if($file->ispublic == false and !Auth::check()) :
       return abort(404);
     endif;
-    return response()->file(storage_path("app/files/".$file->folder."/".$file->name));
+    return response()->file(storage_path("app/private/".$file->folder."/".$file->diskname));
   }
 
   public function processFileThumb($id, $width = 240, $height = 360, $const = true) {
     $file = Files::select('*')->where("id", "=", $id)->first();
     if($file->folder == 'images') :
       if($const == true) :
-        if(!file_exists(storage_path("app/files/" . $file->folder . "/thumbs/" . $height."_".$width."_".$file->name))) :
+        if(!file_exists(storage_path("app/files/" . $file->folder . "/thumbs/" . $height."_".$width."_".$file->diskname))) :
           $manager = \ImageManager::canvas($width, $height)
                       ->insert(
-                        \ImageManager::make(storage_path("app/files/".$file->folder."/".$file->name))
+                        \ImageManager::make(storage_path("app/private/".$file->diskname))
                         ->heighten($height, function ($constraint) use ($const) {
                           if($const == true) :
                             $constraint->aspectRatio();
                           endif;
                         }), 'center'
-                      )->save(storage_path("app/files/".$file->folder."/thumbs/".$height."_".$width."_".$file->name));
+                      )->save(storage_path("app/files/".$file->folder."/thumbs/".$height."_".$width."_".$file->diskname));
         endif;
-        return response()->file(storage_path("app/files/".$file->folder."/thumbs/".$height."_".$width."_".$file->name));
+        return response()->file(storage_path("app/files/".$file->folder."/thumbs/".$height."_".$width."_".$file->diskname));
       else :
-        if(!file_exists(storage_path("app/files/" . $file->folder . "/thumbs/" . $width."_".$height."_".$file->name))) :
+        if(!file_exists(storage_path("app/files/" . $file->folder . "/thumbs/" . $width."_".$height."_".$file->diskname))) :
           $manager = \ImageManager::canvas($width, $height)
                       ->insert(
-                        \ImageManager::make(storage_path("app/files/".$file->folder."/".$file->name))
+                        \ImageManager::make(storage_path("app/private/".$file->diskname))
                         ->widen($width, function ($constraint) use ($const) {
                           if($const == true) :
                             $constraint->aspectRatio();
                           endif;
                         }), 'center'
-                      )->save(storage_path("app/files/".$file->folder."/thumbs/".$width."_".$height."_".$file->name));
+                      )->save(storage_path("app/files/".$file->folder."/thumbs/".$width."_".$height."_".$file->diskname));
         endif;
-        return response()->file(storage_path("app/files/".$file->folder."/thumbs/".$width."_".$height."_".$file->name));
+        return response()->file(storage_path("app/files/".$file->folder."/thumbs/".$width."_".$height."_".$file->diskname));
       endif;
     else :
-      return response()->file(storage_path("app/files/".$file->folder."/".$file->name));
+      return response()->file(storage_path("app/private/".$file->diskname));
     endif;
   }
 
   public static function upload($request, $name) {
-    // getting all of the post data
-    $file = array($name => $request->file($name));
-    // setting up rules
-    $rule = (stripos($request->{$name}->getClientMimeType(), 'image') !== false) ? 'image' : 'file';
-    $rules = array($name => $rule);
-    // doing the validation, passing post data, rules and the messages
-    $validator = Validator::make($file, $rules);
-    if ($validator->fails()) :
-      return array('status' => false, 'msg' => 'validacion error');
-    else :
-      // checking file is valid.
-      if ($request->file($name)->isValid()) :
-        $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
-        $store = ($mime == 'image') ? 'images' : 'documents';
-        $path = file_exists(storage_path("app/files/".$store."/".$request->{$name}->hashName()));
-        if($path == true) :
-          return array('status' => false, 'msg' => 'files.fileexists');
-        endif;
-        $path = $request->{$name}->store("files/".$store);
-        $path = explode("/", $path);
-        $path = $path[count($path) - 1];
-        $id = $request->input('image_id');
-        $filemodel = Files::firstOrNew(['id' => $id]);
-        if(!empty($id) and !is_null($id)) $filemodel->id = $id;
-        $filemodel->folder = $store;
-        $filemodel->name = $path;
-        $filemodel->originalname = $request->{$name}->getClientOriginalName();
-        $filemodel->extension = $request->{$name}->extension();
-        $filemodel->size = $request->{$name}->getClientSize();
-        $filemodel->mime_type = $request->{$name}->getClientMimeType();
-        $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : env("APP_NAME");
-        if(stripos($request->{$name}->getClientMimeType(), 'image') !== false) :
-          $filemodel->height = self::getAttribute($filemodel, 'height');
-          $filemodel->width = self::getAttribute($filemodel, 'width');
-        else :
-          $filemodel->height = $filemodel->width = 0;
-        endif;
-        $filemodel->save();
-        return array('status' => true, 'id' => $filemodel->id);
-      else :
-        return array('status' => false, 'msg' => 'file invalid');
+    // checking file is valid.
+    if($request->file('photo')->isValid()) :
+      $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
+      $path = file_exists(storage_path("app/files/".$request->{$name}->hashName()));
+      if($path == true) :
+        return array('status' => false, 'msg' => 'files.fileexists');
       endif;
+      $path = $request->{$name}->store('private');
+      $path = explode("/", $path);
+      $path = $path[count($path) - 1];
+      $id = $request->input($name.'_id');
+      $filemodel = Files::firstOrNew(['id' => $id]);
+      if(!empty($id) and !is_null($id)) $filemodel->id = $id;
+      $filemodel->diskname = $path;
+      $filemodel->originalname = $request->{$name}->getClientOriginalName();
+      $filemodel->extension = $request->{$name}->extension();
+      $filemodel->size = $request->{$name}->getClientSize();
+      $filemodel->mime_type = $request->{$name}->getClientMimeType();
+      $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : env("APP_NAME");
+      if(stripos($request->{$name}->getClientMimeType(), 'image') !== false) :
+        $filemodel->height = self::getAttribute($filemodel, 'height');
+        $filemodel->width = self::getAttribute($filemodel, 'width');
+      else :
+        $filemodel->height = $filemodel->width = 0;
+      endif;
+      $filemodel->save();
+      return array('status' => true, 'id' => $filemodel->id);
+    else :
+      return array('status' => false, 'msg' => 'file invalid');
     endif;
   }
 
   private static function getAttribute($file, $attribute) {
-    $manager = \ImageManager::make(storage_path("app/files/".$file->folder."/".$file->name));
+    $manager = \ImageManager::make(storage_path("app/private/".$file->diskname));
     return $manager->{$attribute}();
   }
 
@@ -133,6 +120,6 @@ class FilesController extends Controller {
   public static function delete($id) {
     $file = Files::find($id);
     Files::where('id', $id)->delete();
-    Storage::delete("files/".$file->folder.'/'.$file->name);
+    Storage::delete("private/".$file->folder.'/'.$file->diskname);
   }
 }
