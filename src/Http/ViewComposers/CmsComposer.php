@@ -27,13 +27,18 @@ class CmsComposer {
 
     $view->with('modules', $modules);
 
-    $tmp = explode("/", request()->route()->getPrefix());
-    if(count($tmp) > 1) $prefix = $tmp[1];
-    else $prefix = '';
-    $route = request()->route()->uri();
+    
+    if(!is_null(request()->route())) :
+      $tmp = explode("/", request()->route()->getPrefix());
+      if(count($tmp) > 1) $prefix = $tmp[1];
+      else $prefix = '';
+      $route = request()->route()->uri();
+      $view->with('prefix', $prefix);
+      $view->with('route', $route);
+    else :
+      $tmp = NULL;
+    endif;
 
-    $view->with('prefix', $prefix);
-    $view->with('route', $route);
     $view->with('settings', $cms->defaultsettings);
   }
 }

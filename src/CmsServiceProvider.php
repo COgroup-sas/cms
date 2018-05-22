@@ -21,6 +21,9 @@ class CmsServiceProvider extends ServiceProvider
         $this->registerMigrations();
         $this->registerTranslations();
         $this->defineAssetPublishing();
+        $this->defineFontPublishing();
+        $this->defineErrorViewsPublishing();
+        $this->defineMigrationsPublishing();
         $this->registerViewComposer();
         $this->registerValidationRules();
     }
@@ -36,7 +39,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Horizon resources.
+     * Register the COgroup CMS resources.
      *
      * @return void
      */
@@ -46,7 +49,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Horizon resources.
+     * Register the COgroup CMS migrations.
      *
      * @return void
      */
@@ -56,7 +59,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Horizon resources.
+     * Register the COgroup CMS translations.
      *
      * @return void
      */
@@ -66,7 +69,7 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/'),
-        ]);
+        ], 'cogroupcms-translations');
     }
 
     /**
@@ -82,14 +85,14 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->configure();
         $this->offerPublishing();
-        /*$this->registerCommands();
-        $this->registerQueueConnectors();*/
+        $this->registerCommands();
+        //$this->registerQueueConnectors();
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('admin', Http\Middleware\AdminMiddleware::class);
     }
 
     /**
-     * Setup the configuration for Horizon.
+     * Setup the configuration for COgroup CMS.
      *
      * @return void
      */
@@ -101,7 +104,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Setup the resource publishing groups for Horizon.
+     * Define the asset publishing config.
      *
      * @return void
      */
@@ -115,7 +118,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the asset publishing configuration.
+     * Define the asset publishing assets.
      *
      * @return void
      */
@@ -124,14 +127,50 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/cogroup/cms'),
         ], 'cogroupcms-assets');
-
-        $this->publishes([
-            __DIR__.'/../public/fonts' => public_path('fonts'),
-        ], 'cogroupcms-assets');
     }
 
     /**
-     * Define the asset publishing configuration.
+     * Define the asset publishing fonts.
+     *
+     * @return void
+     */
+    public function defineFontPublishing()
+    {
+        $this->publishes([
+            __DIR__.'/../public/fonts' => public_path('fonts'),
+        ], 'cogroupcms-fonts');
+    }
+
+    /**
+     * Define the asset publishing custom error views.
+     *
+     * @return void
+     */
+    public function defineErrorViewsPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../resources/views/errors' => base_path('resources/views/errors'),
+            ], 'cogroupcms-errorviews');
+        }
+    }
+
+    /**
+     * Define the asset publishing migrations.
+     *
+     * @return void
+     */
+    public function defineMigrationsPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../database/migrations' => base_path('database/migrations'),
+            ], 'cogroupcms-migrations');
+        }
+    }
+
+    /**
+     * Define the viewcomposer configuration.
      *
      * @return void
      */
@@ -143,7 +182,7 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the asset publishing configuration.
+     * Define the custom validation rules.
      *
      * @return void
      */
@@ -161,5 +200,24 @@ class CmsServiceProvider extends ServiceProvider
         Validator::replacer('mobilephone', function ($message, $attribute, $rule, $parameters) {
             return trans("validation.custom.mobilephone");
         });
+    }
+
+    /**
+     * Register the COgroup CMS Artisan commands.
+     *
+     * @return void
+     */
+    protected function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\AssetsCommand::class,
+                Console\ConfigCommand::class,
+                Console\FontsCommand::class,
+                Console\PublicErrorViewsCommand::class,
+                Console\TranslationsCommand::class,
+                Console\MigrationsCommand::class,
+            ]);
+        }
     }
 }
