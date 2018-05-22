@@ -24,6 +24,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 - [Usage](#usage)
     - [Middleware](#middleware)
     - [Helper](#helper)
+    - [Helpers](#helpers)
 - [License](#license)
 - [Contribution guidelines](#contribution-guidelines)
 - [Additional information](#additional-information)
@@ -149,7 +150,7 @@ This will enable the relation with `Role`.
 
 **And you are ready to go.**
 
-##Usage
+## Usage
 
 ### Middleware
 
@@ -173,9 +174,9 @@ You can use a helper to verify a permission
 cms_roles_check($check, $moduleslug, $type);
 ```
 
-`check` is a Auth::user info or module id.
-`moduleslug` is a slug of the module to check permission.
-`type` is optional permission, by default it is `view`.
+- `check` is a Auth::user info or module id.
+- `moduleslug` is a slug of the module to check permission.
+- `type` is optional permission, by default it is `view`.
 
 ## Helpers
 
@@ -189,9 +190,9 @@ This function return a modules of the system, register into table `modules`.
 cms_get_modules($modulename, $inmenu, $idrol);
 ```
 
-`modulename` is optional parameter. If is NULL return all modules.
-`inmenu` By default it is `Y`. The other option is `N`.
-`idrol` is optional parameter, by default it is `NULL`. When present, it returns the modules associated with the role that have permission `view`
+- `modulename` is optional parameter. If is NULL return all modules.
+- `inmenu` By default it is `Y`. The other option is `N`.
+- `idrol` is optional parameter, by default it is `NULL`. When present, it returns the modules associated with the role that have permission `view`
 
 ### cms_settings
 
