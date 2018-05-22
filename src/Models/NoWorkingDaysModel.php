@@ -26,7 +26,7 @@ class DiasNoLaborablesModel extends Model
    * @var array
    */
   protected $fillable = [
-    'id', 'fecha', 'active', 'created_at', 'updated_at', 'id_user_create', 'id_user_update'
+    'id', 'date', 'active', 'created_at', 'updated_at'
   ];
 
   /**

@@ -18,16 +18,15 @@
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
   <!-- Scripts -->
 </head>
-<body class="{{ config('cogroupcms.color_theme', 'light-blue') }}">
+<body class="{{ config('cogroupcms.color_theme', 'light-blue') }} error-page">
   @include('cogroupcms::partials.preloader')
-  <div class="wrapper">
-    <div class="main-panel">
-      @include('cogroupcms::partials.header')
-      <div class="content">
-        @yield('messages')
-      </div>
-      @include('cogroupcms::partials.footer')
+  <div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url({{ asset('vendor/cogroup/cms/images/bg.jpg') }})"></div>
+    <div class="container text-error">
+      <p class="number-error text-danger">@yield('number') <i class="@yield('icon')"></i></p>
+      <p>@yield('message')</p>
     </div>
+    @include('cogroupcms::partials.footer')
   </div>
 
   <!-- Scripts -->

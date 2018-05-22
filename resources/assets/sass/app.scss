@@ -88,5 +88,20 @@ html, body {
 	}
 }
 
+.error-page {
+	& .page-header {
+		& .text-error {
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    font-size: 2.5rem;
+	    & .number-error {
+	    	font-size: 12rem;
+	    	font-family: "Museo Sans 900";
+	    }
+		}
+	}
+}
+
 //Themes
 //@import "themes/light-blue";

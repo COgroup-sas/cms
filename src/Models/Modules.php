@@ -28,7 +28,7 @@ class Modules extends Model
    * @var array
    */
   protected $fillable = [
-    'id', 'modulename', 'description', 'active', 'url', 'icon', 'parent', 'order', 'inmenu', 'permissions', 'created_at', 'updated_at'
+    'id', 'moduleslug', 'modulename', 'description', 'active', 'url', 'icon', 'parent', 'order', 'inmenu', 'permissions'
   ];
 
   /**

@@ -24,16 +24,12 @@ class UsersController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function index(Request $request) {
-    if(parent::checkPermission(Auth::user(), 'users')) :
-      $users = User::select('*')
+    $breadcrumb = array(trans('cms.home'), trans('moduleusers.title'));
+
+    $users = User::select('*')
                 ->where('roles_id', '>=', Auth::user()->roles_id)
                 ->where('id', '<>', Auth::user()->id)
                 ->get();
-    else :
-      return abort(404);
-    endif;
-
-    $breadcrumb = array(trans('cms.home'), trans('moduleusers.title'));
 
     return view('cogroupcms::modules.users.body')->with(
       array(
@@ -53,8 +49,6 @@ class UsersController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function add(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'users', 'create')) return abort(404);
-
     $breadcrumb = array(trans('cms.home'), trans('moduleusers.title'), trans('moduleusers.add'));
 
     return view('cogroupcms::modules.users.register')->with(
@@ -70,9 +64,6 @@ class UsersController extends CmsController {
   }
 
   public function addpost(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'users', 'create') || !parent::checkPermission(Auth::user(), 'users', 'update')) 
-      return abort(404);
-
     $id = ($request->has('id')) ? $request->input('id') : NULL;
     if(!is_null($id)) User::findOrFail($id);
     $validator = Validator::make($request->all(), [
@@ -113,8 +104,6 @@ class UsersController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function edit(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'users', 'update')) return abort(404);
-
     $breadcrumb = array(trans('cms.home'), trans('moduleusers.title'), trans('moduleusers.edit'));
 
     $id = $request->input('id');
@@ -134,8 +123,6 @@ class UsersController extends CmsController {
   }
 
   public function active(Request $request) {
-    if(parent::checkPermission(Auth::user(), 'users', 'update') == false) return response('error 404', 404)->json(['status' => false]);
-
     $validator = Validator::make($request->all(), [
         'id' => 'exists:users,id',
         'active' => 'in:Y,N'

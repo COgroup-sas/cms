@@ -26,15 +26,11 @@ class RolesController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function index(Request $request) {
-    if(parent::checkPermission(Auth::user(), 'roles')) :
-      $roles = Roles::select('*')
-                ->where('id', '>=', Auth::user()->roles_id)
-                ->get();
-    else :
-      return abort(404);
-    endif;
-
     $breadcrumb = array(trans('home'), trans('moduleroles.title'));
+
+    $roles = Roles::select('*')
+                  ->where('id', '>=', Auth::user()->roles_id)
+                  ->get();
 
     return view('cogroupcms::modules.roles.body')->with(
       array(
@@ -54,8 +50,6 @@ class RolesController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function add(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'roles', 'create')) return abort(404);
-
     $breadcrumb = array(trans('home'), trans('moduleroles.title'), trans('moduleroles.add'));
 
     return view('cogroupcms::modules.roles.register')->with(
@@ -70,9 +64,6 @@ class RolesController extends CmsController {
   }
 
   public function addpost(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'roles', 'create') || !parent::checkPermission(Auth::user(), 'roles', 'update')) 
-      return abort(404);
-
     $id = ($request->has('id')) ? $request->input('id') : NULL;
     if(!is_null($id)) Roles::findOrFail($id);
     $validator = Validator::make($request->all(), [
@@ -106,8 +97,6 @@ class RolesController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function permissions(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'permissions')) return abort(404);
-
     $breadcrumb = array(trans('home'), trans('moduleroles.title'), trans('moduleroles.permissions'));
 
     $rol = Roles::where('id', $request->input('id'))->with('RolAccess')->first();
@@ -138,8 +127,6 @@ class RolesController extends CmsController {
   }
 
   public function setpermission(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'permissions', 'update')) return reponse('error 404', 404)->json(['status', false]);
-
     $validator = Validator::make($request->all(), [
         'modules_id' => 'exists:modules,id',
         'roles_id' => 'exists:roles,id',
@@ -178,8 +165,6 @@ class RolesController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function edit(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'roles', 'update')) return abort(404);
-
     $breadcrumb = array(trans('home'), trans('moduleroles.title'), trans('moduleroles.edit'));
 
     $id = $request->input('id');

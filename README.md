@@ -14,8 +14,12 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 - [Configuration](#configuration)
     - [User relation to roles](#user-relation-to-roles)
     - [Models](#models)
-        - [Role](#role)
-        - [Permission](#permission)
+    		- [Files](#files)
+    		- [Modules](#modules)
+    		- [No working days](#noworkingdays)
+        - [Roles](#roles)
+        - [Roles Access](#rolesaccess)
+        - [Settings](#settings)
         - [User](#user)
 - [Usage](#usage)
     - [Middleware](#middleware)
@@ -73,36 +77,74 @@ You may now run it with the artisan migrate command:
 php artisan migrate
 ```
 
-After the migration, four new tables will be present:
+After the migration, seven new tables will be present:
+- `files` &mdash; manage files into CMS
 - `modules` &mdash; modules for CMS
-- `noworkingdays` &mdash; days for specials dates, discount to range dates
+- `noworkingdays` &mdash; dates for special days, and to be able to discount in a range of dates
+- `roles` &mdash; roles for CMS
 - `roles_access` &mdash; relations between roles and modules access
 - `settings` &mdash; CMS basic settings (sitename, emailname, etc.)
-- `users` &mdash; Table for users and rol user
+- `user` &mdash; Table for users and specific rol user
 
 ### Models
 
-#### Role
+#### Files
 
-The `Role` model has three main attributes:
-- `name` &mdash; Unique name for the Role, used for looking up role information in the application layer. For example: "admin", "owner", "employee".
-- `display_name` &mdash; Human readable name for the Role. Not necessarily unique and optional. For example: "User Administrator", "Project Owner", "Widget  Co. Employee".
-- `description` &mdash; A more detailed explanation of what the Role does. Also optional.
+The `Files` model has eight main attributes:
+- `originalname` &mdash; Original name of the file.
+- `diskname` &mdash; name of the file into system after upload.
+- `extension` &mdash; extension of the file.
+- `size` &mdash; size of the file.
+- `mimetype` &mdash; Mime type of the file.
+- `width` &mdash; when is image, a width attribute.
+- `height` &mdash; when is image, a height attribute.
+- `ispublic` &mdash; determines whether a file is public or not.
 
-Both `display_name` and `description` are optional; their fields are nullable in the database.
+#### Modules
 
-#### Permission
+The `Modules` model has ten main attributes:
+- `moduleslug` &mdash; Slug name for the module, to verify permissions.
+- `modulename` &mdash; Module name to show.
+- `description` &mdash; A more detailed explanation of what the Module does.
+- `active` &mdash; module is active or not.
+- `url` &mdash; url to acces the module. The url should not have the domain.
+- `icon` &mdash; font icon of the module.
+- `parent` &mdash; When is a submodule, id of the parent module. When is a father module is 0.
+- `order` &mdash; order to show module in the menu.
+- `inmenu` &mdash; determines if the module is show in the main menu.
+- `permissions` &mdash; Determine what permissions the module needs. They must be separated by commas. Example: "view, create".
 
-The `Permission` model has the same three attributes as the `Role`:
-- `name` &mdash; Unique name for the permission, used for looking up permission information in the application layer. For example: "create-post", "edit-user", "post-payment", "mailing-list-subscribe".
-- `display_name` &mdash; Human readable name for the permission. Not necessarily unique and optional. For example "Create Posts", "Edit Users", "Post Payments", "Subscribe to mailing list".
-- `description` &mdash; A more detailed explanation of the Permission.
+#### NoWorkingDays
 
-In general, it may be helpful to think of the last two attributes in the form of a sentence: "The permission `display_name` allows a user to `description`."
+The `NoWorkingDays` model has two main attributes:
+- `date` &mdash; special day date.
+- `active` &mdash; determines whether a date is active or not.
+
+#### Roles
+
+The `Role` model has two main attributes:
+- `rolname` &mdash; Unique name for the Role, used for looking up role information in the application layer. For example: "admin", "owner", "employee".
+- `description` &mdash; A more detailed explanation of what the Role does.
+
+#### RolesAccess
+
+The `RolesAccess` model has six main attributes:
+- `roles_id` &mdash; Unique key for the Role, used for relation to table roles.
+- `modules_id` &mdash; Unique key for the modules, used for relation to table modules.
+- `view` &mdash; Set the permission to see a module or submodule.
+- `create` &mdash; Set the permission to create content in a module or submodule.
+- `update` &mdash; Set the permission to update content in a module or submodule.
+- `delete` &mdash; Set the permission to delete content in a module or submodule.
+
+#### Settings
+
+The `Settings` model has two main attributes:
+- `setting` &mdash; Unique name for the setting.
+- `defaultvalue` &mdash; A value for the setting attribute.
 
 #### User
 
-This will enable the relation with `Role` and add the following methods `roles()`, `hasRole($name)`, `withRole($name)`, `can($permission)`, and `ability($roles, $permissions, $options)` within your `User` model.
+This will enable the relation with `Role`.
 
 **And you are ready to go.**
 
@@ -112,26 +154,27 @@ This will enable the relation with `Role` and add the following methods `roles()
 
 You can use a middleware to filter routes and route groups by permission or role
 ```php
-Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
+Route::group(['prefix' => 'settings', 'middleware' => ['admin:settings|view']], function() {
     Route::get('/', 'AdminController@welcome');
-    Route::get('/manage', ['middleware' => ['permission:manage-admins'], 'uses' => 'AdminController@manageAdmins']);
+    Route::post('/', ['middleware' => ['admin:settings|create,update'], 'uses' => 'AdminController@manageAdmins']);
 });
 ```
 
-It is possible to use pipe symbol as *OR* operator:
+It is possible to use comma symbol to verify until two actions:
 ```php
-'middleware' => ['role:admin|root']
+'middleware' => ['role:admin|create,update']
 ```
 
-To emulate *AND* functionality just use multiple instances of middleware
+### Helper
+
+You can use a helper to verify a permission
 ```php
-'middleware' => ['role:owner', 'role:writer']
+cms_roles_check($check, $moduleslug, $type);
 ```
 
-For more complex situations use `ability` middleware which accepts 3 parameters: roles, permissions, validate_all
-```php
-'middleware' => ['ability:admin|owner,create-post|edit-user,true']
-```
+`check` is a Auth::user info or module id.
+`moduleslug` is a slug of the module to check permission.
+`type` is optional permission, by default is `view`.
 
 ## License
 

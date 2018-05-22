@@ -12,18 +12,18 @@
                 <small>{{ mb_strtoupper(trans('cms.list')) }}</small>
               </h2>
               <div class="float-right">
-                @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'create') == true)
+                @if(cms_roles_check($user, 'users', 'create') == true)
                   <a id="add" href="{{ route('cogroupcms.usersadd') }}" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.add') }}">
                     <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
-                @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
+                @if(cms_roles_check($user, 'users', 'update') == true)
                   <a id="edit" href="{{ route('cogroupcms.usersedit') }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.edit') }}">
                     <i class="far fa-edit"></i>
                   </a>
                 @endif
                 @foreach(Cogroup\Cms\Http\Controllers\CmsController::getModules('Usuarios', 'N') as $mod)
-                  @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, $mod->modulename, 'view') == true)
+                  @if(cms_roles_check($user, $mod->modulename, 'view') == true)
                   <a id="{{ $mod->modulename }}" href="{{ $mod->url }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.'.$mod->modulename) }}">
                     <i class="{{ $mod->icon }}"></i>
                   </a>
@@ -73,7 +73,7 @@
                   @foreach($users as $usr)
                     <tr>
                       <th>
-                        @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
+                        @if(cms_roles_check($user, 'users', 'update') == true)
                         <div class="form-check">
                           <label class="form-check-label" for="chk_{{ $usr->id }}">
                             <input type="checkbox" class="form-check-input check" id="chk_{{ $usr->id }}" name="id" value="{{ $usr->id }}">
@@ -86,7 +86,7 @@
                       <td>{{ $usr->email }}</td>
                       <td>{{ $usr->roles->rolname }}</td>
                       <td>
-                        @if(Cogroup\Cms\Http\Controllers\CmsController::checkPermission($user, 'users', 'update') == true)
+                        @if(cms_roles_check($user, 'users', 'update') == true)
                         <a class="user-active" data-id="{{ $usr->id }}" data-active="{{ $usr->active }}" href="{{ route('cogroupcms.usersactive') }}">
                           <i class="{{ ($usr->active == 'Y') ? 'far fa-check-circle' : 'far fa-circle' }}"></i>
                         </a>

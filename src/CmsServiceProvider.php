@@ -16,7 +16,6 @@ class CmsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerRoutes();
         $this->registerResources();
         $this->registerMigrations();
         $this->registerTranslations();
@@ -86,9 +85,20 @@ class CmsServiceProvider extends ServiceProvider
         $this->configure();
         $this->offerPublishing();
         $this->registerCommands();
-        //$this->registerQueueConnectors();
+        $this->registerHelper();
         $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('admin', Http\Middleware\AdminMiddleware::class);
+        $router->aliasMiddleware('admin', Http\Middleware\AdminMiddleware::class);
+        $this->registerRoutes();
+    }
+
+    /**
+     * Register helper file
+     *
+     * @return void
+     */
+    protected function registerHelper()
+    {
+        require_once __DIR__.'/CmsHelper.php';
     }
 
     /**

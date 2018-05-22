@@ -29,7 +29,7 @@ class RolesAccess extends Model
    * @var array
    */
   protected $fillable = [
-    'rol_id', 'modules_id', 'create', 'edit', 'delete', 'public', 'created_at', 'updated_at'
+    'roles_id', 'modules_id', 'view', 'create', 'update', 'delete', 'created_at', 'updated_at'
   ];
 
   /**

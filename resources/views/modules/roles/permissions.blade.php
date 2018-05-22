@@ -29,7 +29,7 @@
                         <div class="form-group">
                           <label for="switch-sm" data-id="{{ $module->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
                             <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
-                              echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $module->moduleslug, $perm)) ? ' checked' : '';
+                              echo (cms_roles_check($rolpermissions, $module->moduleslug, $perm)) ? ' checked' : '';
                               ?> id="{{ $module->id.'-'.$perm }}"> {{ trans('cms.txt'.$perm) }}
                           </label>
                         </div>
@@ -46,7 +46,7 @@
                           <span class="switch switch-sm">
                             <label for="switch-sm" data-id="{{ $submod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
                               <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
-                            echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $submod->moduleslug, $perm)) ? ' checked' : '';
+                            echo (cms_roles_check($rolpermissions, $submod->moduleslug, $perm)) ? ' checked' : '';
                           ?> class="switch" id="{{ $submod->id.'-'.$perm }}">
                               {{ trans('cms.txt'.$perm) }}
                             </label>
@@ -65,7 +65,7 @@
                           {{ trans('cms.txt'.$perm) }}
                           <label>
                             <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
-                              echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $ssubmod->moduleslug, $perm)) ? ' checked' : '';
+                              echo (cms_roles_check($rolpermissions, $ssubmod->moduleslug, $perm)) ? ' checked' : '';
                             ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
                             {{ trans('cms.txt'.$perm) }}
                         </label>
@@ -83,7 +83,7 @@
                             <div class="switch">
                               {{ trans('cms.txt'.$perm) }}
                               <label><input type="checkbox"<?php
-                                echo (Cogroup\Cms\Http\Controllers\CmsController::checkPermission($rolpermissions, $sssubmod->moduleslug, $perm)) ? ' checked' : '';
+                                echo (cms_roles_check($rolpermissions, $sssubmod->moduleslug, $perm)) ? ' checked' : '';
                               ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm"><span class="lever switch-col-red"></span></label>
                             </div>
                           </div>

@@ -49,11 +49,7 @@ class DashboardController extends CmsController
    * @return \Illuminate\Http\Response
    */
   public function settings(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'settings')) return abort(404);
-
     $breadcrumb = array('settings');
-
-    if(!parent::checkPermission(Auth::user(), 'settings')) return abort(404);
 
     return view('cogroupcms::modules.dashboard.settings')->with(
       array(
@@ -75,7 +71,6 @@ class DashboardController extends CmsController
    * @return \Illuminate\Http\Response
    */
   public function settingstore(Request $request) {
-    if(!parent::checkPermission(Auth::user(), 'settings', 'update')) return abort(404);
     $validator = Validator::make($request->all(), [
       "sitename" => "required",
       "emailname" => "required",
