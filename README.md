@@ -41,7 +41,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install Laravel 5 Entrust, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.0.x-dev"
+"cogroup/cms": "1.0.0"
 ```
 
 2) Run the command below to publish the package config file `config/cogroupcms.php`:
