@@ -49,6 +49,8 @@
                       </th>
                       <th>{{ trans('moduleroles.name') }}</th>
                       <th>{{ trans('moduleroles.description') }}</th>
+                      <th>{{ trans('cms.created_at') }}</th>
+                      <th>{{ trans('cms.updated_at') }}</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -63,6 +65,8 @@
                       </th>
                       <th>{{ trans('moduleroles.name') }}</th>
                       <th>{{ trans('moduleroles.description') }}</th>
+                      <th>{{ trans('cms.created_at') }}</th>
+                      <th>{{ trans('cms.updated_at') }}</th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -81,6 +85,8 @@
                       </th>
                       <td>{{ $rol->rolname }}</td>
                       <td>{{ $rol->description }}</td>
+                      <td>{{ cms_format_datetime($rol->created_at) }}</td>
+                      <td>{{ cms_format_datetime($rol->updated_at) }}</td>
                     </tr>
                   @endforeach
                   </tbody>

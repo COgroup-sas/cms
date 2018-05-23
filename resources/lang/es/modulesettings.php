@@ -27,5 +27,8 @@ return [
   'site.sitekeywords' => 'Palabras clave',
   'site.timeformat' => 'Formato de hora',
   'site.dateformat' => 'Formato de fecha',
-  'msgaddok' => '¡Los ajustes se guardaron correctamente!'
+  'msgaddok' => '¡Los ajustes se guardaron correctamente!',
+  'image.title' => 'Imágenes',
+  'image.favicon' => 'Favicon',
+  'image.logo' => 'Logotipo'
 ];

@@ -85,4 +85,8 @@ return [
   'login' => 'Acceder',
   'register' => 'Registrarse',
   'back' => 'Regresar',
+  'created_at' => 'Fecha de creación',
+  'updated_at' => 'Fecha de actualización',
+  'deleted_at' => 'Fecha de eliminación',
+  'welcome' => 'Bienvenido '
 ];

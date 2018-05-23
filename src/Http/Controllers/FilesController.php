@@ -58,7 +58,7 @@ class FilesController extends Controller {
 
   public static function upload($request, $name) {
     // checking file is valid.
-    if($request->file('photo')->isValid()) :
+    if($request->file($name)->isValid()) :
       $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
       $path = file_exists(storage_path("app/files/".$request->{$name}->hashName()));
       if($path == true) :

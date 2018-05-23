@@ -1,15 +1,17 @@
 <?php
 
 use Cogroup\Cms\Http\Controllers\CmsController;
+use Cogroup\Cms\Models\Files;
 use Illuminate\Support\Facades\Auth;
 
 if (! function_exists('cms_roles_check')) {
     /**
-     * Get the available container instance.
+     * Check a permission into rol
      *
-     * @param  string  $abstract
-     * @param  array   $parameters
-     * @return mixed|\Illuminate\Foundation\Application
+     * @param  User     $check || integer $chek
+     * @param  string   $moduleslug
+     * @param  string   $type
+     * @return mixed|\Cogroup\Cms\CmsController
      */
     function cms_roles_check($check, $moduleslug, $type = 'view')
     {
@@ -19,11 +21,12 @@ if (! function_exists('cms_roles_check')) {
 
 if (! function_exists('cms_get_modules')) {
     /**
-     * Get the available container instance.
+     * Get cms modules
      *
-     * @param  string  $abstract
-     * @param  array   $parameters
-     * @return mixed|\Illuminate\Foundation\Application
+     * @param  string       $modulename || integer $modulename
+     * @param  enum(Y,N)    $inmenu
+     * @param  integer      $idrol
+     * @return mixed|\Cogroup\Cms\CmsController
      */
     function cms_get_modules($modulename = NULL, $inmenu = 'Y', $idrol = NULL)
     {
@@ -35,9 +38,8 @@ if (! function_exists('cms_settings')) {
     /**
      * Get the available container instance.
      *
-     * @param  string  $abstract
-     * @param  array   $parameters
-     * @return mixed|\Illuminate\Foundation\Application
+     * @param  void
+     * @return mixed|\Cogroup\Cms\CmsController
      */
     function cms_settings()
     {
@@ -50,12 +52,72 @@ if (! function_exists('cms_print_submenu')) {
     /**
      * Get the available container instance.
      *
-     * @param  string  $abstract
-     * @param  array   $parameters
-     * @return mixed|\Illuminate\Foundation\Application
+     * @param  object   $submenu
+     * @param  string   $route
+     * @return mixed|\Cogroup\Cms\CmsController
      */
     function cms_print_submenu($submenu, $route)
     {
         return CmsController::printSubmenu($submenu, $route);
+    }
+}
+
+if (! function_exists('cms_format_date')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  string  $date
+     * @return mixed|\Carbon
+     */
+    function cms_format_date($date)
+    {
+        if(!is_null($date) and !empty($date)) return \Carbon\Carbon::createFromFormat("Y-m-d", $date)->format(cms_settings()->dateformat);
+        else return '';
+    }
+}
+
+if (! function_exists('cms_format_time')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  string  $time
+     * @return mixed|\Carbon
+     */
+    function cms_format_time($time)
+    {
+        if(!is_null($time) and !empty($time)) return \Carbon\Carbon::createFromFormat("H:i:s", $time)->format(cms_settings()->timeformat);
+        else return '';
+    }
+}
+
+if (! function_exists('cms_format_datetime')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  string  $datetime
+     * @return mixed|\Carbon
+     */
+    function cms_format_datetime($datetime)
+    {
+        if(!is_null($datetime) and !empty($datetime)) :
+            return \Carbon\Carbon::createFromFormat("Y-m-d H:i:s", $datetime)->format(cms_settings()->dateformat." ".cms_settings()->timeformat);
+        else :
+            return '';
+        endif;
+    }
+}
+
+if (! function_exists('cms_get_file_attribute')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  integer  $id
+     * @param  string   $attribute
+     * @return mixed|\Cogroup\Cms\Models\Files
+     */
+    function cms_get_file_attribute($id, $attribute)
+    {
+        $file = FilesModel::firstOrFail($id);
+        return $file->{$attribute};
     }
 }

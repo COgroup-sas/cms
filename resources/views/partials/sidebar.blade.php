@@ -4,7 +4,7 @@
 -->
   <div class="logo">
     <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-      <img src="{{ asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'light-blue').'/logocms.png') }}">
+      <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
     </a>
   </div>
   <div class="sidebar-wrapper">

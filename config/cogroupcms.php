@@ -22,6 +22,6 @@ return [
     |
     */
 
-    'color_theme' => env('COGROUPCMS_COLORTHEME', 'light-blue'),
+    'color_theme' => env('COGROUPCMS_COLORTHEME', 'orange'),
 
 ];

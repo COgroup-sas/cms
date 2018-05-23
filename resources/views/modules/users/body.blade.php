@@ -49,6 +49,8 @@
                       <th>{{ trans('moduleusers.name') }}</th>
                       <th>{{ trans('cms.email') }}</th>
                       <th>{{ trans('moduleroles.rol') }}</th>
+                      <th>{{ trans('cms.created_at') }}</th>
+                      <th>{{ trans('cms.updated_at') }}</th>
                       <th>{{ trans('cms.active') }}</th>
                     </tr>
                   </thead>
@@ -66,6 +68,8 @@
                       <th>{{ trans('moduleusers.name') }}</th>
                       <th>{{ trans('cms.email') }}</th>
                       <th>{{ trans('moduleroles.rol') }}</th>
+                      <th>{{ trans('cms.created_at') }}</th>
+                      <th>{{ trans('cms.updated_at') }}</th>
                       <th>{{ trans('cms.active') }}</th>
                     </tr>
                   </tfoot>
@@ -85,6 +89,8 @@
                       <td>{{ $usr->name }} {{ $usr->lastname }}</td>
                       <td>{{ $usr->email }}</td>
                       <td>{{ $usr->roles->rolname }}</td>
+                      <td>{{ cms_format_datetime($usr->created_at) }}</td>
+                      <td>{{ cms_format_datetime($usr->updated_at) }}</td>
                       <td>
                         @if(cms_roles_check($user, 'users', 'update') == true)
                         <a class="user-active" data-id="{{ $usr->id }}" data-active="{{ $usr->active }}" href="{{ route('cogroupcms.usersactive') }}">

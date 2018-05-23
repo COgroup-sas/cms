@@ -75,7 +75,9 @@ class DashboardController extends CmsController
       "sitekeywords" => "required",
       "address" => "required",
       "phone" => "required|phone",
-      "mobilephone" => "mobilephone"
+      "mobilephone" => "mobilephone",
+      'favicon' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml',
+      'logo' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml'
     ]);
 
     if ($validator->fails()) :
@@ -96,6 +98,32 @@ class DashboardController extends CmsController
         $settings->save();
       endif;
     endforeach;
+
+    if ($request->hasFile('favicon')) :
+      $image = FilesController::upload($request, 'favicon');
+      if($image['status'] == true) :
+        $id = Settings::where('setting', 'favicon')->value('id');
+        if(!is_null($id)) :
+          $settings = Settings::find($id);
+          $settings->setting = 'favicon';
+          $settings->defaultvalue = $image['id'];;
+          $settings->save();
+        endif;
+      endif;
+    endif;
+
+    if ($request->hasFile('logo')) :
+      $image = FilesController::upload($request, 'logo');
+      if($image['status'] == true) :
+        $id = Settings::where('setting', 'logo')->value('id');
+        if(!is_null($id)) :
+          $settings = Settings::find($id);
+          $settings->setting = 'logo';
+          $settings->defaultvalue = $image['id'];;
+          $settings->save();
+        endif;
+      endif;
+    endif;
 
     $request->session()->flash('status', '1');
     $request->session()->flash('msg', trans('modulesettings.msgaddok'));

@@ -26,6 +26,12 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
     - [Middleware](#middleware)
     - [Helper](#helper)
     - [Helpers](#helpers)
+        - [cms_get_modules](#cms_get_modules)
+        - [cms_settings](#cms_settings)
+        - [cms_format_date](#cms_format_date)
+        - [cms_format_time](#cms_format_time)
+        - [cms_format_datetime](#cms_format_datetime)
+        - [cms_get_file_attribute](#cms_get_file_attribute)
 - [License](#license)
 - [Contribution guidelines](#contribution-guidelines)
 - [Additional information](#additional-information)
@@ -224,6 +230,47 @@ cms_settings();
 ```
 
 Example: `cms_settings()->sitename`
+
+### cms_format_date
+
+This function return a Carbon format date with the dateformat setting format
+
+```php
+cms_format_date($date);
+```
+
+- `date` is required parameter. The date format must be Y-m-d.
+
+### cms_format_time
+
+This function return a Carbon format date with the timeformat setting format
+
+```php
+cms_format_time($time);
+```
+
+- `time` is required parameter. The time format must be H:i:s.
+
+### cms_format_datetime
+
+This function return a Carbon format date with the dateformat and timeformat setting format
+
+```php
+cms_format_datetime($datetime);
+```
+
+- `datetime` is required parameter. The date format must be Y-m-d H:i:s.
+
+### cms_get_file_attribute
+
+This function return a attribute FileModel
+
+```php
+cms_get_file_attribute($id, $attribute);
+```
+
+- `id` is required parameter. Id into table `Files`
+- `attribute` is required parameter. Column of the table `Files`
 
 ## License
 

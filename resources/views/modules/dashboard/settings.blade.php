@@ -5,7 +5,7 @@
     {{ csrf_field() }}
     <section class="content">
       <div class="container-fluid">
-        <!-- Basic Examples -->
+        <!-- Contact data -->
         <div class="row clearfix">
           <div class="col-12">
             <div class="card">
@@ -78,6 +78,7 @@
           </div>
         </div>
         <br>
+        <!-- Website data -->
         <div class="row clearfix">
           <div class="col-12">
             <div class="card">
@@ -183,6 +184,58 @@
                     </div>
                   </div>
                 </fieldset>
+                <div class="text-right">
+                  <button class="btn btn-primary waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <!-- Images -->
+        <div class="row clearfix">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  {{ trans('modulesettings.image.title') }}
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.image.favicon') !!}</label>
+                  <div class="col-sm-9">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input form-control" id="customFile" accept="image/jpeg,image/gif,image/png,image/svg+xml" name="favicon">
+                      <label class="custom-file-label" for="customFile">{{ trans('cms.pleaseselectfile') }}</label>
+                    </div>
+                    @if ($errors->has('favicon'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('favicon') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                  <div class="col-sm-1">
+                    <img class="rounded-circle" src="{{ (empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('getFile', cms_settings()->favicon) }}">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.image.logo') !!}</label>
+                  <div class="col-sm-9">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input form-control" id="customFile" accept="image/jpeg,image/gif,image/png,image/svg+xml" name="logo">
+                      <label class="custom-file-label" for="customFile">{{ trans('cms.pleaseselectfile') }}</label>
+                    </div>
+                    @if ($errors->has('logo'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('logo') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                  <div class="col-sm-1 bg-primary">
+                    <img class="rounded" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'light-blue').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
+                  </div>
+                </div>
                 <div class="text-right">
                   <button class="btn btn-primary waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
                 </div>
