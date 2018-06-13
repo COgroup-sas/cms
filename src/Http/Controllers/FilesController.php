@@ -74,7 +74,7 @@ class FilesController extends Controller {
       $filemodel->originalname = $request->{$name}->getClientOriginalName();
       $filemodel->extension = $request->{$name}->extension();
       $filemodel->size = $request->{$name}->getClientSize();
-      $filemodel->mime_type = $request->{$name}->getClientMimeType();
+      $filemodel->mimetype = $request->{$name}->getClientMimeType();
       $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : env("APP_NAME");
       if(stripos($request->{$name}->getClientMimeType(), 'image') !== false) :
         $filemodel->height = self::getAttribute($filemodel, 'height');

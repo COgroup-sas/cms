@@ -117,7 +117,7 @@ if (! function_exists('cms_get_file_attribute')) {
      */
     function cms_get_file_attribute($id, $attribute)
     {
-        $file = FilesModel::firstOrFail($id);
+        $file = Files::where('id', $id)->first();
         return $file->{$attribute};
     }
 }
