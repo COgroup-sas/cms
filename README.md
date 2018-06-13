@@ -41,11 +41,11 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.0.0-dev"
+"cogroup/cms": "1.0.1-dev"
 ```
 or run the next command:
 ```json
-composer require cogroup/cms:1.0.0-dev
+composer require cogroup/cms
 ```
 
 2) Run the command below to publish the package config file `config/cogroupcms.php`:
