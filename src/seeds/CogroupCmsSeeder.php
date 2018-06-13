@@ -84,15 +84,15 @@ class CogroupCmsSeeder extends Seeder
         'permissions' => 'view,update'
       ],
       [ 
-        'id' => '2', 'moduleslug' => 'roles', 'modulename' => 'Roles', 'description' => 'Módulo de Administración de Roles del sistema GAUDI-BÚSQUEDA', 
+        'id' => '2', 'moduleslug' => 'roles', 'modulename' => 'Roles', 'description' => 'Módulo de Administración de Roles del sistema', 
         'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/roles', 'icon' => 'fa fa-user-plus', 'parent' => '0', 'order' => '1', 'inmenu' => 'Y', 
         'permissions' => 'view,create,update'
       ],
-      [ 'id' => '3', 'moduleslug' => 'permissions', 'modulename' => 'Permisos', 'description' => 'Módulo de Administración de permisos del sistema GAUDI-BÚSQUEDA', 
+      [ 'id' => '3', 'moduleslug' => 'permissions', 'modulename' => 'Permisos', 'description' => 'Módulo de Administración de permisos del sistema', 
         'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/roles/permissions', 'icon' => 'fa fa-check-circle', 'parent' => '2', 'order' => '0', 'inmenu' => 'N', 
         'permissions' => 'view,update'
       ],
-      [ 'id' => '4', 'moduleslug' => 'users', 'modulename' => 'Usuarios', 'description' => 'Módulo de Administración de usuarios del sistema GAUDI-BÚSQUEDA', 
+      [ 'id' => '4', 'moduleslug' => 'users', 'modulename' => 'Usuarios', 'description' => 'Módulo de Administración de usuarios del sistema', 
         'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/users', 'icon' => 'fa fa-users', 'parent' => '0', 'order' => '3', 'inmenu' => 'Y', 
         'permissions' => 'view,create,update'
       ]
