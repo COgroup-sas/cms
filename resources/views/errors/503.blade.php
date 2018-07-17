@@ -1,9 +1,9 @@
 @extends('errors.error')
 
-@section('title', 'Service Unavailable')
+@section('title', trans('cms.error.503.title'))
 
 @section('number', '503')
 
 @section('icon', 'fa fa-clock')
 
-@section('message', 'Be right back.')
+@section('message', trans('cms.error.503.message'))

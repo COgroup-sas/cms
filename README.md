@@ -41,7 +41,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.0.1-dev"
+"cogroup/cms": "1.0.2-dev"
 ```
 or run the next command:
 ```json
@@ -80,7 +80,7 @@ php artisan cogroupcms::translations
 ## Configuration
 
 Set the property values in the `config/cogroupcms.php`.
-These values will be used by cogroup-cms to refer to the correct prefix and color theme.
+These values will be used by cogroup-cms to refer to the correct prefix, color theme and URI to CMS access.
 
 ### User relation to roles
 
@@ -109,9 +109,12 @@ The `Files` model has eight main attributes:
 - `extension` &mdash; extension of the file.
 - `size` &mdash; size of the file.
 - `mimetype` &mdash; Mime type of the file.
+- `alt` &mdash; Texto for label alt in HTML.
 - `width` &mdash; when is image, a width attribute.
 - `height` &mdash; when is image, a height attribute.
 - `ispublic` &mdash; determines whether a file is public or not.
+- `created_at` &mdash; determines the creation date.
+- `updated_at` &mdash; determine the update date.
 
 #### Modules
 
@@ -132,12 +135,16 @@ The `Modules` model has ten main attributes:
 The `NoWorkingDays` model has two main attributes:
 - `date` &mdash; special day date.
 - `active` &mdash; determines whether a date is active or not.
+- `created_at` &mdash; determines the creation date.
+- `updated_at` &mdash; determine the update date.
 
 #### Roles
 
 The `Role` model has two main attributes:
 - `rolname` &mdash; Unique name for the Role, used for looking up role information in the application layer. For example: "admin", "owner", "employee".
 - `description` &mdash; A more detailed explanation of what the Role does.
+- `created_at` &mdash; determines the creation date.
+- `updated_at` &mdash; determine the update date.
 
 #### RolesAccess
 
@@ -148,6 +155,8 @@ The `RolesAccess` model has six main attributes:
 - `create` &mdash; Set the permission to create content in a module or submodule.
 - `update` &mdash; Set the permission to update content in a module or submodule.
 - `delete` &mdash; Set the permission to delete content in a module or submodule.
+- `created_at` &mdash; determines the creation date.
+- `updated_at` &mdash; determine the update date.
 
 #### Settings
 

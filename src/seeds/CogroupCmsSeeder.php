@@ -62,6 +62,10 @@ class CogroupCmsSeeder extends Seeder
       [
         'setting'       => 'logo',
         'defaultvalue'  => ''
+      ],
+      [
+        'setting'       => 'socialaccess',
+        'defaultvalue'  => '1'
       ]
     ]);
 
@@ -80,20 +84,20 @@ class CogroupCmsSeeder extends Seeder
       //Administración
       [ 
         'id' => '1', 'moduleslug' => 'settings', 'modulename' => 'Ajustes', 'description' => 'Módulo de Administración de Ajustes generales del sitio', 
-        'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/settings', 'icon' => 'fa fa-cogs', 'parent' => '0', 'order' => '0', 'inmenu' => 'Y', 
+        'active' => 'Y', 'url' => (empty(config('cogroupcms.uri')) ? '' : config('cogroupcms.uri')."/").'settings', 'icon' => 'fa fa-cogs', 'parent' => '0', 'order' => '0', 'inmenu' => 'Y', 
         'permissions' => 'view,update'
       ],
       [ 
         'id' => '2', 'moduleslug' => 'roles', 'modulename' => 'Roles', 'description' => 'Módulo de Administración de Roles del sistema', 
-        'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/roles', 'icon' => 'fa fa-user-plus', 'parent' => '0', 'order' => '1', 'inmenu' => 'Y', 
+        'active' => 'Y', 'url' => (empty(config('cogroupcms.uri')) ? '' : config('cogroupcms.uri')."/").'roles', 'icon' => 'fa fa-user-plus', 'parent' => '0', 'order' => '1', 'inmenu' => 'Y', 
         'permissions' => 'view,create,update'
       ],
       [ 'id' => '3', 'moduleslug' => 'permissions', 'modulename' => 'Permisos', 'description' => 'Módulo de Administración de permisos del sistema', 
-        'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/roles/permissions', 'icon' => 'fa fa-check-circle', 'parent' => '2', 'order' => '0', 'inmenu' => 'N', 
+        'active' => 'Y', 'url' => (empty(config('cogroupcms.uri')) ? '' : config('cogroupcms.uri')."/").'roles/permissions', 'icon' => 'fa fa-check-circle', 'parent' => '2', 'order' => '0', 'inmenu' => 'N', 
         'permissions' => 'view,update'
       ],
       [ 'id' => '4', 'moduleslug' => 'users', 'modulename' => 'Usuarios', 'description' => 'Módulo de Administración de usuarios del sistema', 
-        'active' => 'Y', 'url' => config('cogroupcms.uri', 'cms').'/users', 'icon' => 'fa fa-users', 'parent' => '0', 'order' => '3', 'inmenu' => 'Y', 
+        'active' => 'Y', 'url' => (empty(config('cogroupcms.uri')) ? '' : config('cogroupcms.uri')."/").'users', 'icon' => 'fa fa-users', 'parent' => '0', 'order' => '3', 'inmenu' => 'Y', 
         'permissions' => 'view,create,update'
       ]
     ]);

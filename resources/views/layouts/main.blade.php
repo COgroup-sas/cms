@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ cms_settings()->sitename }}</title>
+  <title>{{ cms_settings()->sitename }}@if(isset($title)){{ " .::. ".$title }}@endif</title>
   <!-- Favicon-->
   <link rel="shortcut icon" href="{{ (!isset(cms_settings()->favicon) || empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('getFile', cms_settings()->favicon) }}" type="{{ (!isset(cms_settings()->favicon) || empty(cms_settings()->favicon)) ? 'image/png' : cms_get_file_attribute(cms_settings()->favicon, 'mimetype') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -22,6 +22,7 @@
     @endforeach
   @endif
 
+  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
   <!-- Scripts -->
   <script>
@@ -49,7 +50,7 @@
     data-placement-align="center" 
     data-animate-enter="" 
     data-animate-exit="" 
-    data-color-name="{{ (Session::get('status') == 1) ? 'alert-success' : 'alert-danger' }} " 
+    data-color-name="{{ (Session::get('status') == 1) ? 'info' : 'danger' }} " 
     data-text="{{ Session::get('msg') }}">SUCCESS</div>
   @endif
 
@@ -63,6 +64,7 @@
   <script src="{{ asset('vendor/cogroup/cms/js/datatables.net/js/jquery.dataTables.js?'.time()) }}"></script>
   <script src="{{ asset('vendor/cogroup/cms/js/datatables.net-bs4/js/dataTables.bootstrap4.js?'.time()) }}"></script>
   <script src="{{ asset('vendor/cogroup/cms/js/jquery-datatable.js?'.time()) }}"></script>
+  <script src="{{ asset('js/app.js?'.time()) }}"></script>
 
   @if (!empty($scripts))
   @foreach ($scripts as $js)

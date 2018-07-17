@@ -55,7 +55,7 @@ class CmsController extends Controller
     return true;
   }
 
-  public static function getModules($modulename = NULL, $inmenu = 'Y', $idrol = NULL) {
+  public static function getModules($modulename = NULL, $inmenu = 'Y', $idrol = NULL, $menu = true) {
     if(is_null($idrol)) :
       $idrol = Auth::user()->roles_id;
     endif;
@@ -72,6 +72,9 @@ class CmsController extends Controller
                       ->join('roles_access', 'roles_access.modules_id', '=', 'modules.id')
                       ->where('modules.active', 'Y')
                       ->where('roles_access.roles_id', $idrol)
+                      ->when($menu == true, function ($query) {
+                        return $query->where('roles_access.view', '1');
+                      })
                       ->where('parent', $id)
                       ->whereIn('inmenu', $inmenu)
                       ->orderBy('order', 'asc')
@@ -82,7 +85,7 @@ class CmsController extends Controller
       $tmp = $modules[$key];
       $modules[$key] = new \stdClass();
       $modules[$key] = $tmp;
-      $modules[$key]->submod = self::getModules($tmp->id, implode(",",$inmenu), $idrol);
+      $modules[$key]->submod = self::getModules($tmp->id, implode(",",$inmenu), $idrol, $menu);
     endforeach;
 
     return $modules;

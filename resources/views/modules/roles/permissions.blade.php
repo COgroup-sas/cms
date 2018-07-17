@@ -41,7 +41,7 @@
                     <h5><i class="fas fa-long-arrow-alt-right"></i> {{ trans($submod->modulename) }}</h5>
                     <div class="row">
                         @foreach(explode(",", $submod->permissions) as $perm)
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                         <div class="form-group">  
                           <span class="switch switch-sm">
                             <label for="switch-sm" data-id="{{ $submod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
@@ -57,18 +57,17 @@
                     </div>
                         @if(count($submod->submod) > 0)
                           @foreach($submod->submod as $ssubmod)
-                    <h5><i class="material-icons">remove</i><i class="fas fa-minus"></i> {{ trans($ssubmod->modulename) }}</h5>
+                    <h5><i class="fas fa-minus"></i><i class="fas fa-long-arrow-alt-right"></i> {{ trans($ssubmod->modulename) }}</h5>
                     <div class="row">
                           @foreach(explode(",", $ssubmod->permissions) as $perm)
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                         <div class="switch">
-                          {{ trans('cms.txt'.$perm) }}
                           <label>
                             <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
                               echo (cms_roles_check($rolpermissions, $ssubmod->moduleslug, $perm)) ? ' checked' : '';
                             ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
                             {{ trans('cms.txt'.$perm) }}
-                        </label>
+                          </label>
                         </div>
                       </div>
                             @endforeach
@@ -76,12 +75,11 @@
 
                             @if(count($ssubmod->submod) > 0)
                               @foreach($ssubmod->submod as $sssubmod)
-                        <h5><i class="material-icons">remove</i><i class="fas fa-minus"></i> {{ trans($sssubmod->modulename) }}</h5>
+                        <h5><i class="fas fa-minus"></i><i class="fas fa-minus"></i><i class="fas fa-long-arrow-alt-right"></i> {{ trans($sssubmod->modulename) }}</h5>
                         <div class="row">
                               @foreach(explode(",", $sssubmod->permissions) as $perm)
-                          <div class="col-sm-2">
+                          <div class="col-sm-3">
                             <div class="switch">
-                              {{ trans('cms.txt'.$perm) }}
                               <label><input type="checkbox"<?php
                                 echo (cms_roles_check($rolpermissions, $sssubmod->moduleslug, $perm)) ? ' checked' : '';
                               ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm"><span class="lever switch-col-red"></span></label>

@@ -24,4 +24,15 @@ return [
 
     'color_theme' => env('COGROUPCMS_COLORTHEME', 'orange'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup CMS url
+    |--------------------------------------------------------------------------
+    |
+    | This prefix will be used for set default uri from CMS access.
+    |
+    */
+
+    'uri' => env('COGROUPCMS_URI', 'cms'),
+
 ];

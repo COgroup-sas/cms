@@ -14,6 +14,7 @@ return [
     */
 
     'title' => 'Usuarios',
+    'user' => 'Usuario',
     'add' => 'Agregar usuario',
     'edit' => 'Editar usuario',
     'name' => 'Nombre',

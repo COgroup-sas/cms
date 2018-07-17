@@ -88,5 +88,17 @@ return [
   'created_at' => 'Fecha de creación',
   'updated_at' => 'Fecha de actualización',
   'deleted_at' => 'Fecha de eliminación',
-  'welcome' => 'Bienvenido '
+  'welcome' => 'Bienvenido ',
+  'error.403.title' => 'Acción no autorizada.',
+  'error.403.message' => 'Lo sentimos, la acción no está autorizada para el rol asignado.',
+  'error.404.title' => 'Página no encontrada',
+  'error.404.message' => 'Lo sentimos, la página que está buscando no se pudo encontrar.',
+  'error.419.title' => 'Página vencida',
+  'error.419.message' => 'La página ha expirado debido a inactividad.<br/><br/>Por favor, actualice y pruebe de nuevo.',
+  'error.429.title' => 'Error',
+  'error.429.message' => 'Demasiadas solicitudes.',
+  'error.500.title' => 'Error',
+  'error.500.message' => 'Vaya, parece que algo ha ido mal.',
+  'error.503.title' => 'Servicio no disponible',
+  'error.503.message' => 'Volvemos en seguida.'
 ];

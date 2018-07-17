@@ -120,7 +120,7 @@ class RolesController extends CmsController {
         'scripts' => $this->scripts,
         'csss' => $this->csss,
         'breadcrumb' => $breadcrumb,
-        'modulesrol' => parent::getModules(0, ['Y','N'], $request->input('id')),
+        'modulesrol' => parent::getModules(0, ['Y','N'], $request->input('id'), false),
         'title' => trans('moduleroles.permissions')
       )
     );
@@ -171,16 +171,6 @@ class RolesController extends CmsController {
     if(empty($id)) $id = $request->old('id');
 
     $editrol = Roles::findOrFail($id);
-
-    parent::registerScripts(array('src' => url('themecms/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js')));
-    parent::registerScripts(array('src' => url('themecms/plugins/dropzone/dropzone.js')));
-    parent::registerScripts(array('src' => url('themecms/plugins/multi-select/js/jquery.multi-select.js')));
-    parent::registerScripts(array('src' => url('themecms/plugins/jquery-spinner/js/jquery.spinner.js')));
-    parent::registerScripts(array('src' => url('themecms/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')));
-    parent::registerScripts(array('src' => url('themecms/plugins/nouislider/nouislider.js')));
-    parent::registerScripts(array('src' => url('js/advanced-form-elements.js')));
-
-    parent::registerScripts(array('src' => url('themecms/js/pages/rolesregister.js')));
 
     return view('cogroupcms::modules.roles.register')->with(
       array(

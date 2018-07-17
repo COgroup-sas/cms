@@ -6,15 +6,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ cms_settings()->sitename }}</title>
+  <title>{{ cms_settings()->sitename }}@if(isset($title)){{ " .::. ".$title }}@endif</title>
   <!-- Favicon-->
-  <link rel="shortcut icon" href="{{ asset('vendor/cogroup/cms/images/favicon.png') }}" type="image/png">
+  <link rel="shortcut icon" href="{{ (!isset(cms_settings()->favicon) || empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('getFile', cms_settings()->favicon) }}" type="{{ (!isset(cms_settings()->favicon) || empty(cms_settings()->favicon)) ? 'image/png' : cms_get_file_attribute(cms_settings()->favicon, 'mimetype') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  @php /*<meta name="description" content="{{ cms_settings()->sitedescription }}" />
-  <meta name="keywords" content="{{ cms_settings()->sitekeywords   }}" />*/ @endphp
+  <meta name="description" content="{{ cms_settings()->sitedescription }}" />
+  <meta name="keywords" content="{{ cms_settings()->sitekeywords   }}" />
   <meta name="author" content="www.cogroupsas.com" />
+
+  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
   <!-- Scripts -->
   <script>
@@ -35,7 +37,7 @@
             @csrf
             <div class="header header-primary text-center">
               <div class="logo-container">
-                <img src="{{ asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'light-blue').'/logo.png') }}" alt="">
+                <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}">
               </div>
             </div>
             <div class="content">
@@ -80,13 +82,14 @@
                 {{ trans('cms.textbtnsignin') }}
               </button>
             </div>
-            <div class="pull-left">
+            <div class="{{ (cms_settings()->socialaccess == 1) ? 'pull-left' : '' }}">
               <h6>
                 <a class="link" href="{{ route('password.request') }}">
                   {{ trans('cms.linkforgotpassword') }}
                 </a>
               </h6>
             </div>
+            @if(cms_settings()->socialaccess == 1)
             <div class="pull-right">
               <h6>
                 <a class="link" href="{{ url('login/google') }}"><i class="fab fa-google"></i> Google</a>
@@ -94,6 +97,7 @@
                 <a class="link" href="{{ url('login/twitter') }}"><i class="fab fa-twitter"></i> Twitter</a>
               </h6>
             </div>
+            @endif
           </form>
         </div>
       </div>
@@ -102,11 +106,13 @@
   </div>
 
   <!-- Scripts -->
+  <!-- Scripts -->
   <script>
     var lang = '{{ Session::get('applocale') }}';
     var SITE_URL = "{{ URL::to('/') }}/";
     var CMS_SITE = "{{ config('cogroupcms.uri', 'cms') }}";
   </script>
   <script src="{{ asset('vendor/cogroup/cms/js/app.js?'.time()) }}"></script>
+  <script src="{{ asset('js/app.js?'.time()) }}"></script>
 </body>
 </html>

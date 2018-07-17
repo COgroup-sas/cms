@@ -1,9 +1,9 @@
 @extends('errors.error')
 
-@section('title', 'Unauthorized action.')
+@section('title', trans('cms.error.403.title'))
 
 @section('number', '403')
 
 @section('icon', 'fa fa-lock')
 
-@section('message', 'Sorry, the action is not authorized for the assigned role.')
+@section('message', trans('cms.error.403.message'))
