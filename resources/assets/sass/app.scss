@@ -13,10 +13,11 @@
 @import "node_modules/animate.css/animate";
 
 // Fonts
-@import "fontawesome-free-5.0.13/web-fonts-with-css/scss/fa-brands";
-@import "fontawesome-free-5.0.13/web-fonts-with-css/scss/fa-regular";
-@import "fontawesome-free-5.0.13/web-fonts-with-css/scss/fa-solid";
-@import "fontawesome-free-5.0.13/web-fonts-with-css/scss/fontawesome";
+@import "fontawesome-free-5.1.1-web/scss/v4-shims";
+@import "fontawesome-free-5.1.1-web/scss/brands";
+@import "fontawesome-free-5.1.1-web/scss/regular";
+@import "fontawesome-free-5.1.1-web/scss/solid";
+@import "fontawesome-free-5.1.1-web/scss/fontawesome";
 @import "_museo";
 
 //now-ui-kit
