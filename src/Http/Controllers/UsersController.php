@@ -5,6 +5,7 @@ namespace Cogroup\Cms\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Cogroup\Cms\Models\User;
 use Cogroup\Cms\Models\Roles\Roles;
 use Cogroup\Cms\Http\Controllers\CmsController;
@@ -198,5 +199,20 @@ class UsersController extends CmsController {
     $request->session()->flash('status', '1');
     $request->session()->flash('msg', trans('moduleusers.profileok'));
     return redirect(route('cogroupcms.usersprofile'));
+  }
+
+  /**
+   * Get the user from ajax request
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function getUsers(Request $request) {
+    if($request->ajax()) :
+      $users = User::select(DB::Raw('id As value'), DB::Raw('name AS text'))->where('name', 'like', '%'.$request->input('q').'%')->orderBy('name', 'asc')->get();
+
+      return response()->json($users);
+    else :
+      return abort(403, trans('cms.403'));
+    endif;
   }
 }
