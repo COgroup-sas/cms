@@ -35,7 +35,7 @@
             @csrf
             <div class="header header-primary text-center">
               <div class="logo-container">
-                <img src="{{ asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'light-blue').'/logo.png') }}" alt="">
+                <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}">
               </div>
             </div>
             <div class="content">

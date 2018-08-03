@@ -162,17 +162,17 @@ nowuiDashboard = {
     });
   },
 
-  showSidebarMessage: function(message, type = 'info', from = '', align = '') {
+  showSidebarMessage: function(message, type = 'info', from = 'top', align = 'right', icon = 'now-ui-icons ui-1_bell-53', timer = 4000) {
     try {
       $.notify({
-        icon: "now-ui-icons ui-1_bell-53",
+        icon: icon,
         message: message
       }, {
         type: type,
-        timer: 4000,
+        timer: timer,
         placement: {
-          from: 'top',
-          align: 'right'
+          from: from,
+          align: align
         }
       });
     } catch (e) {

@@ -73,6 +73,27 @@ require('./bootstrap');
 		});
 	}
 
+	if(jQuery(".btnaction2").length > 0) {
+	  jQuery(".btnaction2").each(function () {
+	  	jQuery(this).on("click", function(e){
+				event.preventDefault();
+				var url = jQuery(this).attr('href');
+				var check = 0;
+				var idmodal = jQuery(this).attr('id');
+				var id = '';
+				jQuery(".check").each(function() {
+					if(jQuery(this).is(":checked") == true) check++;
+					id = jQuery(this).val();
+				});
+				if(check == 1) {
+					$(location).attr('href', url + "/" + id);
+				}
+				else if(check > 1) jQuery("#more-" + idmodal + "-modal-error").modal();
+				else jQuery("#" + idmodal + "-modal-error").modal();
+			});
+		});
+	}
+
 	if(jQuery("#btndelete").length > 0) {
 		jQuery("#btndelete").on("click", function(e){
 			event.preventDefault();

@@ -58,6 +58,7 @@ return [
   'txtbtnclose' => 'Cerrar',
   'txtbtnaccept' => 'Aceptar',
   'txtbtncancel' => 'Cancelar',
+  'txtbtnprint' => 'Imprimir',
   'txtview' => 'Ver',
   'txtcreate' => 'Crear',
   'txtedit' => 'Editar',
