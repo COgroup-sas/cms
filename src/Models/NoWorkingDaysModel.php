@@ -4,7 +4,7 @@ namespace Cogroup\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DiasNoLaborablesModel extends Model
+class NoWorkingDaysModel extends Model
 {
   /**
    * The table associated with the model.
