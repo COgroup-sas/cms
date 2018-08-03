@@ -24,7 +24,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
     - [Intervention Image](#interventionimage)
 - [Usage](#usage)
     - [Middleware](#middleware)
-    - [Helper](#helper)
+    - [Helper Permission](#helper-permission)
     - [Helpers](#helpers)
         - [cms_get_modules](#cms_get_modules)
         - [cms_settings](#cms_settings)
@@ -32,6 +32,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
         - [cms_format_time](#cms_format_time)
         - [cms_format_datetime](#cms_format_datetime)
         - [cms_get_file_attribute](#cms_get_file_attribute)
+    - [Notifications javascript](#notifications-javascript)
 - [License](#license)
 - [Contribution guidelines](#contribution-guidelines)
 - [Additional information](#additional-information)
@@ -41,7 +42,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.0.4-dev"
+"cogroup/cms": "1.0.5-dev"
 ```
 or run the next command:
 ```json
@@ -207,7 +208,7 @@ It is possible to use comma symbol to verify until two actions:
 'middleware' => ['role:admin|create,update']
 ```
 
-### Helper
+### Helper Permission
 
 You can use a helper to verify a permission
 ```php
@@ -284,6 +285,35 @@ cms_get_file_attribute($id, $attribute);
 
 - `id` is required parameter. Id into table `Files`
 - `attribute` is required parameter. Column of the table `Files`
+
+## Notifications Javascript
+
+This configuration to set a float message from Controller
+
+Set 1 to info, 0 to danger
+```php
+$request->session()->flash('status', '1');
+```
+
+Set a position (top, middle, bottom)
+```php
+$request->session()->flash('msgfrom', {position});
+```
+
+Set a align (left, middle, right)
+```php
+$request->session()->flash('msgfrom', {align});
+```
+
+Set delay time (default: 4000)
+```php
+$request->session()->flash('msgtime', {time});
+```
+
+Set a message
+```php
+$request->session()->flash('msg', {message});
+```
 
 ## License
 

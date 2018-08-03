@@ -46,10 +46,9 @@
 
   @if(Session::has('status'))
   <div class="hidden notification"
-    data-placement-from="bottom" 
-    data-placement-align="center" 
-    data-animate-enter="" 
-    data-animate-exit="" 
+    data-placement-from="{{ Session::has('msgfrom') ? Session::get('msgfrom') : 'top' }}" 
+    data-placement-align="{{ Session::has('msgalign') ? Session::get('msgalign') : 'right' }}" 
+    data-time="{{ Session::has('msgtime') ? Session::get('msgtime') : 4000 }}" 
     data-color-name="{{ (Session::get('status') == 1) ? 'info' : 'danger' }} " 
     data-text="{{ Session::get('msg') }}">SUCCESS</div>
   @endif

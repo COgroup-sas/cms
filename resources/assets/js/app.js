@@ -33,8 +33,7 @@ require('./bootstrap');
 	if(jQuery('.notification').length > 0) {
     var placementFrom = jQuery('.notification').data('placement-from');
     var placementAlign = jQuery('.notification').data('placement-align');
-    var animateEnter = jQuery('.notification').data('animate-enter');
-    var animateExit = jQuery('.notification').data('animate-exit');
+    var animateEnter = jQuery('.notification').data('time');
     var colorName = jQuery('.notification').data('color-name');
     var text = jQuery('.notification').data('text');
 
