@@ -1,10 +1,15 @@
+<p align="center"><img src="https://www.cogroupsas.com/wp-content/uploads/2018/02/logo_azul.png"></p>
+
+<p align="center">
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/license.svg" alt="License"></a>
+</p>
+
 # Cms
 
-CMS package for laravel &gt;= 5.6
+##CMS package for laravel
 
-
-[![Version](https://www.cogroupsas.com/gitimages/version.svg)](https://cogroupsas.com/cms)
-[![License](https://www.cogroupsas.com/gitimages/license.svg)](https://packagist.org/packages/cogroup/cms)
+### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
 
 COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel 5**.
 
@@ -42,7 +47,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.6"
+"cogroup/cms": "1.7-dev"
 ```
 or run the next command:
 ```json
