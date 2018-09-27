@@ -42,7 +42,7 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.0.6-dev"
+"cogroup/cms": "1.6"
 ```
 or run the next command:
 ```json
@@ -323,5 +323,5 @@ COgroup CMS is free software distributed under the terms of the MIT license.
 
 Support follows PSR-1 and PSR-4 PHP coding standards, and semantic versioning.
 
-Please report any issue you find in the issues page.  
+Please report any issue you find in the issues page.
 Pull requests are welcome.
