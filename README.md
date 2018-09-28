@@ -1,10 +1,13 @@
+<p align="center"><img src="https://www.cogroupsas.com/gitimages/cogroup.svg"></p>
+
+<p align="center">
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/license.svg" alt="License"></a>
+</p>
+
 # Cms
 
-CMS package for laravel &gt;= 5.6
-
-
-[![Version](https://www.cogroupsas.com/gitimages/version.svg)](https://cogroupsas.com/cms)
-[![License](https://www.cogroupsas.com/gitimages/license.svg)](https://packagist.org/packages/cogroup/cms)
+### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
 
 COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel 5**.
 
