@@ -66,15 +66,15 @@ class CogroupCmsSeeder extends Seeder
       [
         'setting'       => 'socialaccess',
         'defaultvalue'  => '1'
-      ]
+      ],
       [
         'setting'       => 'socialaccessgoogle',
         'defaultvalue'  => '1'
-      ]
+      ],
       [
         'setting'       => 'socialaccessfacebook',
         'defaultvalue'  => '0'
-      ]
+      ],
       [
         'setting'       => 'socialaccesstwitter',
         'defaultvalue'  => '0'
