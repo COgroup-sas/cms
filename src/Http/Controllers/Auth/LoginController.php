@@ -56,10 +56,31 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($service)
     {
-        $user = Socialite::driver($service)->user();
+        $social_user = Socialite::driver($service)->user();
 
-        dd($user);
+        // Comprobamos si el usuario ya existe
+        if ($user = User::where('email', $social_user->email)->first()) { 
+            return $this->authAndRedirect($user); // Login y redirección
+        } else {  
+            // En caso de que no exista creamos un nuevo usuario con sus datos.
+            $user = User::create([
+                'name' => $social_user->name,
+                'email' => $social_user->email,
+                'avatar' => $social_user->avatar,
+            ]);
+ 
+            return $this->authAndRedirect($user); // Login y redirección
+        }
     }
+
+    // Login y redirección
+    public function authAndRedirect($user)
+    {
+        Auth::login($user);
+ 
+        return redirect()->to(config('cogroupcms.uri'));
+    }
+
 
     /**
      * Show the application's login form.
