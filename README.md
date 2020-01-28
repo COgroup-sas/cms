@@ -73,12 +73,12 @@ php artisan db:seed --class=Cogroup\\Cms\\Seeds\\CogroupCmsSeeder
 5)  Run the command below to re-publish assets, config, custom error views, font, migrations and translations
 
 ```php
-php artisan cogroupcms::assets
-php artisan cogroupcms::config
-php artisan cogroupcms::errorviews
-php artisan cogroupcms::fonts
-php artisan cogroupcms::migrations
-php artisan cogroupcms::translations
+php artisan cogroupcms:assets
+php artisan cogroupcms:config
+php artisan cogroupcms:errorviews
+php artisan cogroupcms:fonts
+php artisan cogroupcms:migrations
+php artisan cogroupcms:translations
 ```
 
 ## Configuration
