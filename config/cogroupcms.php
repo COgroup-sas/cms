@@ -35,4 +35,15 @@ return [
 
     'uri' => env('COGROUPCMS_URI', 'cms'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup CMS background login
+    |--------------------------------------------------------------------------
+    |
+    | This prefix will be used for set default uri background from CMS access.
+    |
+    */
+
+    'bguri' => env('COGROUPCMS_BGURI', 'vendor/cogroup/cms/images/bg.jpg'),
+
 ];

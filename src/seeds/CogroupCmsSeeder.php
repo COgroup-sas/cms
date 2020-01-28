@@ -67,6 +67,18 @@ class CogroupCmsSeeder extends Seeder
         'setting'       => 'socialaccess',
         'defaultvalue'  => '1'
       ]
+      [
+        'setting'       => 'socialaccessgoogle',
+        'defaultvalue'  => '1'
+      ]
+      [
+        'setting'       => 'socialaccessfacebook',
+        'defaultvalue'  => '0'
+      ]
+      [
+        'setting'       => 'socialaccesstwitter',
+        'defaultvalue'  => '0'
+      ]
     ]);
 
     DB::table('roles')->insert([
@@ -113,7 +125,8 @@ class CogroupCmsSeeder extends Seeder
 
     DB::table('users')->insert(
       [
-        'name' => 'Super Administrador',
+        'name' => 'Super',
+        'lastname' => 'Administrador',
         'email' => 'cms@cogroupsas.com',
         'password' => bcrypt('password'),
         'roles_id' => '1',
@@ -125,90 +138,6 @@ class CogroupCmsSeeder extends Seeder
 
     DB::table('noworkingdays')->insert(
       [
-        //2018
-        //Enero
-        ['date' => '2018-01-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-01-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-01-08', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-01-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-01-21', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-01-28', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Febrero
-        ['date' => '2018-02-04', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-02-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-02-18', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-02-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Marzo
-        ['date' => '2018-03-04', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-03-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-03-18', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-03-19', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-03-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-03-29', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-03-30', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Abril
-        ['date' => '2018-04-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-04-08', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-04-15', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-04-22', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-04-29', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Mayo
-        ['date' => '2018-05-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-05-06', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-05-13', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-05-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-05-20', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-05-27', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Junio
-        ['date' => '2018-06-03', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-06-04', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-06-10', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-06-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-06-17', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-06-24', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Julio
-        ['date' => '2018-07-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-07-02', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-07-08', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-07-15', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-07-20', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-07-22', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-07-29', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Agosto
-        ['date' => '2018-08-05', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-08-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-08-12', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-08-19', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-08-20', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-08-26', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Septiembre
-        ['date' => '2018-09-02', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-09-09', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-09-16', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-09-23', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-09-30', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Octubre
-        ['date' => '2018-10-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-10-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-10-15', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-10-21', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-10-28', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Noviembre
-        ['date' => '2018-11-04', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-11-05', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-11-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-11-12', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-11-18', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-11-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        //Diciembre
-        ['date' => '2018-12-02', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-12-08', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-12-09', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-12-16', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-12-23', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-12-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-        ['date' => '2018-12-30', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
-
         //2019
         //Enero
         ['date' => '2019-01-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
@@ -374,6 +303,90 @@ class CogroupCmsSeeder extends Seeder
         ['date' => '2020-12-20', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
         ['date' => '2020-12-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
         ['date' => '2020-12-27', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+
+        //2021
+        //Enero
+        ['date' => '2021-01-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-01-03', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-01-10', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-01-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-01-17', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-01-24', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-01-31', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Febrero
+        ['date' => '2021-02-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-02-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-02-21', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-02-28', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Marzo
+        ['date' => '2021-03-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-03-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-03-21', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-03-22', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-03-28', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Abril
+        ['date' => '2021-04-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-04-02', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-04-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-04-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-04-18', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-04-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Mayo
+        ['date' => '2021-05-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-05-02', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-05-09', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-05-16', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-05-17', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-05-23', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-05-30', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Junio
+        ['date' => '2021-06-06', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-06-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-06-13', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-06-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-06-20', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-06-27', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Julio
+        ['date' => '2021-07-04', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-07-05', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-07-11', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-07-18', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-07-20', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-07-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Agosto
+        ['date' => '2021-08-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-08-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-08-08', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-08-15', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-08-16', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-08-22', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-08-29', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Septiembre
+        ['date' => '2021-09-05', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-09-12', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-09-19', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-09-26', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Octubre
+        ['date' => '2021-10-03', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-10-10', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-10-17', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-10-18', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-10-24', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-10-31', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Noviembre
+        ['date' => '2021-11-01', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-11-07', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-11-14', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-11-15', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-11-21', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-11-28', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        //Diciembre
+        ['date' => '2021-12-05', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-12-08', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-12-12', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-12-19', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-12-25', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
+        ['date' => '2021-12-26', 'active' => 'Y', 'created_at' => date('Y-m-d H:i:s')],
       ]
     );
   }

@@ -22,8 +22,8 @@
     @endforeach
   @endif
 
-  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
+  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
   <!-- Scripts -->
   <script>
       window.Laravel = {!! json_encode([

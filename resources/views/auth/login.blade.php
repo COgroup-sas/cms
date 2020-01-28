@@ -16,8 +16,8 @@
   <meta name="keywords" content="{{ cms_settings()->sitekeywords   }}" />
   <meta name="author" content="www.cogroupsas.com" />
 
-  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
+  <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
   <!-- Scripts -->
   <script>
       window.Laravel = {!! json_encode([
@@ -29,7 +29,7 @@
   @include('cogroupcms::partials.preloader')
 
   <div class="page-header" filter-color="orange">
-    <div class="page-header-image" style="background-image:url({{ asset('vendor/cogroup/cms/images/bg.jpg') }})"></div>
+    <div class="page-header-image" style="background-image:url({{ asset(config('cogroupcms.bguri')) }})"></div>
     <div class="container">
       <div class="col-md-4 content-center">
         <div class="card card-login card-plain">
@@ -92,9 +92,15 @@
             @if(cms_settings()->socialaccess == 1)
             <div class="pull-right">
               <h6>
+                @if(cms_settings()->socialaccessgoogle == 1)
                 <a class="link" href="{{ url('login/google') }}"><i class="fab fa-google"></i> Google</a>
+                @endif
+                @if(cms_settings()->socialaccessfacebook == 1)
                 <a class="link" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Facebook</a>
+                @endif
+                @if(cms_settings()->socialaccesstwitter == 1)
                 <a class="link" href="{{ url('login/twitter') }}"><i class="fab fa-twitter"></i> Twitter</a>
+                @endif
               </h6>
             </div>
             @endif

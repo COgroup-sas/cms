@@ -3,7 +3,7 @@
     Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
 -->
   <div class="logo">
-    <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+    <a href="{{ env('APP_URL') }}{{ config('cogroupcms.uri') }}" class="simple-text logo-normal">
       <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
     </a>
   </div>

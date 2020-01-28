@@ -7,7 +7,7 @@
         {
             "name": "COgroup",
             "email": "support@cogroupsas.com",
-            "homepage": "https://cogroupsas.com"
+            "homepage": "https://wwww.cogroupsas.com"
         }
     ],
     "require": {
@@ -24,7 +24,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "1.6-dev"
+            "dev-master": "1.7-dev"
         },
         "laravel": {
             "providers": [
@@ -36,7 +36,7 @@
         }
     },
     "require-dev": {
-        "laravel/framework": "5.6.x"
+        "laravel/framework": "5.8.x"
     },
     "config": {
         "sort-packages": true
