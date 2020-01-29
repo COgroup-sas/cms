@@ -58,6 +58,8 @@ class LoginController extends Controller
     {
         $social_user = Socialite::driver($service)->user();
 
+        dd($social_user);
+
         // Comprobamos si el usuario ya existe
         if ($user = User::where('email', $social_user->email)->first()) { 
             return $this->authAndRedirect($user); // Login y redirección

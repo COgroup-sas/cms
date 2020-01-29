@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "cogroupcms",
-  "version": "1.0.2",
-  "description": "CMS Styles for laravel >= 5.6",
+  "version": "1.7.4",
+  "description": "CMS Styles for laravel >= 5.8",
   "main": "cogroupcms.js",
   "scripts": {
     "dev": "npm run development",
@@ -28,23 +28,27 @@
   },
   "homepage": "https://github.com/COgroup-sas/cms#readme",
   "devDependencies": {
-    "axios": "^0.18",
+    "axios": "^0.18.1",
     "babel-preset-env": "^1.6.1",
-    "bootstrap": "latest",
-    "cross-env": "^5.1",
+    "bootstrap": "^4.4.1",
+    "cross-env": "^5.2.1",
     "jquery": "latest",
-    "jquery-validation": "latest",
-    "laravel-mix": "^2.0",
-    "lodash": "^4.17.4",
-    "vue": "^2.5.7"
+    "jquery-validation": "^1.19.1",
+    "laravel-mix": "^5.0.1",
+    "lodash": "^4.17.15",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
-    "animate.css": "latest",
+    "animate.css": "^3.7.2",
     "datatables.net-bs4": "^1.10.16",
     "datatables.net-fixedcolumns-bs4": "^3.2.4",
     "datatables.net-keytable-bs4": "^2.3.2",
     "datatables.net-responsive-bs4": "^2.2.1",
     "inputmask": "^3.3.11",
-    "popper.js": "latest"
+    "popper.js": "^1.14.3"
   }
 }
