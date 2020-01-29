@@ -26,6 +26,7 @@ class CreateCogUsersTable extends Migration
                 $table->enum('active', ['Y', 'N'])->default('Y');
                 $table->integer('roles_id')->unsigned()->default(1);
                 $table->integer('image_id')->unsigned()->nullable();
+                $table->enum('social', ['Y', 'N'])->default('N');
                 $table->text('avatar')->nullable();
                 $table->timestamps();
 

@@ -37,7 +37,7 @@
                 <label for="name">{{ trans('moduleusers.lastname') }}</label>
                 <div class="form-group">
                   <div class="form-line">
-                    <input required name="lastname" type="text" class="form-control" placeholder="{{ trans('moduleusers.name') }}" value="{{ (!isset($useredit)) ? old('lastname') : $useredit->lastname }}" />
+                    <input required name="lastname" type="text" class="form-control" placeholder="{{ trans('moduleusers.lastname') }}" value="{{ (!isset($useredit)) ? old('lastname') : $useredit->lastname }}" />
                     @if ($errors->has('lastname'))
                       <span class="form-text text-danger">
                         <strong>{{ $errors->first('lastname') }}</strong>
