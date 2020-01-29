@@ -40,9 +40,9 @@ Route::group(['middleware' => ['web'],
         Route::post('add',  ['middleware' => ['admin:users|create,update'], 'uses' => 'UsersController@addpost'])->name('cogroupcms.userspost');
         Route::post('edit',  ['middleware' => ['admin:users|update'], 'uses' => 'UsersController@edit'])->name('cogroupcms.usersedit');
         Route::post('active',  ['middleware' => ['admin:users|update'], 'uses' => 'UsersController@active'])->name('cogroupcms.usersactive');
-        Route::get('profile',  'UsersController@profile')->name('cogroupcms.usersprofile');
-        Route::post('profile',  'UsersController@profilesave')->name('cogroupcms.usersprofilesave');
         Route::get('getUsers',  'UsersController@getUsers')->name('cogroupcms.usersajax');
       });
+      Route::get('profile',  'UsersController@profile')->name('cogroupcms.usersprofile');
+      Route::post('profile',  'UsersController@profilesave')->name('cogroupcms.usersprofilesave');
   });
 });

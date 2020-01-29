@@ -4,7 +4,9 @@ namespace Cogroup\Cms\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Cogroup\Cms\Models\Roles\Roles;
+use Cogroup\Cms\Models\User;
 
 use Socialite;
 
@@ -65,8 +67,8 @@ class LoginController extends Controller
         } else {  
             // En caso de que no exista creamos un nuevo usuario con sus datos.
             $user = User::create([
-                'name' => $social_user->user->given_name,
-                'lastname' => $social_user->user->family_name,
+                'name' => $social_user->user['given_name'],
+                'lastname' => $social_user->user['family_name'],
                 'email' => $social_user->email,
                 'roles_id' => Roles::where('id', 2)->first()->id,
                 'avatar' => $social_user->avatar
@@ -79,7 +81,7 @@ class LoginController extends Controller
     // Login y redirección
     public function authAndRedirect($user)
     {
-        Auth::login($user);
+        \Auth::login($user);
  
         return redirect()->to(config('cogroupcms.uri'));
     }
