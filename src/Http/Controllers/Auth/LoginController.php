@@ -4,6 +4,7 @@ namespace Cogroup\Cms\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Cogroup\Cms\Models\Roles\Roles;
 
 use Socialite;
 
@@ -58,16 +59,16 @@ class LoginController extends Controller
     {
         $social_user = Socialite::driver($service)->user();
 
-        dd($social_user);
-
         // Comprobamos si el usuario ya existe
         if ($user = User::where('email', $social_user->email)->first()) { 
             return $this->authAndRedirect($user); // Login y redirección
         } else {  
             // En caso de que no exista creamos un nuevo usuario con sus datos.
             $user = User::create([
-                'name' => $social_user->name,
+                'name' => $social_user->user->given_name,
+                'lastname' => $social_user->user->family_name,
                 'email' => $social_user->email,
+                'roles_id' => Roles::where('id', 2)->first()->id
                 'avatar' => $social_user->avatar,
             ]);
  

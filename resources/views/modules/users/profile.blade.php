@@ -12,20 +12,33 @@
             <form action="{{ route('cogroupcms.usersprofilesave') }}" method="POST" class="form needs-validation" novalidate  enctype="multipart/form-data">
             	@csrf
               <div class="row">
-                <div class="col-md-6 pr-1">
+                <div class="col-md-12 pr-1">
                   <div class="form-group">
                     <label>{{ trans('cms.email') }}</label>
                     <input type="text" class="form-control" disabled="" placeholder="Company" value="{{ $profile->email }}">
                   </div>
                 </div>
-                <div class="col-md-6 pl-1">
+              </div>
+              <div class="row">
+                <div class="col-md-6 pr-1">
                   <div class="form-group">
                     <label>{{ trans('moduleusers.name') }}</label>
-                    <input type="text" class="form-control" placeholder="Last Name" name="name" value="{{ $profile->name }}">
+                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{ $profile->name }}">
                   </div>
-                  @if ($errors->has('password'))
+                  @if ($errors->has('name'))
                     <span class="form-text text-danger">
-                      <strong>{{ $errors->first('password') }}</strong>
+                      <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                  @endif
+                </div>
+                <div class="col-md-6 pl-1">
+                  <div class="form-group">
+                    <label>{{ trans('moduleusers.lastname') }}</label>
+                    <input type="text" class="form-control" placeholder="Last Name" name="lastname" value="{{ $profile->lastname }}">
+                  </div>
+                  @if ($errors->has('lastname'))
+                    <span class="form-text text-danger">
+                      <strong>{{ $errors->first('lastname') }}</strong>
                     </span>
                   @endif
                 </div>
@@ -49,6 +62,7 @@
                   </div>
                 </div>
               </div>
+              @if(empty($profile->avatar))
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -60,6 +74,7 @@
                   </div>
                 </div>
               </div>
+              @endif
               <!--<div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
@@ -116,7 +131,12 @@
           <div class="card-body">
             <div class="author">
               <a href="#">
-                <img class="avatar border-gray" src="{{ (is_null($profile->image_id)) ? asset('vendor/cogroup/cms/images/default-avatar.png') : route('getFile', [$profile->image_id]) }}" alt="{{ $profile->name }}">
+                <img class="avatar border-gray" src="{{ (is_null($profile->image_id) and is_null($profile->avatar)) ? 
+                asset('vendor/cogroup/cms/images/default-avatar.png') : 
+                (!is_null($profile->image_id)) ?
+                  route('getFile', [$profile->image_id]) :
+                  $profile->avatar
+                }}" alt="{{ $profile->name }}">
                 <h5 class="title">{{ $profile->name }}</h5>
               </a>
               <p class="description">

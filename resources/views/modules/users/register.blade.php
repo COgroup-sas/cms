@@ -34,6 +34,17 @@
                     @endif
                   </div>
                 </div>
+                <label for="name">{{ trans('moduleusers.lastname') }}</label>
+                <div class="form-group">
+                  <div class="form-line">
+                    <input required name="lastname" type="text" class="form-control" placeholder="{{ trans('moduleusers.name') }}" value="{{ (!isset($useredit)) ? old('lastname') : $useredit->lastname }}" />
+                    @if ($errors->has('lastname'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('lastname') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
                 <label for="email">{{ trans('cms.email') }}</label>
                 <div class="form-group">
                   <div class="form-line">

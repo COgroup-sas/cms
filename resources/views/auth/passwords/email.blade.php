@@ -27,7 +27,7 @@
   @include('cogroupcms::partials.preloader')
 
   <div class="page-header" filter-color="orange">
-    <div class="page-header-image" style="background-image:url({{ asset('vendor/cogroup/cms/images/bg.jpg') }})"></div>
+    <div class="page-header-image" style="background-image:url({{ asset(config('cogroupcms.bguri')) }})"></div>
     <div class="container">
       <div class="col-md-4 content-center">
         <div class="card card-login card-plain">

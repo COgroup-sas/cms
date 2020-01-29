@@ -90,6 +90,10 @@ class CogroupCmsSeeder extends Seeder
         'rolname' => 'Administrador',
         'description' => 'Rol para Administradores'
       ]
+      [
+        'rolname' => 'Usuario',
+        'description' => 'Rol para Usuarios'
+      ]
     ]);
 
     DB::table('modules')->insert([
@@ -116,10 +120,21 @@ class CogroupCmsSeeder extends Seeder
 
     DB::table('roles_access')->insert(
       [
+        //Superadmin
         ['roles_id' => '1', 'modules_id' => '1', 'view' => '1', 'create' => '0', 'update' => '1', 'delete' => '0'],
         ['roles_id' => '1', 'modules_id' => '2', 'view' => '1', 'create' => '1', 'update' => '1', 'delete' => '0'],
         ['roles_id' => '1', 'modules_id' => '3', 'view' => '1', 'create' => '0', 'update' => '1', 'delete' => '0'],
-        ['roles_id' => '1', 'modules_id' => '4', 'view' => '1', 'create' => '1', 'update' => '1', 'delete' => '0']
+        ['roles_id' => '1', 'modules_id' => '4', 'view' => '1', 'create' => '1', 'update' => '1', 'delete' => '0'],
+        //Administrator
+        ['roles_id' => '2', 'modules_id' => '1', 'view' => '0', 'create' => '0', 'update' => '0', 'delete' => '0'],
+        ['roles_id' => '2', 'modules_id' => '2', 'view' => '1', 'create' => '1', 'update' => '1', 'delete' => '0'],
+        ['roles_id' => '2', 'modules_id' => '3', 'view' => '1', 'create' => '0', 'update' => '1', 'delete' => '0'],
+        ['roles_id' => '2', 'modules_id' => '4', 'view' => '1', 'create' => '1', 'update' => '1', 'delete' => '0'],
+        //Usuario
+        ['roles_id' => '3', 'modules_id' => '1', 'view' => '0', 'create' => '0', 'update' => '0', 'delete' => '0'],
+        ['roles_id' => '3', 'modules_id' => '2', 'view' => '0', 'create' => '0', 'update' => '0', 'delete' => '0'],
+        ['roles_id' => '3', 'modules_id' => '3', 'view' => '0', 'create' => '0', 'update' => '0', 'delete' => '0'],
+        ['roles_id' => '3', 'modules_id' => '4', 'view' => '0', 'create' => '0', 'update' => '0', 'delete' => '0']
       ]
     );
 
