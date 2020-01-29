@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "cogroupcms",
-  "version": "1.7.9",
+  "version": "1.7.10",
   "description": "CMS Styles for laravel >= 5.8",
   "main": "cogroupcms.js",
   "scripts": {
@@ -43,6 +43,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
     "animate.css": "^3.7.2",
     "datatables.net-bs4": "^1.10.16",
     "datatables.net-fixedcolumns-bs4": "^3.2.4",
