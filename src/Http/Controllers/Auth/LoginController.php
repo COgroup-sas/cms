@@ -68,8 +68,8 @@ class LoginController extends Controller
                 'name' => $social_user->user->given_name,
                 'lastname' => $social_user->user->family_name,
                 'email' => $social_user->email,
-                'roles_id' => Roles::where('id', 2)->first()->id
-                'avatar' => $social_user->avatar,
+                'roles_id' => Roles::where('id', 2)->first()->id,
+                'avatar' => $social_user->avatar
             ]);
  
             return $this->authAndRedirect($user); // Login y redirección
