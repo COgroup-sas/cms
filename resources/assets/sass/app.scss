@@ -6,6 +6,9 @@
 @import "node_modules/bootstrap/scss/variables";
 @import "variables";
 
+//mixins
+@import "mixins";
+
 // Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 
@@ -55,10 +58,6 @@ html, body {
 			border-width: 10vh;
 			border-radius: 50%;
 			border-style: solid;
-			border-top-color: $cog-purple;
-			border-right-color: $cog-light-purple;
-			border-bottom-color: $cog-orange;
-			border-left-color: $cog-yellow;
 		}
 
 		&:after {
@@ -68,11 +67,43 @@ html, body {
 			animation-direction: reverse;
 			border-radius: 50%;
 			border-style: solid;
-			border-top-color: $cog-purple;
-			border-right-color: $cog-light-purple;
-			border-bottom-color: $cog-purple;
-			border-left-color: $cog-light-purple;
 		}
+
+    &[data-color="purple"]{
+     @include preloader-color(rgba(124, 23, 127, 1), rgba(108, 0, 112, 1), rgba(69, 0, 71, 1), rgba(30, 0, 31, 1));
+    }
+
+    &[data-color="light-purple"]{
+     @include preloader-color(rgba(175, 0, 83, 1), rgba(133, 0, 62, 1), rgba(97, 0, 45, 1), rgba(56, 0, 26, 1));
+    }
+
+    &[data-color="orange"]{
+     @include preloader-color(rgba(219, 150, 18, 1), rgba(217, 114, 18, 1), rgba(217, 87, 18, 1), rgba(198, 62, 16, 1));
+    }
+
+    &[data-color="light-green"]{
+     @include preloader-color(rgba(163, 189, 53, 1), rgba(142, 163, 46, 1), rgba(111, 127, 36, 1), rgba(86, 99, 28, 1));
+    }
+
+    &[data-color="blue"]{
+     @include preloader-color(rgba(73, 80, 151, 1), rgba(58, 65, 152, 1), rgba(48, 54, 126, 1), rgba(36, 41, 96, 1));
+    }
+
+    &[data-color="light-blue"]{
+     @include preloader-color(rgba(119, 171, 220, 1), rgba(81, 148, 210, 1), rgba(50, 125, 195, 1), rgba(35, 86, 134, 1));
+    }
+
+    &[data-color="green"]{
+     @include preloader-color(rgba(113, 168, 60, 1), rgba(98, 146, 53, 1), rgba(75, 112, 41, 1), rgba(58, 86, 31, 1));
+    }
+
+    &[data-color="yellow"]{
+     @include preloader-color(rgba(203, 200, 61, 1), rgba(173, 171, 46, 1), rgba(153, 151, 41, 1), rgba(125, 123, 33, 1));
+    }
+
+    &[data-color="dark"]{
+     @include preloader-color(rgba(53, 53, 53, 1), rgba(40, 40, 40, 1), rgba(28, 28, 28, 1), rgba(2, 2, 2, 1));
+    }
 	}	
 }
 

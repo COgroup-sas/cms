@@ -1,0 +1,18 @@
+@mixin preloader-color($color1, $color2, $color3, $color4){
+	&:before {
+		border-width: 10vh;
+		border-radius: 50%;
+		border-style: solid;
+		border-top-color: $color1;
+		border-right-color: $color2;
+		border-bottom-color: $color3;
+		border-left-color: $color4;
+	}
+
+  &:after{
+    border-top-color: $color1;
+		border-right-color: $color2;
+		border-bottom-color: $color1;
+		border-left-color: $color2;
+  }
+}
