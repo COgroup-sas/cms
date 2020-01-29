@@ -243,7 +243,7 @@
         z-index: 3;
     }
 
-    &[data-color="blue"]{
+    /*&[data-color="blue"]{
       @include sidebar-color($info-color);
     }
     &[data-color="green"]{
@@ -257,6 +257,46 @@
     }
     &[data-color="yellow"]{
       @include sidebar-color($warning-color);
+    }*/
+
+    &[data-color="red"]{
+      @include sidebar-color($danger-color);
+    }
+
+    &[data-color="purple"]{
+      @include sidebar-color(rgba(124, 23, 127));
+    }
+
+    &[data-color="light-purple"]{
+      @include sidebar-color(rgba(175, 0, 83));
+    }
+
+    &[data-color="orange"]{
+      @include sidebar-color(rgba(219, 150, 18));
+    }
+
+    &[data-color="light-green"]{
+      @include sidebar-color(rgba(163, 189, 53));
+    }
+
+    &[data-color="blue"]{
+      @include sidebar-color(rgba(73, 80, 151));
+    }
+
+    &[data-color="light-blue"]{
+      @include sidebar-color(rgba(119, 171, 220));
+    }
+
+    &[data-color="green"]{
+      @include sidebar-color(rgba(113, 168, 60));
+    }
+
+    &[data-color="yellow"]{
+      @include sidebar-color(rgba(203, 200, 61));
+    }
+
+    &[data-color="dark"]{
+      @include sidebar-color(rgba(53, 53, 53));
     }
 }
 

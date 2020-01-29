@@ -31,7 +31,7 @@
       ]) !!};
   </script>
 </head>
-<body class="{{ config('cogroupcms.color_theme', 'light-blue') }}">
+<body class="{{ config('cogroupcms.color_theme') }}">
   @include('cogroupcms::partials.preloader')
   <div class="wrapper">
     @include('cogroupcms::partials.sidebar')

@@ -25,21 +25,36 @@
       ]) !!};
   </script>
 </head>
-<body class="{{ config('cogroupcms.color_theme', 'light-blue') }} login-page sidebar-collapse">
+<body class="{{ config('cogroupcms.color_theme') }} login-page sidebar-collapse">
   @include('cogroupcms::partials.preloader')
 
-  <div class="page-header" filter-color="orange">
+  <div class="page-header" filter-color="{{ config('cogroupcms.color_theme') }}">
     <div class="page-header-image" style="background-image:url({{ asset(config('cogroupcms.bguri')) }})"></div>
     <div class="container">
       <div class="col-md-4 content-center">
         <div class="card card-login card-plain">
           <form method="POST" action="{{ route('login') }}" class="form needs-validation" novalidate>
             @csrf
-            <div class="header header-primary text-center">
+            <div class="header header-primary text-center pb-2">
               <div class="logo-container">
                 <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}">
               </div>
             </div>
+            @if(cms_settings()->socialaccess == 1)
+            <div class="header header-primary text-center pb-5">
+              <h6>
+                @if(cms_settings()->socialaccessgoogle == 1)
+                <a class="link fs-1-2" href="{{ url('login/google') }}"><i class="fab fa-google"></i> Google</a>
+                @endif
+                @if(cms_settings()->socialaccessfacebook == 1)
+                <a class="link fs-1-2" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Facebook</a>
+                @endif
+                @if(cms_settings()->socialaccesstwitter == 1)
+                <a class="link fs-1-2" href="{{ url('login/twitter') }}"><i class="fab fa-twitter"></i> Twitter</a>
+                @endif
+              </h6>
+            </div>
+            @endif
             <div class="content">
               <div class="input-group form-group-no-border input-lg">
                 <div class="input-group-prepend">
@@ -89,21 +104,6 @@
                 </a>
               </h6>
             </div>
-            @if(cms_settings()->socialaccess == 1)
-            <div class="pull-right">
-              <h6>
-                @if(cms_settings()->socialaccessgoogle == 1)
-                <a class="link" href="{{ url('login/google') }}"><i class="fab fa-google"></i> Google</a>
-                @endif
-                @if(cms_settings()->socialaccessfacebook == 1)
-                <a class="link" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Facebook</a>
-                @endif
-                @if(cms_settings()->socialaccesstwitter == 1)
-                <a class="link" href="{{ url('login/twitter') }}"><i class="fab fa-twitter"></i> Twitter</a>
-                @endif
-              </h6>
-            </div>
-            @endif
           </form>
         </div>
       </div>

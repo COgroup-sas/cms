@@ -23,10 +23,10 @@
       ]) !!};
   </script>
 </head>
-<body class="{{ config('cogroupcms.color_theme', 'light-blue') }} login-page sidebar-collapse">
+<body class="{{ config('cogroupcms.color_theme') }} login-page sidebar-collapse">
   @include('cogroupcms::partials.preloader')
 
-  <div class="page-header" filter-color="orange">
+  <div class="page-header" filter-color="{{ config('cogroupcms.color_theme') }}">
     <div class="page-header-image" style="background-image:url({{ asset(config('cogroupcms.bguri')) }})"></div>
     <div class="container">
       <div class="col-md-4 content-center">

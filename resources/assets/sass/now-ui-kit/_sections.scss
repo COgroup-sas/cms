@@ -90,8 +90,40 @@
         background-color: rgba(0,0,0,.5);
     }
 
+    &[filter-color="purple"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(124, 23, 127, 0.6));
+    }
+
+    &[filter-color="light-purple"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(175, 0, 83, 0.6));
+    }
+
     &[filter-color="orange"]{
-        @include linear-gradient(rgba($black-color,.20), rgba(224, 23, 3, 0.6));
+        @include linear-gradient(rgba($black-color,.20), rgba(219, 150, 18, 0.6));
+    }
+
+    &[filter-color="light-green"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(163, 189, 53, 0.6));
+    }
+
+    &[filter-color="blue"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(73, 80, 151, 0.6));
+    }
+
+    &[filter-color="light-blue"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(119, 171, 220, 0.6));
+    }
+
+    &[filter-color="green"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(113, 168, 60, 0.6));
+    }
+
+    &[filter-color="yellow"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(203, 200, 61, 0.6));
+    }
+
+    &[filter-color="dark"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(53, 53, 53, 0.6));
     }
 
     .container{

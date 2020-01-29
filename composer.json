@@ -3,7 +3,7 @@
     "description": "CMS for all laravel projects",
     "keywords" : ["cms", "admin", "laravel","illuminate","auth","roles","permission"],
     "license": "MIT",
-    "version": "1.8.0",
+    "version": "1.8.1",
     "authors": [
         {
             "name": "COgroup",
