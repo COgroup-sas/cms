@@ -27,17 +27,24 @@ class DashboardController extends CmsController
      */
     public function index()
     {
+        $class = config("cogroupcms.dashboard");
+
         $breadcrumb = array();
 
-        return view('cogroupcms::modules.dashboard.body')->with(
-          array(
-            'user' => Auth::user(),
-            'scripts' => $this->scripts,
-            'csss' => $this->csss,
-            'breadcrumb' => $breadcrumb,
-            'title' => trans('cms.home')
-          )
-        );
+        if(empty($class)) :
+          return view('cogroupcms::modules.dashboard.body')->with(
+            array(
+              'user' => Auth::user(),
+              'scripts' => $this->scripts,
+              'csss' => $this->csss,
+              'breadcrumb' => $breadcrumb,
+              'title' => trans('cms.home')
+            )
+          );
+        else :
+          $object = new $class;
+          return call_user_func([$object, "index"]);
+        endif;
     }
 
   /**

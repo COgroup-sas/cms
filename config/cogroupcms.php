@@ -46,4 +46,20 @@ return [
 
     'bguri' => env('COGROUPCMS_BGURI', 'vendor/cogroup/cms/images/bg.jpg'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup CMS Dashboard class
+    |--------------------------------------------------------------------------
+    |
+    | This variable set the class call for dashboard. When is empty, the COgroupCMS call default function
+    | 
+    | The class name must include the namespace:
+    | example: \App\Http\Controllers\DashboardController
+    |
+    | The main function is index by default
+    |
+    */
+
+    'dashboard' => '\App\Http\Controllers\GaudiDashboardController',
+
 ];
