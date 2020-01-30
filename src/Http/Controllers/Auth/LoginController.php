@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/cms';
+    protected $redirectTo = config('cogroupcms.uri');
 
     /**
      * Create a new controller instance.

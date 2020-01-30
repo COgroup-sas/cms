@@ -18,14 +18,14 @@ class FilesController extends Controller {
     if($file->ispublic == false and !Auth::check()) :
       return abort(404);
     endif;
-    return response()->file(storage_path("app/private/".$file->folder."/".$file->diskname));
+    return response()->file(storage_path("app/private/".$file->diskname));
   }
 
   public function processFileThumb($id, $width = 240, $height = 360, $const = true) {
     $file = Files::select('*')->where("id", "=", $id)->first();
     if($file->folder == 'images') :
       if($const == true) :
-        if(!file_exists(storage_path("app/files/" . $file->folder . "/thumbs/" . $height."_".$width."_".$file->diskname))) :
+        if(!file_exists(storage_path("app/files/private/thumbs/" . $height."_".$width."_".$file->diskname))) :
           $manager = \ImageManager::canvas($width, $height)
                       ->insert(
                         \ImageManager::make(storage_path("app/private/".$file->diskname))
@@ -34,11 +34,11 @@ class FilesController extends Controller {
                             $constraint->aspectRatio();
                           endif;
                         }), 'center'
-                      )->save(storage_path("app/files/".$file->folder."/thumbs/".$height."_".$width."_".$file->diskname));
+                      )->save(storage_path("app/files/private/thumbs/".$height."_".$width."_".$file->diskname));
         endif;
-        return response()->file(storage_path("app/files/".$file->folder."/thumbs/".$height."_".$width."_".$file->diskname));
+        return response()->file(storage_path("app/files/private/thumbs/".$height."_".$width."_".$file->diskname));
       else :
-        if(!file_exists(storage_path("app/files/" . $file->folder . "/thumbs/" . $width."_".$height."_".$file->diskname))) :
+        if(!file_exists(storage_path("app/files/private/thumbs/" . $width."_".$height."_".$file->diskname))) :
           $manager = \ImageManager::canvas($width, $height)
                       ->insert(
                         \ImageManager::make(storage_path("app/private/".$file->diskname))
@@ -47,9 +47,9 @@ class FilesController extends Controller {
                             $constraint->aspectRatio();
                           endif;
                         }), 'center'
-                      )->save(storage_path("app/files/".$file->folder."/thumbs/".$width."_".$height."_".$file->diskname));
+                      )->save(storage_path("app/files/private/thumbs/".$width."_".$height."_".$file->diskname));
         endif;
-        return response()->file(storage_path("app/files/".$file->folder."/thumbs/".$width."_".$height."_".$file->diskname));
+        return response()->file(storage_path("app/files/private/thumbs/".$width."_".$height."_".$file->diskname));
       endif;
     else :
       return response()->file(storage_path("app/private/".$file->diskname));
@@ -60,7 +60,7 @@ class FilesController extends Controller {
     // checking file is valid.
     if($request->file($name)->isValid()) :
       $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
-      $path = file_exists(storage_path("app/files/".$request->{$name}->hashName()));
+      $path = file_exists(storage_path("app/files/private/".$request->{$name}->hashName()));
       if($path == true) :
         return array('status' => false, 'msg' => 'files.fileexists');
       endif;
@@ -120,6 +120,6 @@ class FilesController extends Controller {
   public static function delete($id) {
     $file = Files::find($id);
     Files::where('id', $id)->delete();
-    Storage::delete("private/".$file->folder.'/'.$file->diskname);
+    Storage::delete("app/files/private/".$file->diskname);
   }
 }
