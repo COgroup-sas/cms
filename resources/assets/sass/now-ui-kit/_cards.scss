@@ -50,7 +50,7 @@
         }
     }
 
-    &[data-background-color="red"]{
+    /*&[data-background-color="red"]{
         background-color: $danger-color;
     }
 
@@ -64,6 +64,42 @@
 
     &[data-background-color="green"]{
         background-color: $success-color;
+    }*/
+
+    &[data-background-color="purple"]{
+        background-color: rgba(124, 23, 127) !important;
+    }
+
+    &[data-background-color="light-purple"]{
+        background-color: rgba(175, 0, 83) !important;
+    }
+
+    &[data-background-color="orange"]{
+        background-color: rgba(219, 150, 18) !important;
+    }
+
+    &[data-background-color="light-green"]{
+        background-color: rgba(163, 189, 53) !important;
+    }
+
+    &[data-background-color="blue"]{
+        background-color: rgba(73, 80, 151) !important;
+    }
+
+    &[data-background-color="light-blue"]{
+        background-color: rgba(119, 171, 220) !important;
+    }
+
+    &[data-background-color="green"]{
+        background-color: rgba(113, 168, 60) !important;
+    }
+
+    &[data-background-color="yellow"]{
+        background-color: rgba(203, 200, 61) !important;
+    }
+
+    &[data-background-color="dark"]{
+        background-color: rgba(53, 53, 53) !important;
     }
 
     .image{

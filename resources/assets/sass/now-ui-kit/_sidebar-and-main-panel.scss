@@ -259,10 +259,6 @@
       @include sidebar-color($warning-color);
     }*/
 
-    &[data-color="red"]{
-      @include sidebar-color($danger-color);
-    }
-
     &[data-color="purple"]{
       @include sidebar-color(rgba(124, 23, 127));
     }

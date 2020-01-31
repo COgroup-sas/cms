@@ -80,7 +80,7 @@
               @endif
             </div>
             <div class="footer text-center">
-              <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">
+              <button type="submit" class="btn btn-primary btn-round btn-lg btn-block" data-background-color="{{ config('cogroupcms.color_theme') }}">
                 {{ trans('cms.textbtnresetpassword') }}
               </button>
             </div>

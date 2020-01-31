@@ -13,7 +13,7 @@ Route::group(['middleware' => ['web'],
   });
 
   Route::group(['prefix' => 'files'], function () {
-    Route::get('thumb/{id}/{height?}/{width?}/{const?}', 'FilesController@processFileThumb')->name('thumb');
+    Route::get('thumb/{id}/{height?}/{width?}', 'FilesController@processFileThumb')->name('thumb');
     Route::get('{id}', 'FilesController@processFile')->name('getFile');
   });
 

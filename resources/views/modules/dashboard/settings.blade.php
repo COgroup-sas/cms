@@ -1,10 +1,8 @@
 @extends('cogroupcms::layouts.main')
 
 @section('content')
-  <form action="{{ route('cogroupcms.settingsave') }}" role="form" id="form_advanced_validation" class="masked-input" method="POST" autocomplete="off" enctype="multipart/form-data">
+  <form action="{{ route('cogroupcms.settingsave') }}" role="form" id="form_advanced_validation" class="masked-input no-gutters" method="POST" autocomplete="off" enctype="multipart/form-data">
     {{ csrf_field() }}
-    <section class="content">
-      <div class="container-fluid">
         <!-- Contact data -->
         <div class="row clearfix">
           <div class="col-12">
@@ -71,7 +69,7 @@
                   </div>
                 </div>
                 <div class="text-right">
-                  <button class="btn btn-primary waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                  <button class="btn btn-primary waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
                 </div>
               </div>
             </div>
@@ -185,7 +183,7 @@
                   </div>
                 </fieldset>
                 <div class="text-right">
-                  <button class="btn btn-primary waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                  <button class="btn btn-primary waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
                 </div>
               </div>
             </div>
@@ -204,7 +202,7 @@
               <div class="card-body">
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">{!! trans('modulesettings.image.favicon') !!}</label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-7">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input form-control" id="customFile" accept="image/jpeg,image/gif,image/png,image/svg+xml" name="favicon">
                       <label class="custom-file-label" for="customFile">{{ trans('cms.pleaseselectfile') }}</label>
@@ -215,13 +213,15 @@
                       </span>
                     @endif
                   </div>
-                  <div class="col-sm-1">
-                    <img class="rounded-circle" src="{{ (empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('getFile', cms_settings()->favicon) }}">
+                  <div class="col-sm-3">
+                    <div class="bg-primary img-fluid rounded my-0 p-2" data-background-color="{{ config('cogroupcms.color_theme') }}">
+                      <img class="rounded mx-auto d-block" src="{{ (empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('getFile', cms_settings()->favicon) }}">
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-sm-2 col-form-label">{!! trans('modulesettings.image.logo') !!}</label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-7">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input form-control" id="customFile" accept="image/jpeg,image/gif,image/png,image/svg+xml" name="logo">
                       <label class="custom-file-label" for="customFile">{{ trans('cms.pleaseselectfile') }}</label>
@@ -232,18 +232,18 @@
                       </span>
                     @endif
                   </div>
-                  <div class="col-sm-1 bg-primary">
-                    <img class="rounded" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'light-blue').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
+                  <div class="col-sm-3">
+                    <div class="bg-primary img-fluid rounded my-0 p-2" data-background-color="{{ config('cogroupcms.color_theme') }}">
+                      <img class="rounded mx-auto d-block" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'light-blue').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
+                    </div>
                   </div>
                 </div>
                 <div class="text-right">
-                  <button class="btn btn-primary waves-effect" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                  <button class="btn btn-primary waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
   </form>
 @endsection

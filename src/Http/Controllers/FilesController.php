@@ -18,41 +18,45 @@ class FilesController extends Controller {
     if($file->ispublic == false and !Auth::check()) :
       return abort(404);
     endif;
-    return response()->file(storage_path("app/private/".$file->diskname));
+
+    return $this->showImage($file->diskname, $file->originalname);
   }
 
-  public function processFileThumb($id, $width = 240, $height = 360, $const = true) {
+  private function showImage($path, $originalname) {
+    $mime = Storage::disk(config('filesystems.cloud'))->mimeType($path);
+    $data = Storage::disk(config('filesystems.cloud'))->get($path);
+
+    return response($data, 200)
+            ->header('Content-Type', $mime)
+            ->header('Content-Disposition', 'attachment; filename="'. $originalname .'"')
+            ->header('Access-Control-Expose-Headers', 'Content-Disposition');
+  }
+
+  public function processFileThumb($id, $width = 240, $height = 360) {
     $file = Files::select('*')->where("id", "=", $id)->first();
-    if($file->folder == 'images') :
-      if($const == true) :
-        if(!file_exists(storage_path("app/files/private/thumbs/" . $height."_".$width."_".$file->diskname))) :
-          $manager = \ImageManager::canvas($width, $height)
-                      ->insert(
-                        \ImageManager::make(storage_path("app/private/".$file->diskname))
-                        ->heighten($height, function ($constraint) use ($const) {
-                          if($const == true) :
-                            $constraint->aspectRatio();
-                          endif;
-                        }), 'center'
-                      )->save(storage_path("app/files/private/thumbs/".$height."_".$width."_".$file->diskname));
+    $mime = explode("/", $file->mimetype);
+    $ext = $mime[1];
+    $mime = $mime[0];
+
+    if($mime == "image") :
+      $path = "thumbs/".$height."_".$width."_".$file->diskname;
+      $data = Storage::disk(config('filesystems.cloud'))->get($file->diskname);
+
+      if(!Storage::disk(config('filesystems.cloud'))->exists("thumbs/" . $height."_".$width."_".$file->diskname)) :
+        if($width > $height || $width == $height) :
+          $img = \ImageManager::make($data)->widen($width, function ($constraint) {
+            $constraint->upsize();
+          })->stream($ext, 60);
+        else :
+          $img = \ImageManager::make($data)->heighten($height, function ($constraint) {
+            $constraint->upsize();
+          })->stream($ext, 60);
         endif;
-        return response()->file(storage_path("app/files/private/thumbs/".$height."_".$width."_".$file->diskname));
-      else :
-        if(!file_exists(storage_path("app/files/private/thumbs/" . $width."_".$height."_".$file->diskname))) :
-          $manager = \ImageManager::canvas($width, $height)
-                      ->insert(
-                        \ImageManager::make(storage_path("app/private/".$file->diskname))
-                        ->widen($width, function ($constraint) use ($const) {
-                          if($const == true) :
-                            $constraint->aspectRatio();
-                          endif;
-                        }), 'center'
-                      )->save(storage_path("app/files/private/thumbs/".$width."_".$height."_".$file->diskname));
-        endif;
-        return response()->file(storage_path("app/files/private/thumbs/".$width."_".$height."_".$file->diskname));
+        Storage::disk(config('filesystems.cloud'))->put($path, $img);
       endif;
+      return $this->showImage($path, $file->originalname);
     else :
-      return response()->file(storage_path("app/private/".$file->diskname));
+      return $this->showImage($file->diskname, $file->originalname);
     endif;
   }
 
@@ -60,11 +64,11 @@ class FilesController extends Controller {
     // checking file is valid.
     if($request->file($name)->isValid()) :
       $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
-      $path = file_exists(storage_path("app/files/private/".$request->{$name}->hashName()));
+      $path = Storage::disk(config('filesystems.cloud'))->exists($request->{$name}->hashName());
       if($path == true) :
         return array('status' => false, 'msg' => 'files.fileexists');
       endif;
-      $path = $request->{$name}->store('private');
+      $path = $request->{$name}->store(config('filesystems.cloud'));
       $path = explode("/", $path);
       $path = $path[count($path) - 1];
       $id = $request->input($name.'_id');
@@ -90,7 +94,7 @@ class FilesController extends Controller {
   }
 
   private static function getAttribute($file, $attribute) {
-    $manager = \ImageManager::make(storage_path("app/private/".$file->diskname));
+    $manager = \ImageManager::make(Storage::disk(config('filesystems.cloud'))->get($file->diskname));
     return $manager->{$attribute}();
   }
 
@@ -120,6 +124,6 @@ class FilesController extends Controller {
   public static function delete($id) {
     $file = Files::find($id);
     Files::where('id', $id)->delete();
-    Storage::delete("app/files/private/".$file->diskname);
+    Storage::disk(config('filesystems.cloud'))->delete($file->diskname);
   }
 }
