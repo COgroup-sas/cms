@@ -294,6 +294,10 @@
     &[data-color="dark"]{
       @include sidebar-color(rgba(53, 53, 53));
     }
+
+    &[data-color="light"]{
+      @include sidebar-color(rgba(154, 154, 154));
+    }
 }
 
 .visible-on-sidebar-regular{

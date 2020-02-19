@@ -62,4 +62,15 @@ return [
 
     'dashboard' => '\App\Http\Controllers\GaudiDashboardController',
 
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup Notifications
+    |--------------------------------------------------------------------------
+    |
+    | This variable set type notifications system
+    |
+    */
+
+    'via' => ['mail', 'database'],
+
 ];

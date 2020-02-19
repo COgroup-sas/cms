@@ -126,6 +126,10 @@
         @include linear-gradient(rgba($black-color,.20), rgba(53, 53, 53, 0.6));
     }
 
+    &[filter-color="light"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(154, 154, 154, 0.6));
+    }
+
     .container{
         z-index: 2;
     }
@@ -184,7 +188,7 @@
 }
 
 .section-nucleo-icons{
-     .nucleo-container img{
+    .nucleo-container img{
         width: auto;
         left: 0;
         top: 0;
@@ -366,6 +370,10 @@
 
 [data-background-color="dark"]{
     background-color: rgba(53, 53, 53) !important;
+}
+
+[data-background-color="light"]{
+    background-color: rgba(154, 154, 154) !important;
 }
 
 [data-background-color]{

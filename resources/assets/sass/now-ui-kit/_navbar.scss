@@ -294,6 +294,10 @@
     &[data-background-color="dark"]{
         background-color: rgba(53, 53, 53) !important;
     }
+
+    &[data-background-color="light"]{
+        background-color: rgba(154, 154, 154) !important;
+    }
 }
 
 .bg-info{

@@ -19,15 +19,15 @@
     <div class="collapse navbar-collapse justify-content-end" id="navigation">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#COgroup">
-            <i class="now-ui-icons media-2_sound-wave"></i>
+          <a class="nav-link" href="{{ route('notifications') }}">
+            <i class="now-ui-icons ui-1_bell-53"></i><span class="badge badge-pill badge-warning">{{ cms_get_total_unread_notifications() }}</span>
             <p>
               <span class="d-lg-none d-md-block">Stats</span>
             </p>
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#profile" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="now-ui-icons users_single-02"></i>
             <p>
               <span class="d-lg-none d-md-block">{{ trans('moduleusers.user') }}</span>
@@ -36,13 +36,13 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="{{ route('cogroupcms.usersprofile') }}"><i class="fa fa-user-circle"></i>{{ trans('moduleusers.profile') }}</a>
             <a class="dropdown-item" href="{{ route('logout') }}" 
-		            onclick="event.preventDefault();
-		                     document.getElementById('logout-form').submit();">
-		          <i class="fa fa-sign-out-alt"></i> {{ trans('cms.signout') }}
-		        </a>
-		        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-		            {{ csrf_field() }}
-		        </form>
+                onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+              <i class="fa fa-sign-out-alt"></i> {{ trans('cms.signout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
           </div>
         </li>
       </ul>

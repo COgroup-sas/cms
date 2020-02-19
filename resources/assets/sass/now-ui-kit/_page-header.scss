@@ -114,4 +114,8 @@
     &[filter-color="dark"]{
         @include linear-gradient(rgba($black-color,.20), rgba(53, 53, 53, 0.6));
     }
+
+    &[filter-color="light"]{
+        @include linear-gradient(rgba($black-color,.20), rgba(154, 154, 154, 0.6));
+    }
 }

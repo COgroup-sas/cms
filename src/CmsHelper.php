@@ -2,6 +2,7 @@
 
 use Cogroup\Cms\Http\Controllers\CmsController;
 use Cogroup\Cms\Models\Files;
+use Cogroup\Cms\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 if (! function_exists('cms_roles_check')) {
@@ -119,5 +120,20 @@ if (! function_exists('cms_get_file_attribute')) {
     {
         $file = Files::where('id', $id)->first();
         return $file->{$attribute};
+    }
+}
+
+if (! function_exists('cms_get_total_unread_notifications')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  integer  $id
+     * @param  string   $attribute
+     * @return mixed|\Cogroup\Cms\Models\Files
+     */
+    function cms_get_total_unread_notifications()
+    {
+        $user = User::find(auth()->user()->id);
+        return $user->unreadNotifications()->count();
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Cogroup\Cms\Models\DatabaseNotification;
+use Cogroup\Cms\Models\User;
+
 
 Route::group(['middleware' => ['web'],
               'namespace' => 'Cogroup\Cms\Http\Controllers'
@@ -44,5 +47,33 @@ Route::group(['middleware' => ['web'],
       });
       Route::get('profile',  'UsersController@profile')->name('cogroupcms.usersprofile');
       Route::post('profile',  'UsersController@profilesave')->name('cogroupcms.usersprofilesave');
+
+      Route::get('notifications', function () {
+        $notifications = User::find(auth()->user()->id)->notifications;
+        $breadcrumb = [trans('home'), trans('notifications.title')];
+
+        return view('cogroupcms::modules.notifications.notifications')->with(
+          [
+            'user' => auth()->user(),
+            'breadcrumb' => $breadcrumb,
+            'title' => trans('notifications.title'),
+            'notifications' => $notifications
+          ]
+        );
+      })->name('notifications');
+
+      Route::get('notifications/read-all', function () {
+        User::find(auth()->user()->id)->unreadNotifications->markAsRead();
+
+        return back();
+      })->name('notifications.readall');
+
+      Route::get('notifications/{notification}', function (DatabaseNotification $notification) {
+        abort_unless($notification->associatedTo(User::find(auth()->user()->id)), 404);
+
+        $notification->markAsRead();
+
+        return redirect(route('notifications'));
+      })->name('notifications.notification');
   });
 });

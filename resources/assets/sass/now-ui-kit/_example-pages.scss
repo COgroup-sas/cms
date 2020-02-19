@@ -168,13 +168,70 @@
         background-color: rgba(0,0,0,.5);
     }
 
-    &[filter-color="purple"],
     &[filter-color="primary"]{
         &:after{
             @include linear-gradient(rgba($light-gray,.26), rgba($primary-color,.95));
-
         }
+    }
 
+    &[filter-color="purple"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(124, 23, 127, .95));
+        }
+    }
+
+    &[filter-color="light-purple"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(175, 0, 83, .95));
+        }
+    }
+
+    &[filter-color="orange"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(219, 150, 18, .95));
+        }
+    }
+
+    &[filter-color="light-green"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(163, 189, 53, .95));
+        }
+    }
+
+    &[filter-color="blue"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(73, 80, 151, .95));
+        }
+    }
+
+    &[filter-color="light-blue"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(119, 171, 220, .95));
+        }
+    }
+
+    &[filter-color="green"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(113, 168, 60, .95));
+        }
+    }
+
+    &[filter-color="yellow"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(203, 200, 61, .95));
+        }
+    }
+
+    &[filter-color="dark"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(53, 53, 53, .95));
+        }
+    }
+
+    &[filter-color="light"]{
+        &:after{
+            @include linear-gradient(rgba($light-gray,.26), rgba(154, 154, 154, .95));
+        }
     }
 
     &[data-image]:after{

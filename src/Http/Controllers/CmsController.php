@@ -99,7 +99,7 @@ class CmsController extends Controller
                     ->where('modules.moduleslug', $moduleslug)
                     ->first();
 
-    if(!isset($permission->{$type})) return $type;
+    if(!isset($permission->{$type})) return false;
 
     if($permission->{$type} == 0) return false;
     if($permission->{$type} == 1) return true;
@@ -109,7 +109,7 @@ class CmsController extends Controller
     if(!empty($submenu)) :
       echo '<ul class="nav">';
       foreach($submenu as $submodule) :
-        if(cms_roles_check(Auth::user(), $submodule->modulename) == true) :
+        if(cms_roles_check(Auth::user(), $submodule->moduleslug) == true) :
           echo '<li';
           echo (starts_with($route, $submodule->url)) ? ' class="active"' : '';
           echo '>';
@@ -118,7 +118,9 @@ class CmsController extends Controller
           else :
             echo '<a href="' . url($submodule->url) . '">';
           endif;
-          echo ($route != $submodule->url) ? '<i class="sidebar-mini-icon ' . $submodule->icon . '"></i>' : '';
+          //echo ($route != $submodule->url) ? 
+          echo '<i class="sidebar-mini-icon ' . $submodule->icon . '"></i>';
+          // : '';
           echo '<span class="sidebar-normal">';
           echo $submodule->modulename;
           if(isset($submodule->submod) and !empty($submodule->submod) and count($submodule->submod) > 0) :

@@ -104,6 +104,10 @@ html, body {
     &[data-color="dark"]{
      @include preloader-color(rgba(53, 53, 53, 1), rgba(40, 40, 40, 1), rgba(28, 28, 28, 1), rgba(2, 2, 2, 1));
     }
+
+    &[data-color="light"]{
+     @include preloader-color(rgba(154, 154, 154, 1), rgba(115, 115, 115, 1), rgba(82, 82, 82, 1), rgba(43, 43, 43, 1));
+    }
 	}	
 }
 
@@ -147,11 +151,158 @@ html, body {
   overflow-y:auto;
 }
 
-//Font sizes
+//
+/* Opacity defininations */
+@for $i from 50 through 100 {
+	@if($i % 5 == 0) {
+		.opacity-#{$i} {
+			opacity: #{$i/100}!important;
+  		filter: alpha(opacity=#{$i})!important;
+		}
+	}
+}
+
+/* Font Size definitations */
+.fs-0-625 {
+	font-size: 0.625rem;
+}
+
+.fs-0-75 {
+	font-size: 0.75rem;
+}
+
+.fs-0-8 {
+	font-size: 0.8rem;
+}
+
+.fs-0-8125 {
+	font-size: 0.8125rem;
+}
+
+.fs-0-85 {
+	font-size: 0.85rem;
+}
+
+.fs-0-875 {
+	font-size: 0.875rem;
+}
+
+.fs-0-9 {
+	font-size: 0.9rem;
+}
+
+.fs-0-9375 {
+	font-size: 0.9375rem;
+}
+
+.fs-1 {
+	font-size: 1rem;
+}
+
 .fs-1-2 {
-	font-size: 1.2rem!important;
+	font-size: 1.20rem;
+}
+
+.fs-1-25 {
+	font-size: 1.25rem;
+}
+
+.fs-1-3 {
+	font-size: 1.3rem;
+}
+
+.fs-1-375 {
+	font-size: 1.375rem;
 }
 
 .fs-1-5 {
-	font-size: 1.5rem!important;
+	font-size: 1.5rem;
+}
+
+.fs-1-75 {
+	font-size: 1.75rem;
+}
+
+.fs-2 {
+	font-size: 2rem;
+}
+
+.fs-2-25 {
+	font-size: 2.25rem;
+}
+
+.fs-2-5 {
+	font-size: 2.5rem;
+}
+
+.fs-2-75 {
+	font-size: 2.75rem;
+}
+
+.fs-3 {
+	font-size: 3rem;
+}
+
+@media (max-width: 991px) {
+	.fs-2 {
+		font-size: 1.25rem;
+	}
+
+	.fs-2-25 {
+		font-size: 1.5rem;
+	}
+
+	.fs-2-5 {
+		font-size: 1.75rem;
+	}
+
+	.fs-2-75 {
+		font-size: 2rem;
+	}
+
+	.fs-3 {
+		font-size: 2.25rem;
+	}
+}
+
+.text-color {
+	&[data-color="purple"]{
+		color: $cog-purple !important;
+  }
+
+  &[data-color="light-purple"]{
+		color: $cog-light-purple !important;
+  }
+
+  &[data-color="orange"]{
+		color: $cog-orange !important;
+  }
+
+  &[data-color="light-green"]{
+		color: $cog-light-green !important;
+  }
+
+  &[data-color="blue"]{
+		color: $cog-blue !important;
+  }
+
+  &[data-color="light-blue"]{
+		color: $cog-light-blue !important;
+  }
+
+  &[data-color="green"]{
+		color: $cog-green !important;
+  }
+
+  &[data-color="yellow"]{
+		color: $cog-yellow !important;
+  }
+
+  &[data-color="dark"]{
+    color: $cog-grey !important;
+  }
+
+  &[data-color="light"]{
+    color: $cog-light-grey !important;
+  }
 }

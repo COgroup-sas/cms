@@ -34,4 +34,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo("Cogroup\Cms\Models\Roles\Roles", 'roles_id');
     }
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->lastname}";
+    }
 }
