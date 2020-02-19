@@ -30,5 +30,10 @@ return [
   'msgaddok' => '¡Los ajustes se guardaron correctamente!',
   'image.title' => 'Imágenes',
   'image.favicon' => 'Favicon',
-  'image.logo' => 'Logotipo'
+  'image.logo' => 'Logotipo',
+  'social.title' => 'Acceso a través de redes sociales',
+  'social.access' => 'Acceso con redes sociales',
+  'social.gmail' => 'GSuite',
+  'social.facebook' => 'Facebook',
+  'social.twitter' => 'Twitter',
 ];

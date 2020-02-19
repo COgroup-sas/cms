@@ -245,5 +245,62 @@
             </div>
           </div>
         </div>
+        <!-- Social access -->
+        <div class="row clearfix">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2>
+                  {{ trans('modulesettings.social.title') }}
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.social.access') !!}</label>
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label for="switch-sm">
+                        <input type="checkbox" name="socialaccess" value="1" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"@if(cms_settings()->socialaccess == 1){{ ' checked' }}@endif id="socialaccess">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.social.gmail') !!}</label>
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label for="switch-sm">
+                        <input type="checkbox" name="socialaccessgoogle" value="1" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"@if(cms_settings()->socialaccessgoogle == 1){{ ' checked' }}@endif id="socialaccessgoogle">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.social.facebook') !!}</label>
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label for="switch-sm">
+                        <input type="checkbox" name="socialaccessfacebook" value="1" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"@if(cms_settings()->socialaccessfacebook == 1){{ ' checked' }}@endif id="socialaccessfacebook">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.social.twitter') !!}</label>
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label for="switch-sm">
+                        <input type="checkbox" name="socialaccesstwitter" value="1" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"@if(cms_settings()->socialaccesstwitter == 1){{ ' checked' }}@endif id="socialaccesstwitter">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <button class="btn btn-primary waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   </form>
 @endsection
