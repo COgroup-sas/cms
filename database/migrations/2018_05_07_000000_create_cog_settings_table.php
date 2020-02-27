@@ -19,7 +19,7 @@ class CreateCogSettingsTable extends Migration
             Schema::create('settings', function (Blueprint $table) {
                 $table->increments('id')->unsigned();
                 $table->string('setting');
-                $table->string('defaultvalue');
+                $table->text('defaultvalue');
             });
         }
 

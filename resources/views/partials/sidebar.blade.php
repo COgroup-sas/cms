@@ -24,5 +24,6 @@
       </li>
       @endforeach
     </ul>
+    <div class="text-center fs-0-8 version">{{ cms_version() }}</div>
   </div>
 </div>

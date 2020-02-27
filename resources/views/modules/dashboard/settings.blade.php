@@ -87,8 +87,8 @@
               </div>
               <div class="card-body">
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.site.sitename') !!}</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">{!! trans('modulesettings.site.sitename') !!}</label>
+                  <div class="col-sm-9">
                     <input required type="text" name="sitename" class="form-control" placeholder="{{ trans('modulesettings.site.sitename') }}" value="{{ (!empty(old('sitename'))) ? old('sitename') : cms_settings()->sitename }}" />
                     @if ($errors->has('sitename'))
                       <span class="form-text text-danger">
@@ -98,8 +98,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.site.sitedescription') !!}</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">{!! trans('modulesettings.site.sitedescription') !!}</label>
+                  <div class="col-sm-9">
                     <textarea name="sitedescription" rows="4" class="form-control no-resize" placeholder="{{ trans('modulesettings.site.sitedescription') }}">{{ (!empty(old('sitedescription'))) ? old('sitedescription') : cms_settings()->sitedescription }}</textarea>
                     @if ($errors->has('sitedescription'))
                       <span class="form-text text-danger">
@@ -109,8 +109,8 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-sm-2 col-form-label">{!! trans('modulesettings.site.sitekeywords') !!}</label>
-                  <div class="col-sm-10">
+                  <label class="col-sm-3 col-form-label">{!! trans('modulesettings.site.sitekeywords') !!}</label>
+                  <div class="col-sm-9">
                     <textarea name="sitekeywords" rows="4" class="form-control no-resize" placeholder="{{ trans('modulesettings.site.sitekeywords') }}">{{ (!empty(old('sitekeywords'))) ? old('sitekeywords') : cms_settings()->sitekeywords }}</textarea>
                     @if ($errors->has('sitekeywords'))
                       <span class="form-text text-danger">
@@ -121,8 +121,8 @@
                 </div>
                 <fieldset class="form-group">
                   <div class="row">
-                    <label class="col-form-label col-sm-2">{{ trans('modulesettings.site.timeformat') }}</label>
-                    <div class="col-sm-10">
+                    <label class="col-form-label col-sm-3">{{ trans('modulesettings.site.timeformat') }}</label>
+                    <div class="col-sm-9">
                       <div class="form-check form-check-radio">
                         <label class="form-check-label" for="radio1">
                           <input id="radio1" type="radio" name="timeformat" class="form-check-input" value="h:i a"@if(cms_settings()->timeformat == 'h:i a') checked @endif />
@@ -149,8 +149,8 @@
                 </fieldset>
                 <fieldset class="form-group">
                   <div class="row">
-                    <label class="col-form-label col-sm-2">{{ trans('modulesettings.site.dateformat') }}</label>
-                    <div class="col-sm-10">
+                    <label class="col-form-label col-sm-3">{{ trans('modulesettings.site.dateformat') }}</label>
+                    <div class="col-sm-9">
                       <div class="form-check form-check-radio">
                         <label class="form-check-label">
                           <input id="radio4" type="radio" name="dateformat" class="form-check-input" value="Y-m-d"@if(cms_settings()->dateformat == 'Y-m-d') checked @endif />
@@ -182,6 +182,44 @@
                     </div>
                   </div>
                 </fieldset>
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">{!! trans('modulesettings.site.analyticscode') !!}</label>
+                  <div class="col-sm-9">
+                    <textarea name="analyticscode" rows="4" class="form-control no-resize" placeholder="{{ trans('modulesettings.site.analyticscode') }}">{{ (!empty(old('analyticscode'))) ? old('analyticscode') : cms_settings()->analyticscode }}</textarea>
+                    @if ($errors->has('analyticscode'))
+                      <span class="form-text text-danger">
+                        <strong>{{ $errors->first('analyticscode') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">{!! trans('modulesettings.site.defaultrol') !!}</label>
+                  <div class="col-sm-9">
+                    <div class="form-line">
+                      @foreach($roles as $rol)
+                        <div class="form-check form-check-radio">
+                          <label class="form-check-label" for="{{ mb_strtolower($rol->rolname) }}">
+                            <input class="form-check-input" required type="radio" name="defaultrol" id="{{ mb_strtolower($rol->rolname) }}" value="{{ $rol->id }}" class=""
+                        @if(old('defaultrol') == $rol->id || cms_settings()->defaultrol == $rol->id)
+                          checked="checked" 
+                        @endif
+                        >
+                            <span class="form-check-sign"></span>
+                            {{ $rol->rolname }}
+                          </label>
+                        </div>
+                      @endforeach
+                      @if ($errors->has('defaultrol'))
+                        <span class="form-text text-danger">
+                          <strong>{{ $errors->first('defaultrol') }}</strong>
+                        </span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+
                 <div class="text-right">
                   <button class="btn btn-primary waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
                 </div>

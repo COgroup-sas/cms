@@ -5,6 +5,7 @@ namespace Cogroup\Cms\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Cogroup\Cms\Models\Settings;
+use Cogroup\Cms\Models\Roles\Roles;
 use Cogroup\Cms\Http\Controllers\CmsController;
 use Validator;
 
@@ -61,6 +62,7 @@ class DashboardController extends CmsController
         'scripts' => $this->scripts,
         'csss' => $this->csss,
         'breadcrumb' => $breadcrumb,
+        'roles' => Roles::orderBy('id')->get(),
         'title' => trans('modulesettings.title')
       )
     );
@@ -84,7 +86,8 @@ class DashboardController extends CmsController
       "phone" => "required|phone",
       "mobilephone" => "mobilephone",
       'favicon' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml',
-      'logo' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml'
+      'logo' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml',
+      'defaultrol' => 'required|exists:roles,id'
     ]);
 
     if ($validator->fails()) :
@@ -98,50 +101,13 @@ class DashboardController extends CmsController
     $datos = array();
     foreach($data as $key => $dat) :
       $id = Settings::where('setting', $key)->value('id');
-      if($key == 'socialaccess' || $key == 'socialaccessgoogle' || $key == "socialaccessfacebook" || $key == "socialaccesstwitter") $dat = 1;
-      if(!is_null($id)) :
+      if(!is_null($id) and !empty($dat)) :
         $settings = Settings::find($id);
         $settings->setting = $key;
         $settings->defaultvalue = $dat;
         $settings->save();
       endif;
     endforeach;
-
-    if(!$request->has('socialaccess')) :
-      $id = Settings::where('setting', 'socialaccess')->value('id');
-      if(!is_null($id)) :
-        $settings = Settings::find($id);
-        $settings->defaultvalue = 0;
-        $settings->save();
-      endif;
-    endif;
-
-    if(!$request->has('socialaccessgoogle')) :
-      $id = Settings::where('setting', 'socialaccessgoogle')->value('id');
-      if(!is_null($id)) :
-        $settings = Settings::find($id);
-        $settings->defaultvalue = 0;
-        $settings->save();
-      endif;
-    endif;
-
-    if(!$request->has('socialaccessfacebook')) :
-      $id = Settings::where('setting', 'socialaccessfacebook')->value('id');
-      if(!is_null($id)) :
-        $settings = Settings::find($id);
-        $settings->defaultvalue = 0;
-        $settings->save();
-      endif;
-    endif;
-
-    if(!$request->has('socialaccesstwitter')) :
-      $id = Settings::where('setting', 'socialaccesstwitter')->value('id');
-      if(!is_null($id)) :
-        $settings = Settings::find($id);
-        $settings->defaultvalue = 0;
-        $settings->save();
-      endif;
-    endif;
 
     if ($request->hasFile('favicon')) :
       $image = FilesController::upload($request, 'favicon');

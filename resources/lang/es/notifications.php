@@ -17,10 +17,11 @@ return [
     'subject' => '%s: Tienes un nuevo mensaje de %s!',
     'greeting' => 'Hola %s!',
     'salutation' => 'Atentamente',
-    'action' => 'Nombre',
+    'action' => 'Ir al sistema',
     'message' => '%s',
     'unread' => "Sin leer",
     'read' => 'Leídas',
     'all' => 'Todas',
     'markread' => "Marcar todas como leídas",
+    'thanks' => 'Atentamente,'
 ];

@@ -44,6 +44,10 @@ class CogroupCmsSeeder extends Seeder
         'defaultvalue'  => 'COgroup, cms'
       ],
       [
+        'setting'       => 'analyticscode',
+        'defaultvalue'  => ''
+      ],
+      [
         'setting'       => 'phone',
         'defaultvalue'  => '+00 (0) 000 0000'
       ],
@@ -78,6 +82,10 @@ class CogroupCmsSeeder extends Seeder
       [
         'setting'       => 'socialaccesstwitter',
         'defaultvalue'  => '0'
+      ]
+      [
+        'setting'       => 'defaultrol',
+        'defaultvalue'  => '3'
       ]
     ]);
 

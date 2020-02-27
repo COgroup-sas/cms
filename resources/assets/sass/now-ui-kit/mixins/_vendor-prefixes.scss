@@ -65,7 +65,7 @@
     background: $color;
   }
 
-  .nav li.active > a{
+  .nav li.active > a, .version{
     color: $color;
 
     i{

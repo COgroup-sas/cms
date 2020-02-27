@@ -5,6 +5,16 @@ use Cogroup\Cms\Models\Files;
 use Cogroup\Cms\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+if (! function_exists('cms_version')) {
+    /**
+     * Return CMS version
+     */
+    function cms_version()
+    {
+        return "CMS V1.8.7";
+    }
+}
+
 if (! function_exists('cms_roles_check')) {
     /**
      * Check a permission into rol

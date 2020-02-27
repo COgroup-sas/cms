@@ -71,7 +71,7 @@ class LoginController extends Controller
                 'name' => $social_user->user['given_name'],
                 'lastname' => $social_user->user['family_name'],
                 'email' => $social_user->email,
-                'roles_id' => Roles::where('id', 2)->first()->id,
+                'roles_id' => cms_settings()->defaultrol,
                 'avatar' => $social_user->avatar
             ]);
  

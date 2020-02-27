@@ -54,13 +54,13 @@ return [
     | This variable set the class call for dashboard. When is empty, the COgroupCMS call default function
     | 
     | The class name must include the namespace:
-    | example: \App\Http\Controllers\DashboardController
+    | example: \App\Http\Controllers\MyDashboardController
     |
     | The main function is index by default
     |
     */
 
-    'dashboard' => '\App\Http\Controllers\GaudiDashboardController',
+    'dashboard' => '',
 
     /*
     |--------------------------------------------------------------------------

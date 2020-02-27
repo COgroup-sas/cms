@@ -81,6 +81,22 @@ php artisan cogroupcms:migrations
 php artisan cogroupcms:translations
 ```
 
+6) Change default User model in `config/auth.php file`
+
+```php
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => Cogroup\Cms\Models\User::class,
+    ],
+
+    // 'users' => [
+    //     'driver' => 'database',
+    //     'table' => 'users',
+    // ],
+],
+```
+
 ## Configuration
 
 Set the property values in the `config/cogroupcms.php`.
@@ -288,6 +304,35 @@ cms_get_file_attribute($id, $attribute);
 
 - `id` is required parameter. Id into table `Files`
 - `attribute` is required parameter. Column of the table `Files`
+
+### cms_get_total_unread_notifications
+
+This function return a number of total unread notifications system
+
+```php
+cms_get_file_attribute();
+```
+
+### Dashboard
+
+For change dashboard, change option dashboard into `config/cogroupcms.php` file.
+Add all namespace example: `\App\Http\Controllers\MyDashboardController`
+
+### Notifications Messages
+
+config channels into config/cogroupcms.php via option 
+
+```php
+'via' => ['mail', 'database'],
+```
+
+If use a mail channel add `use Cogroup\Cms\Notifications\NewMessage;` to your Controller.
+
+For send message use `Notification::send( $user, new NewMessage( $from, $message ) );`
+
+- `$user` is the user to send email. Object User
+- `$from` is the user from send email. Object User
+- `$message` is a data message
 
 ## Notifications Javascript
 
