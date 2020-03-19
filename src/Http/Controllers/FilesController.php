@@ -68,7 +68,7 @@ class FilesController extends Controller {
       if($path == true) :
         return array('status' => false, 'msg' => 'files.fileexists');
       endif;
-      $path = $request->{$name}->store(config('filesystems.cloud'));
+      $path = $request->{$name}->store('', config('filesystems.cloud'));
       $path = explode("/", $path);
       $path = $path[count($path) - 1];
       $id = $request->input($name.'_id');

@@ -38,4 +38,24 @@ class Files extends Model
   protected $hidden = [
     'id'
   ];
+
+  /**
+   * Get the user's full name.
+   *
+   * @return string
+   */
+  public function getUrl()
+  {
+    return route('getFile', $this->id);
+  }
+
+  /**
+   * Get the user's full name.
+   *
+   * @return string
+   */
+  public function getThumbUrl($width, $height)
+  {
+    return route('thumb', $this->id, $height, $width);
+  }
 }
