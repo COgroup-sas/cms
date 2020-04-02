@@ -14,11 +14,11 @@ class Files extends Model
   protected $table = 'files';
 
   /**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var bool
-	 */
-	public $timestamps = true;
+   * Indicates if the model should be timestamped.
+   *
+   * @var bool
+   */
+  public $timestamps = true;
 
   /**
    * The attributes that are mass assignable.
@@ -40,6 +40,33 @@ class Files extends Model
   ];
 
   /**
+  * The attributes that should be mutated to dates.
+  *
+  * @var array
+  */
+  protected $dates = ['created_at', 'updated_at'];
+
+  /**
+  * The attributes that should be casted to native types.
+  *
+  * @var array
+  */
+  protected $casts = [
+    'id' => 'integer',
+    'originalname' => 'string',
+    'diskname' => 'string', 
+    'extension' => 'string',
+    'size' => 'integer', 
+    'mimetype' => 'string', 
+    'alt' => 'string',
+    'width' => 'integer',
+    'height' => 'integer',
+    'ispublic' => 'integer',
+    'created_at' => 'string',
+    'updated_at' => 'string'
+  ];
+
+  /**
    * Get the user's full name.
    *
    * @return string
@@ -54,7 +81,7 @@ class Files extends Model
    *
    * @return string
    */
-  public function getThumbUrl($width, $height)
+  public function getThumbUrl($width = 240, $height = 360)
   {
     return route('thumb', $this->id, $height, $width);
   }

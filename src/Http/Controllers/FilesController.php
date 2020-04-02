@@ -15,7 +15,7 @@ class FilesController extends Controller {
   public function processFile($id) {
     $file = Files::select('*')->where("id", "=", $id)->first();
 
-    if($file->ispublic == false and !Auth::check()) :
+    if(isset($file->ispublic) and $file->ispublic == false and !Auth::check()) :
       return abort(404);
     endif;
 
