@@ -61,36 +61,74 @@ class FilesController extends Controller {
   }
 
   public static function upload($request, $name) {
-    // checking file is valid.
-    if($request->file($name)->isValid()) :
-      $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
-      $path = Storage::disk(config('filesystems.cloud'))->exists($request->{$name}->hashName());
-      if($path == true) :
-        return array('status' => false, 'msg' => 'files.fileexists');
-      endif;
-      $path = $request->{$name}->store('', config('filesystems.cloud'));
-      $path = explode("/", $path);
-      $path = $path[count($path) - 1];
-      $id = $request->input($name.'_id');
-      $filemodel = Files::firstOrNew(['id' => $id]);
-      if(!empty($id) and !is_null($id)) $filemodel->id = $id;
-      $filemodel->diskname = $path;
-      $filemodel->originalname = $request->{$name}->getClientOriginalName();
-      $filemodel->extension = $request->{$name}->extension();
-      $filemodel->size = $request->{$name}->getClientSize();
-      $filemodel->mimetype = $request->{$name}->getClientMimeType();
-      $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : cms_settings()->sitename;
-      if(stripos($request->{$name}->getClientMimeType(), 'image') !== false) :
-        $filemodel->height = self::getAttribute($filemodel, 'height');
-        $filemodel->width = self::getAttribute($filemodel, 'width');
-      else :
-        $filemodel->height = $filemodel->width = 0;
-      endif;
-      $filemodel->save();
-      return array('status' => true, 'id' => $filemodel->id);
+    if(is_array($request->file($name))) :
+      $ids = [];
+      foreach($request->file($name) as $file) :
+        // checking file is valid.
+        if($file->isValid()) :
+          $mime = substr($file->getClientMimeType(), 0, 5);
+          $path = Storage::disk(config('filesystems.cloud'))->exists($file->hashName());
+          if($path == true) :
+            $id[] = array('status' => false, 'msg' => 'files.fileexists', "name" => $file->getClientOriginalName());
+          endif;
+          $path = $file->store('', config('filesystems.cloud'));
+          $path = explode("/", $path);
+          $path = $path[count($path) - 1];
+          $id = $request->input($name.'_id');
+          $filemodel = Files::firstOrNew(['id' => $id]);
+          if(!empty($id) and !is_null($id)) $filemodel->id = $id;
+          $filemodel->diskname = $path;
+          $filemodel->originalname = $file->getClientOriginalName();
+          $filemodel->extension = $file->extension();
+          $filemodel->size = $file->getClientSize();
+          $filemodel->mimetype = $file->getClientMimeType();
+          $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : cms_settings()->sitename;
+          if(stripos($file->getClientMimeType(), 'image') !== false) :
+            $filemodel->height = self::getAttribute($filemodel, 'height');
+            $filemodel->width = self::getAttribute($filemodel, 'width');
+          else :
+            $filemodel->height = $filemodel->width = 0;
+          endif;
+          $filemodel->save();
+          $ids[] = array('status' => true, 'id' => $filemodel->id, "name" => $file->getClientOriginalName());
+        else :
+          $ids[] = array('status' => false, 'msg' => 'file invalid', "name" => $file->getClientOriginalName());
+        endif;
+      endforeach;
+      return $ids;
     else :
-      return array('status' => false, 'msg' => 'file invalid');
+      // checking file is valid.
+      if($request->file($name)->isValid()) :
+        $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
+        $path = Storage::disk(config('filesystems.cloud'))->exists($request->{$name}->hashName());
+        if($path == true) :
+          return array('status' => false, 'msg' => 'files.fileexists');
+        endif;
+        $path = $request->{$name}->store('', config('filesystems.cloud'));
+        $path = explode("/", $path);
+        $path = $path[count($path) - 1];
+        $id = $request->input($name.'_id');
+        $filemodel = Files::firstOrNew(['id' => $id]);
+        if(!empty($id) and !is_null($id)) $filemodel->id = $id;
+        $filemodel->diskname = $path;
+        $filemodel->originalname = $request->{$name}->getClientOriginalName();
+        $filemodel->extension = $request->{$name}->extension();
+        $filemodel->size = $request->{$name}->getClientSize();
+        $filemodel->mimetype = $request->{$name}->getClientMimeType();
+        $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : cms_settings()->sitename;
+        if(stripos($request->{$name}->getClientMimeType(), 'image') !== false) :
+          $filemodel->height = self::getAttribute($filemodel, 'height');
+          $filemodel->width = self::getAttribute($filemodel, 'width');
+        else :
+          $filemodel->height = $filemodel->width = 0;
+        endif;
+        $filemodel->save();
+        return array('status' => true, 'id' => $filemodel->id);
+      else :
+        return array('status' => false, 'msg' => 'file invalid');
+      endif;
     endif;
+    return array('status' => false, 'msg' => 'file invalid');
   }
 
   private static function getAttribute($file, $attribute) {
