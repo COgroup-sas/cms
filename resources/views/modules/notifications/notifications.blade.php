@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-10">
                           <h6 class="text-color" data-color="{{ config('cogroupcms.color_theme') }}">{{ $notification->data['subject'] }}</h6>
-                          <p class="text-color" data-color="light">{{ $notification->data['message'] }}</p>
+                          <p class="text-color" data-color="light">{!! $notification->data['message'] !!}</p>
                           <small class="text-color" data-color="light"><strong>{{ $notification->created_at->format('Y-m-d h:i a') }}</strong></small>
                         </div>
                       </div>
