@@ -5,6 +5,7 @@ namespace Cogroup\Cms\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\HtmlString;
 use Cogroup\Cms\Models\User;
 //Mail
 use Illuminate\Notifications\Messages\MailMessage;
@@ -67,7 +68,7 @@ class NewMessage extends Notification
     return (new MailMessage)
               ->subject($subject)
               ->greeting($greeting)
-              ->line($this->message)
+              ->line(new HtmlString($this->message))
               ->action($action, url('/'));
   }
 

@@ -11,7 +11,7 @@ if (! function_exists('cms_version')) {
      */
     function cms_version()
     {
-        return "CMS V1.8.7";
+        return "CMS V1.8.12";
     }
 }
 
