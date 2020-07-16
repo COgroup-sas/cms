@@ -35,7 +35,7 @@
     "jquery": ">=3.5",
     "jquery-validation": "^1.19.2",
     "laravel-mix": "^5.0.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "resolve-url-loader": "^3.1.1",
     "sass": "^1.26.9",
     "sass-loader": "^8.0.2",
