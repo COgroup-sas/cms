@@ -12,9 +12,9 @@
         }
     ],
     "require": {
-        "laravel/socialite": "^3.0",
-        "intervention/image": "^2.4.1",
-        "mailjet/laravel-mailjet": "^2.1"
+        "laravel/socialite": ">=3.*",
+        "intervention/image": ">=2.*",
+        "mailjet/laravel-mailjet": ">=2.*"
     },
     "autoload": {
         "psr-4": {

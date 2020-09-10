@@ -30,20 +30,20 @@
   "devDependencies": {
     "axios": "^0.18.1",
     "babel-preset-env": "^1.6.1",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.2",
     "cross-env": "^5.2.1",
     "jquery": ">=3.5",
     "jquery-validation": "^1.19.2",
-    "laravel-mix": "^5.0.4",
-    "lodash": "^4.17.15",
+    "laravel-mix": "^5.0.5",
+    "lodash": "^4.17.20",
     "resolve-url-loader": "^3.1.1",
-    "sass": "^1.26.9",
+    "sass": "^1.26.10",
     "sass-loader": "^8.0.2",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.1",
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "animate.css": "^3.7.2",
     "datatables.net-bs4": "^1.10.21",
     "datatables.net-fixedcolumns-bs4": "^3.3.1",
