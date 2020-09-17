@@ -8,12 +8,16 @@
 # Cms
 
 ### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
+### For Laravel < 6, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.9)!
+### For Laravel 7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
+### Laravel 8 is not support yet
 
 COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel 5**.
 
 ## Contents
 
 - [Installation](#installation)
+    - [Intervention Image](#interventionimage)
 - [Configuration](#configuration)
     - [User relation to roles](#user-relation-to-roles)
     - [Models](#models)
@@ -24,7 +28,6 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
         - [Roles Access](#rolesaccess)
         - [Settings](#settings)
         - [User](#user)
-    - [Intervention Image](#interventionimage)
 - [Usage](#usage)
     - [Middleware](#middleware)
     - [Helper Permission](#helper-permission)
@@ -45,32 +48,48 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "1.8"
+"cogroup/cms": "2.0"
 ```
 or run the next command:
 ```json
 composer require cogroup/cms
 ```
 
-2) Run the command below to publish the package config file `config/cogroupcms.php`:
+2) Run the command to install laravel/ui and generate scaffolding
+
+```shell
+composer require laravel/ui
+php artisan ui bootstrap --auth
+```
+
+3) fixed Auth::routes, to avoid Clouser error
+
+Remove Auth::routes from web.php file
+Fixed auth:api route from api.php file or comment
+Change default route '/' to 
+```php
+Route::view('/', 'welcome');
+```
+
+4) Run the command below to publish the package config file `config/cogroupcms.php`:
 
 ```shell
 php artisan vendor:publish --provider="Cogroup\Cms\CmsServiceProvider"
 ```
 
-3)  Run the command below to execute migrations
+5)  Run the command below to execute migrations
 
 ```php
 php artisan migrate
 ```
 
-4)  Run the command below to seed
+6)  Run the command below to seed
 
 ```php
 php artisan db:seed --class=Cogroup\\Cms\\Seeds\\CogroupCmsSeeder
 ```
 
-5)  Run the command below to re-publish assets, config, custom error views, font, migrations and translations
+7)  Run the command below to re-publish assets, config, custom error views, font, migrations and translations
 
 ```php
 php artisan cogroupcms:assets
@@ -95,6 +114,26 @@ php artisan cogroupcms:translations
     //     'table' => 'users',
     // ],
 ],
+```
+
+### InterventionImage
+
+After you have installed Intervention Image, open your Laravel config file `config/app.php` and add the following lines.
+
+In the `$providers` array add the service providers for this package.
+  
+`Intervention\Image\ImageServiceProvider::class`
+
+Add the facade of this package to the $aliases array.
+  
+`'ImageManager' => Intervention\Image\Facades\Image::class`
+
+Now the Image Class will be auto-loaded by Laravel.
+
+#### Publish configuration in Laravel 5
+
+```php
+$ php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
 ```
 
 ## Configuration
@@ -189,26 +228,6 @@ The `Settings` model has two main attributes:
 This will enable the relation with `Role`.
 
 **And you are ready to go.**
-
-### InterventionImage
-
-After you have installed Intervention Image, open your Laravel config file `config/app.php` and add the following lines.
-
-In the `$providers` array add the service providers for this package.
-  
-`Intervention\Image\ImageServiceProvider::class`
-
-Add the facade of this package to the $aliases array.
-  
-`'ImageManager' => Intervention\Image\Facades\Image::class`
-
-Now the Image Class will be auto-loaded by Laravel.
-
-#### Publish configuration in Laravel 5
-
-```php
-$ php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravel5"
-```
 
 ## Usage
 

@@ -22,7 +22,6 @@ class CmsComposer {
 
     $view->with('modules', $modules);
 
-    
     if(!is_null(request()->route())) :
       $tmp = explode("/", request()->route()->getPrefix());
       if(count($tmp) > 1) $prefix = $tmp[1];

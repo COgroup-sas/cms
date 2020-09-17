@@ -24,92 +24,161 @@
           'csrfToken' => csrf_token(),
       ]) !!};
   </script>
+
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+    }
+    header {
+      height: calc(100vh - 56px);
+    }
+
+    @media screen and (max-width: 767px) {
+      header {
+        height: calc(100vh - 128px) !important;
+      }
+    }
+
+    #intro {
+      background: url("{{ config('app.url')."/".config('cogroupcms.bguri') }}")no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
 </head>
 <body class="{{ config('cogroupcms.color_theme') }} login-page sidebar-collapse">
   @include('cogroupcms::partials.preloader')
 
-  <div class="page-header" filter-color="{{ config('cogroupcms.color_theme') }}">
-    <div class="page-header-image" style="background-image:url({{ asset(config('cogroupcms.bguri')) }})"></div>
-    <div class="container">
-      <div class="col-md-4 content-center">
-        <div class="card card-login card-plain">
-          <form method="POST" action="{{ route('login') }}" class="form needs-validation" novalidate>
-            @csrf
-            <div class="header header-primary text-center pb-2">
-              <div class="logo-container">
-                <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}">
-              </div>
-            </div>
-            @if(cms_settings()->socialaccess == 1)
-            <div class="header header-primary text-center pb-5">
-              <h6>
-                @if(cms_settings()->socialaccessgoogle == 1)
-                <a class="link fs-1-2" href="{{ url('login/google') }}"><i class="fab fa-google"></i> Google</a>
-                @endif
-                @if(cms_settings()->socialaccessfacebook == 1)
-                <a class="link fs-1-2" href="{{ url('login/facebook') }}"><i class="fab fa-facebook-f"></i> Facebook</a>
-                @endif
-                @if(cms_settings()->socialaccesstwitter == 1)
-                <a class="link fs-1-2" href="{{ url('login/twitter') }}"><i class="fab fa-twitter"></i> Twitter</a>
-                @endif
-              </h6>
-            </div>
-            @endif
-            <div class="content">
-              <div class="input-group form-group-no-border input-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-addon input-group-text" id="basic-addon1">
-                    <i class="fa fa-user"></i>
-                  </span>
+  <header>
+
+    <!--Mask-->
+    <div id="intro" class="view h-100">
+
+      <div class="mask" filter-background-linear-color="{{ config('cogroupcms.color_theme') }}">
+
+        <div class="container-fluid d-flex align-items-center justify-content-center h-100 scrollbar-primary">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <!-- Material form login -->
+              <div class="card login opacity-80" data-background-color="white">
+
+                <h5 class="card-header text-center py-3" data-background-color="transparent">
+                  <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}" class="img-fluid w-50 m-auto">
+                </h5>
+
+                <!--Card content-->
+                <div class="card-body px-lg-4 pt-0">
+
+                  <!-- Form -->
+                  <form class="text-center needs-validation text-color" data-color="dark" novalidate method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    @if(cms_settings()->socialaccess == 1)
+                    <p class="mt-2">{{ __('cms.sign_in_with') }}</p>
+
+                    <h6>
+                      <div class="row justify-content-center">
+                        @if(cms_settings()->socialaccessgoogle == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/google') }}">
+                            <i class="fab fa-google"></i><br>
+                            <small class="fs-0-625">Google</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccessfacebook == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/facebook') }}">
+                            <i class="fab fa-facebook-f"></i><br>
+                            <small class="fs-0-625">Facebook</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccesstwitter == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/twitter') }}">
+                            <i class="fab fa-twitter"></i><br>
+                            <small class="fs-0-625">Twitter</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccesslinkedin == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/linkedin') }}">
+                            <i class="fab fa-linkedin"></i><br>
+                            <small class="fs-0-625">Linkedin</small>
+                          </a>
+                        </div>
+                        @endif
+                      </div>
+                    </h6>
+
+                    <p class="text-center">{{ __('cms.or') }}</p>
+                    @endif
+
+                    <!-- Email -->
+                    <div class="md-form">
+                      <input type="text" id="LoginFormEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                      <label for="LoginFormEmail">{{ __('validation.attributes.email') }}</label>
+                    </div>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+
+                    <!-- Password -->
+                    <div class="md-form">
+                      <input type="password" id="materialLoginFormPassword" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                      <label for="materialLoginFormPassword">@lang('validation.attributes.password')</label>
+                    </div>
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+
+                    <div class="d-flex justify-content-around">
+                      <div>
+                        <!-- Remember me -->
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" {{ old('remember') ? 'checked' : '' }} name="remember" id="remember">
+                          <label class="form-check-label" for="remember">{{ __('cms.rememberme') }}</label>
+                        </div>
+                      </div>
+                      <div>
+                        @if (Route::has('password.request'))
+                        <!-- Forgot password -->
+                        <a href="{{ route('password.request') }}">{{ __('cms.linkforgotpassword') }}</a>
+                        @endif
+                      </div>
+                    </div>
+
+                    <!-- Sign in button -->
+                    <button class="btn btn-theme btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">{{ __('cms.textbtnsignin') }}</button>
+
+                  </form>
+                  <!-- Form -->
+
                 </div>
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' has-danger' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off" placeholder="{{ trans('validation.attributes.email') }}">
+
               </div>
-              @if ($errors->has('email'))
-                <span class="text-warning">
-                  <strong>{{ $errors->first('email') }}</strong>
-                </span>
-              @endif
-              <div class="input-group form-group-no-border input-lg">
-                <div class="input-group-prepend">
-                  <span class="input-group-addon input-group-text" id="basic-addon1">
-                    <i class="fa fa-key"></i>
-                  </span>
-                </div>
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="{{ trans('validation.attributes.password') }}">
-              </div>
-              @if ($errors->has('password'))
-                <span class="text-warning">
-                  <strong>{{ $errors->first('password') }}</strong>
-                </span>
-              @endif
-              <div class="input-group form-group-no-border input-lg">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="customCheck1" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <span class="form-check-sign"></span>
-                    {{ trans('cms.rememberme') }}
-                  </label>
-                </div>
-              </div>
+              <!-- Material form login -->
             </div>
-            <div class="footer text-center">
-              <button type="submit" class="btn btn-primary btn-round btn-lg btn-block" data-background-color="{{ config('cogroupcms.color_theme') }}">
-                {{ trans('cms.textbtnsignin') }}
-              </button>
-            </div>
-            <div class="{{ (cms_settings()->socialaccess == 1) ? 'pull-left' : '' }}">
-              <h6>
-                <a class="link" href="{{ route('password.request') }}">
-                  {{ trans('cms.linkforgotpassword') }}
-                </a>
-              </h6>
-            </div>
-          </form>
+          </div>
         </div>
+
       </div>
+
     </div>
+    <!--/.Mask-->
+
     @include('cogroupcms::partials.footer')
-  </div>
+
+  </header>
 
   <!-- Scripts -->
   <!-- Scripts -->
@@ -119,6 +188,7 @@
     var CMS_SITE = "{{ config('cogroupcms.uri', 'cms') }}";
   </script>
   <script src="{{ asset('vendor/cogroup/cms/js/app.js?'.time()) }}"></script>
+  <script src="{{ asset('vendor/cogroup/cms/js/mdb.min.js') }}"></script>
   <script src="{{ asset('js/app.js?'.time()) }}"></script>
 </body>
 </html>

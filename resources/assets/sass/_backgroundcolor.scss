@@ -1,0 +1,28 @@
+/* Background color */
+[data-background-color="transparent"]{
+    background-color: transparent !important;
+}
+
+[data-background-color="black"]{
+    background-color: rgba(0, 0, 0) !important;
+}
+
+[data-background-color="white"]{
+    background-color: rgba(255, 255, 255) !important;
+}
+
+[filter-background-linear-color="black"]{
+    @include linear-gradient(rgba($black,.20), rgba(0, 0, 0, 0.6));
+}
+
+[filter-background-linear-color="white"]{
+    @include linear-gradient(rgba($black,.20), rgba(255, 255, 255, 0.6));
+}
+
+[filter-background-color="black"]{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+[filter-background-color="white"]{
+    background-color: rgba(255, 255, 255, 0.6);
+}

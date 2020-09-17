@@ -15,12 +15,15 @@ class CreateCogUsersTable extends Migration
     {
         $schema = app('db')->connection('mysql')->getSchemaBuilder();
 
+        Schema::disableForeignKeyConstraints();
+
         if (!$schema->hasTable('users')) :
             Schema::create('users', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name');
                 $table->string('lastname');
                 $table->string('email')->unique();
+                $table->timestamps('email_verified_at', 0)->nullable();
                 $table->string('password')->nullable();
                 $table->rememberToken();
                 $table->enum('active', ['Y', 'N'])->default('Y');
@@ -35,9 +38,10 @@ class CreateCogUsersTable extends Migration
             });
         else :
             Schema::table('users', function (Blueprint $table) {
-                $table->enum('active', ['Y', 'N'])->default('N');
-                $table->integer('roles_id')->unsigned()->default(1);
-                $table->integer('image_id')->unsigned()->nullable();
+                $table->string('lastname')->after('name');
+                $table->enum('active', ['Y', 'N'])->default('N')->after('remember_token');
+                $table->integer('roles_id')->unsigned()->default(1)->after('active');
+                $table->integer('image_id')->unsigned()->nullable()->after('roles_id');
                 
                 $table->foreign('roles_id')->references('id')->on('roles');
                 $table->foreign('image_id')->references('id')->on('files');

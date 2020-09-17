@@ -5,7 +5,7 @@
     <div class="container-fluid">
        <!-- Input -->
       <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-5 pb-4">
           <div class="card">
             <div class="card-header">
               <h2>
@@ -22,68 +22,68 @@
               <div class="demo-switch">
                 <div class="row clearfix">
                   <div class="col-sm-12">
-                    <h4>{{ trans($module->modulename) }}</h4>
+                    <h4>{{ trans($module['modulename']) }}</h4>
                     <div class="row">
-                    @foreach(explode(",", $module->permissions) as $perm)
+                    @foreach(explode(",", $module['permissions']) as $perm)
                       <div class="col-sm-3">
                         <div class="form-group">
-                          <label for="switch-sm" data-id="{{ $module->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
-                            <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
-                              echo (cms_roles_check($rolpermissions, $module->moduleslug, $perm)) ? ' checked' : '';
-                              ?> id="{{ $module->id.'-'.$perm }}"> {{ trans('cms.txt'.$perm) }}
-                          </label>
+                          <div class="material-switch">
+                            <input id="{{ $module['id'] }}-{{ $perm }}" name="{{ $module['id'] }}-{{ $perm }}" type="checkbox" data-id="{{ $module['id'] }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
+                              echo (cms_roles_check($rolpermissions, $module['moduleslug'], $perm)) ? ' checked' : '';
+                              ?> id="{{ $module['id'].'-'.$perm }}">
+                            <label for="{{ $module['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                          </div> {{ trans('cms.txt'.$perm) }}
                         </div>
                       </div>
                     @endforeach
                     </div>
-                    @if(!empty($module->submod) and count($module->submod) > 0)
-                      @foreach($module->submod as $submod)
-                    <h5><i class="fas fa-long-arrow-alt-right"></i> {{ trans($submod->modulename) }}</h5>
+                    @if(!empty($module['submod']) and count($module['submod']) > 0)
+                      @foreach($module['submod'] as $submod)
+                    <h5><i class="fas fa-long-arrow-alt-right"></i> {{ trans($submod['modulename']) }}</h5>
                     <div class="row">
-                        @foreach(explode(",", $submod->permissions) as $perm)
+                        @foreach(explode(",", $submod['permissions']) as $perm)
                       <div class="col-sm-3">
-                        <div class="form-group">  
-                          <span class="switch switch-sm">
-                            <label for="switch-sm" data-id="{{ $submod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
-                              <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
-                            echo (cms_roles_check($rolpermissions, $submod->moduleslug, $perm)) ? ' checked' : '';
-                          ?> class="switch" id="{{ $submod->id.'-'.$perm }}">
-                              {{ trans('cms.txt'.$perm) }}
-                            </label>
-                          </span>
+                        <div class="form-group">
+                          <div class="material-switch">
+                            <input id="{{ $submod['id'] }}-{{ $perm }}" name="{{ $submod['id'] }}-{{ $perm }}" type="checkbox" data-id="{{ $submod['id'] }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
+                              echo (cms_roles_check($rolpermissions, $submod['moduleslug'], $perm)) ? ' checked' : '';
+                              ?> id="{{ $module['id'].'-'.$perm }}">
+                            <label for="{{ $submod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                          </div> {{ trans('cms.txt'.$perm) }}
                         </div>
                       </div>
                         @endforeach
                     </div>
-                        @if(count($submod->submod) > 0)
-                          @foreach($submod->submod as $ssubmod)
-                    <h5><i class="fas fa-minus"></i><i class="fas fa-long-arrow-alt-right"></i> {{ trans($ssubmod->modulename) }}</h5>
+                        @if(count($submod['submod']) > 0)
+                          @foreach($submod['submod'] as $ssubmod)
+                    <h5><i class="fas fa-minus"></i><i class="fas fa-long-arrow-alt-right"></i> {{ trans($ssubmod['modulename']) }}</h5>
                     <div class="row">
-                          @foreach(explode(",", $ssubmod->permissions) as $perm)
+                          @foreach(explode(",", $ssubmod['permissions']) as $perm)
                       <div class="col-sm-3">
-                        <div class="switch">
-                          <label>
-                            <input type="checkbox" name="checkbox" class="bootstrap-switch" data-on-label="<i class='now-ui-icons ui-1_check'></i>" data-off-label="<i class='now-ui-icons ui-1_simple-remove'></i>"<?php
-                              echo (cms_roles_check($rolpermissions, $ssubmod->moduleslug, $perm)) ? ' checked' : '';
-                            ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm">
-                            {{ trans('cms.txt'.$perm) }}
-                          </label>
+                        <div class="form-group">
+                          <div class="material-switch">
+                            <input id="{{ $ssubmod['id'] }}-{{ $perm }}" name="{{ $ssubmod['id'] }}-{{ $perm }}" type="checkbox" data-id="$ssubmod['id']" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
+                              echo (cms_roles_check($rolpermissions, $ssubmod['moduleslug'], $perm)) ? ' checked' : '';
+                              ?> id="{{ $module['id'].'-'.$perm }}">
+                            <label for="{{ $ssubmod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                          </div> {{ trans('cms.txt'.$perm) }}
                         </div>
                       </div>
                             @endforeach
                     </div>
 
-                            @if(count($ssubmod->submod) > 0)
-                              @foreach($ssubmod->submod as $sssubmod)
-                        <h5><i class="fas fa-minus"></i><i class="fas fa-minus"></i><i class="fas fa-long-arrow-alt-right"></i> {{ trans($sssubmod->modulename) }}</h5>
+                            @if(count($ssubmod['submod']) > 0)
+                              @foreach($ssubmod['submod'] as $sssubmod)
+                        <h5><i class="fas fa-minus"></i><i class="fas fa-minus"></i><i class="fas fa-long-arrow-alt-right"></i> {{ trans($ssubmod['modulename']) }}</h5>
                         <div class="row">
-                              @foreach(explode(",", $sssubmod->permissions) as $perm)
+                              @foreach(explode(",", $sssubmod['permissions']) as $perm)
                           <div class="col-sm-3">
-                            <div class="switch">
-                              <label><input type="checkbox"<?php
-                                echo (cms_roles_check($rolpermissions, $sssubmod->moduleslug, $perm)) ? ' checked' : '';
-                              ?> data-id="{{ $ssubmod->id }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm"><span class="lever switch-col-red"></span></label>
-                            </div>
+                            <div class="material-switch">
+                              <input id="{{ $sssubmod['id'] }}-{{ $perm }}" name="{{ $sssubmod['id'] }}-{{ $perm }}" type="checkbox" data-id="$sssubmod['id']" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
+                                echo (cms_roles_check($rolpermissions, $sssubmod['moduleslug'], $perm)) ? ' checked' : '';
+                                ?> id="{{ $module['id'].'-'.$perm }}">
+                              <label for="{{ $sssubmod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                            </div> {{ trans('cms.txt'.$perm) }}
                           </div>
                                 @endforeach
                         </div>

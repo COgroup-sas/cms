@@ -16,11 +16,7 @@
   <meta name="keywords" content="{{ cms_settings()->sitekeywords   }}" />
   <meta name="author" content="www.cogroupsas.com" />
 
-  @if (!empty($csss))
-    @foreach ($csss as $css)
-  <link href="{{ $css[0] }}" rel="stylesheet" media="{{ $css[1].'?'.time() }}">
-    @endforeach
-  @endif
+  @yield('css')
 
   <link rel="stylesheet" href="{{ asset('vendor/cogroup/cms/css/app.css?'.time()) }}">
   <link rel="stylesheet" href="{{ asset('css/app.css?'.time()) }}">
@@ -33,24 +29,22 @@
 </head>
 <body class="{{ config('cogroupcms.color_theme') }}">
   @include('cogroupcms::partials.preloader')
-  <div class="wrapper">
-    @include('cogroupcms::partials.sidebar')
-    <div class="main-panel">
-      @include('cogroupcms::partials.header')
-      <div class="content">
-        @yield('content')
-      </div>
-      @include('cogroupcms::partials.footer')
+  @include('cogroupcms::partials.header')
+
+  <main class="mt-5 pt-5">
+    <div class="container-fluid">
+      @yield('content')
     </div>
-  </div>
+  </main>
+
+  @include('cogroupcms::partials.footer')
 
   @if(Session::has('status'))
-  <div class="hidden notification"
-    data-placement-from="{{ Session::has('msgfrom') ? Session::get('msgfrom') : 'top' }}" 
-    data-placement-align="{{ Session::has('msgalign') ? Session::get('msgalign') : 'right' }}" 
-    data-time="{{ Session::has('msgtime') ? Session::get('msgtime') : 4000 }}" 
-    data-color-name="{{ (Session::get('status') == 1) ? 'info' : 'danger' }} " 
-    data-text="{{ Session::get('msg') }}">SUCCESS</div>
+  <div id="toast-container" class="cogtoast md-toast-{{ Session::has('msgfrom') ? Session::get('msgfrom') : 'top' }}-{{ Session::has('msgalign') ? Session::get('msgalign') : 'right' }}" aria-live="polite" role="alert" data-autohide="true" data-delay="{{ Session::has('msgtime') ? Session::get('msgtime') : 4000 }}">
+    <div class="md-toast md-toast-{{ (Session::get('status') == 1) ? 'success' : 'error' }}" style="">
+      <div class="md-toast-message">{{ Session::get('msg') }}</div>
+    </div>
+  </div>
   @endif
 
   <!-- Scripts -->
@@ -60,15 +54,9 @@
     var CMS_SITE = "{{ config('cogroupcms.uri', 'cms') }}";
   </script>
   <script src="{{ asset('vendor/cogroup/cms/js/app.js?'.time()) }}"></script>
-  <script src="{{ asset('vendor/cogroup/cms/js/datatables.net/js/jquery.dataTables.js?'.time()) }}"></script>
-  <script src="{{ asset('vendor/cogroup/cms/js/datatables.net-bs4/js/dataTables.bootstrap4.js?'.time()) }}"></script>
-  <script src="{{ asset('vendor/cogroup/cms/js/jquery-datatable.js?'.time()) }}"></script>
+  <script src="{{ asset('vendor/cogroup/cms/js/mdb.min.js') }}"></script>
   <script src="{{ asset('js/app.js?'.time()) }}"></script>
 
-  @if (!empty($scripts))
-  @foreach ($scripts as $js)
-  <script @if (!empty($js['type'])) type="{{ $js['type'] }}" @endif src="{{ $js['src'].'?'.time() }}"></script>
-    @endforeach
-  @endif
+  @yield('scripts')
 </body>
 </html>

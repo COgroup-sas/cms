@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Cogroup\Cms\Models\Settings;
 use Cogroup\Cms\Models\Roles\Roles;
 use Cogroup\Cms\Http\Controllers\CmsController;
+use Cogroup\Cms\Models\DatabaseNotification;
+use Cogroup\Cms\Models\User;
 use Validator;
 
 class DashboardController extends CmsController
@@ -87,6 +89,7 @@ class DashboardController extends CmsController
       "mobilephone" => "mobilephone",
       'favicon' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml',
       'logo' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml',
+      'logocontraste' => 'sometimes|nullable|image|mimetypes:image/jpeg,image/gif,image/png,image/svg+xml',
       'defaultrol' => 'required|exists:roles,id'
     ]);
 
@@ -98,10 +101,15 @@ class DashboardController extends CmsController
     endif;
 
     $data = $request->all();
+    $data['socialaccess'] = (isset($data['socialaccess'])) ? $data['socialaccess'] : 0;
+    $data['socialaccessgoogle'] = (isset($data['socialaccessgoogle'])) ? $data['socialaccessgoogle'] : 0;
+    $data['socialaccessfacebook'] = (isset($data['socialaccessfacebook'])) ? $data['socialaccessfacebook'] : 0;
+    $data['socialaccesstwitter'] = (isset($data['socialaccesstwitter'])) ? $data['socialaccesstwitter'] : 0;
+    $data['socialaccesslinkedin'] = (isset($data['socialaccesslinkedin'])) ? $data['socialaccesslinkedin'] : 0;
     $datos = array();
     foreach($data as $key => $dat) :
       $id = Settings::where('setting', $key)->value('id');
-      if(!is_null($id) and !empty($dat)) :
+      if(!is_null($id)) :
         $settings = Settings::find($id);
         $settings->setting = $key;
         $settings->defaultvalue = $dat;
@@ -135,8 +143,55 @@ class DashboardController extends CmsController
       endif;
     endif;
 
+    if ($request->hasFile('logocontraste')) :
+      $image = FilesController::upload($request, 'logocontraste');
+      if($image['status'] == true) :
+        $id = Settings::where('setting', 'logocontraste')->value('id');
+        if(!is_null($id)) :
+          $settings = Settings::find($id);
+          $settings->setting = 'logocontraste';
+          $settings->defaultvalue = $image['id'];
+          $settings->save();
+        endif;
+      endif;
+    endif;
+
     $request->session()->flash('status', '1');
     $request->session()->flash('msg', trans('modulesettings.msgaddok'));
     return redirect(route('cogroupcms.settings'));
+  }
+
+  public function notifications() {
+    $notifications = User::find(Auth::id())->notifications;
+    $breadcrumb = [trans('home'), trans('notifications.title')];
+
+    return view('cogroupcms::modules.notifications.notifications')->with(
+      [
+        'user' => auth()->user(),
+        'breadcrumb' => $breadcrumb,
+        'title' => trans('notifications.title'),
+        'notifications' => $notifications
+      ]
+    );
+  }
+
+  public function notificationsReadAll() {
+    User::find(auth()->user()->id)->unreadNotifications->markAsRead();
+
+    return back();
+  }
+
+  public function notification(DatabaseNotification $notification) {
+    abort_unless($notification->associatedTo(User::find(auth()->user()->id)), 404);
+
+    $notification->markAsRead();
+
+    return redirect(route('notifications'));
+  }
+
+  public function notificationsDelete() {
+    User::find(auth()->user()->id)->notifications()->delete();
+
+    return back();
   }
 }

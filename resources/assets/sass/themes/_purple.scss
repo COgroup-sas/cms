@@ -1,0 +1,100 @@
+body {
+	&.purple {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="purple"]{
+		     @include preloader-color(rgba(124, 23, 127, 1), rgba(108, 0, 112, 1), rgba(69, 0, 71, 1), rgba(30, 0, 31, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(124,23,127) !important;
+			background-color: rgb(124,23,127) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(124,23,127,1) !important;
+			&:hover {
+				color: rgba(124,23,127,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(124,23,127,1);
+			border-color: rgba(124,23,127,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(124,23,127,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="purple"] {
+				& {
+					a {
+						color: $white !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(298,70%,30%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(124,23,147);
+  		& a {
+  			color: $white !important;
+  			&:hover {
+  				color: rgba(255,255,255,.8) !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-purple !important;
+		}
+	}
+}
+
+[data-background-color="purple"]{
+    background-color: rgba(124, 23, 127) !important;
+}
+
+/* Linear background color with opacity*/
+[filter-background-linear-color="purple"]{
+    @include linear-gradient(rgba($black,.20), rgba(124, 23, 127, 0.6));
+}
+
+[filter-background-color="purple"]{
+    background-color: rgba(124, 23, 127, 0.6);
+}
+
+.text-color {
+	&[data-color="purple"]{
+		color: $cog-purple !important;
+  }
+}
+
+.md-form {
+  &[data-color="purple"] > .tagsinput .tag {
+		background: $cog-purple !important;
+		& .tag-remove {
+			color: $cog-light-purple !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $cog-light-purple !important;
+		}
+  }
+}

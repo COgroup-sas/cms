@@ -1,0 +1,99 @@
+body {
+	&.green {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="green"]{
+		     @include preloader-color(rgba(113, 168, 60, 1), rgba(98, 146, 53, 1), rgba(75, 112, 41, 1), rgba(58, 86, 31, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(113,168,60) !important;
+			background-color: rgb(113,168,60) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(113,168,60,1) !important;
+			&:hover {
+				color: rgba(113,168,60,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(113,168,60,1);
+			border-color: rgba(113,168,60,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(113,168,60,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="green"] {
+				& {
+					a {
+						color: $white !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(91,47%,45%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(113,188,60);
+  		& a {
+  			color: $white !important;
+  			&:hover {
+  				color: rgba(255,255,255,.8) !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-green !important;
+		}
+	}
+}
+
+[data-background-color="green"]{
+    background-color: rgba(113, 168, 60) !important;
+}
+
+[filter-background-linear-color="green"]{
+    @include linear-gradient(rgba($black,.20), rgba(113, 168, 60, 0.6));
+}
+
+[filter-background-color="green"]{
+    background-color: rgba(113, 168, 60, 0.6);
+}
+
+.text-color {
+	&[data-color="green"]{
+		color: $cog-green !important;
+  }
+}
+
+.md-form {
+  &[data-color="green"] > .tagsinput .tag {
+		background: $cog-green !important;
+		& .tag-remove {
+			color: $cog-light-green !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $cog-light-green !important;
+		}
+  }
+}

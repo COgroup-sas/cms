@@ -1,0 +1,99 @@
+body {
+	&.lightblue {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="lightblue"]{
+		     @include preloader-color(rgba(118, 170, 219, 1), rgba(81, 148, 210, 1), rgba(50, 125, 195, 1), rgba(35, 86, 134, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(118,170,219) !important;
+			background-color: rgb(118,170,219) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(119,171,220,1) !important;
+			&:hover {
+				color: rgba(119,171,220,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(119,171,220,1);
+			border-color: rgba(119,171,220,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(119,171,220,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="lightblue"] {
+				& {
+					a {
+						color: $white !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(209,58%,66%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(119,191,220);
+  		& a {
+  			color: $white !important;
+  			&:hover {
+  				color: rgba(255,255,255,.8) !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-light-blue !important;
+		}
+	}
+}
+
+[data-background-color="lightblue"]{
+    background-color: rgba(119, 171, 220) !important;
+}
+
+[filter-background-linear-color="lightblue"]{
+    @include linear-gradient(rgba($black,.20), rgba(119, 171, 220, 0.6));
+}
+
+[filter-background-color="lightblue"]{
+    background-color: rgba(119, 171, 220, 0.6);
+}
+
+.text-color {
+	&[data-color="lightblue"]{
+		color: $cog-light-blue !important;
+  }
+}
+
+.md-form {
+  &[data-color="lightblue"] > .tagsinput .tag {
+		background: $cog-light-blue !important;
+		& .tag-remove {
+			color: $cog-blue !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $cog-blue !important;
+		}
+  }
+}

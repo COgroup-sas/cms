@@ -117,7 +117,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <button class="btn btn-primary btn-round" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fa fa-cloud"></i></button>
+                    <button class="btn btn-theme btn-round" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fa fa-cloud"></i></button>
                   </div>
                 </div>
               </div>
@@ -126,27 +126,37 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card card-user">
-          <div class="image">
-            <img src="{{ asset('vendor/cogroup/cms/images/bg.jpg') }}" style="width: 100%; height: 100%">
+        <!-- Card -->
+        <div class="card testimonial-card">
+
+          <!-- Background color -->
+          <div class="card-up bgusertop lighten-1">
+            <img src="{{ config('app.url')."/".config('cogroupcms.bguri') }}" class="img-fluid">
           </div>
-          <div class="card-body">
-            <div class="author">
-              <a href="#">
-                <img class="avatar border-gray" src="{{ (is_null($profile->image_id) and is_null($profile->avatar)) ? 
+
+          <!-- Avatar -->
+          <div class="avatar mx-auto white">
+            <img src="{{ (is_null($profile->image_id) and is_null($profile->avatar)) ? 
                 asset('vendor/cogroup/cms/images/default-avatar.png') : 
                 ((!is_null($profile->image_id)) ?
                   route('getFile', [$profile->image_id]) :
                   $profile->avatar)
-                }}" alt="{{ $profile->name }}">
-                <h5 class="title">{{ $profile->name }}</h5>
-              </a>
-              <p class="description">
-                {{ $profile->roles->rolname }}
-              </p>
-            </div>
+                }}" class="rounded-circle"
+              alt="{{ $profile->name }}">
           </div>
+
+          <!-- Content -->
+          <div class="card-body">
+            <!-- Name -->
+            <h4 class="card-title">{{ $profile->name }}</h4>
+            <hr>
+            <!-- Quotation -->
+            <p><i class="fas fa-quote-left"></i> {{ $profile->roles->rolname }} <i class="fas fa-quote-right"></i>
+            </p>
+          </div>
+
         </div>
+        <!-- Card -->
       </div>
     </div>
   </div>

@@ -13,18 +13,18 @@
               </h2>
               <div class="float-right">
                 @if(cms_roles_check($user, 'users', 'create') == true)
-                  <a id="add" href="{{ route('cogroupcms.usersadd') }}" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.add') }}">
+                  <a id="add" href="{{ route('cogroupcms.usersadd') }}" class="btn btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.add') }}">
                     <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
                 @if(cms_roles_check($user, 'users', 'update') == true)
-                  <a id="edit" href="{{ route('cogroupcms.usersedit') }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.edit') }}">
+                  <a id="edit" href="{{ route('cogroupcms.usersedit') }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.edit') }}">
                     <i class="far fa-edit"></i>
                   </a>
                 @endif
                 @foreach(cms_get_modules('Usuarios', 'N') as $mod)
                   @if(cms_roles_check($user, $mod->modulename, 'view') == true)
-                  <a id="{{ $mod->modulename }}" href="{{ $mod->url }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.'.$mod->modulename) }}">
+                  <a id="{{ $mod->modulename }}" href="{{ $mod->url }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('modules.'.$mod->modulename) }}">
                     <i class="{{ $mod->icon }}"></i>
                   </a>
                   @endif
@@ -38,13 +38,10 @@
                   <thead>
                     <tr>
                       <th>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input allcheck">
-                            <span class="form-check-sign"></span>
-                          </label>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input allcheck" id="allchecktop">
+                          <label class="custom-control-label" for="allchecktop"></label>
                         </div>
-                        <label for="select_all"></label>
                       </th>
                       <th>{{ trans('moduleusers.name') }}</th>
                       <th>{{ trans('cms.email') }}</th>
@@ -57,13 +54,10 @@
                   <tfoot>
                     <tr>
                       <th>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input allcheck">
-                            <span class="form-check-sign"></span>
-                          </label>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input allcheck" id="allcheckbottom">
+                          <label class="custom-control-label" for="allcheckbottom"></label>
                         </div>
-                        <label for="select_all2"></label>
                       </th>
                       <th>{{ trans('moduleusers.name') }}</th>
                       <th>{{ trans('cms.email') }}</th>
@@ -78,11 +72,9 @@
                     <tr>
                       <th>
                         @if(cms_roles_check($user, 'users', 'update') == true)
-                        <div class="form-check">
-                          <label class="form-check-label" for="chk_{{ $usr->id }}">
-                            <input type="checkbox" class="form-check-input check" id="chk_{{ $usr->id }}" name="id" value="{{ $usr->id }}">
-                            <span class="form-check-sign"></span>
-                          </label>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input check" id="chk_{{ $usr->id }}" name="id" value="{{ $usr->id }}">
+                          <label class="custom-control-label" for="chk_{{ $usr->id }}"></label>
                         </div>
                         @endif
                       </th>

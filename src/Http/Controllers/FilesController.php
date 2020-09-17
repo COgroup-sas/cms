@@ -23,8 +23,8 @@ class FilesController extends Controller {
   }
 
   private function showImage($path, $originalname) {
-    $mime = Storage::disk(config('filesystems.cloud'))->mimeType($path);
-    $data = Storage::disk(config('filesystems.cloud'))->get($path);
+    $mime = Storage::disk(config(config('cogroupcms.filesystem')))->mimeType($path);
+    $data = Storage::disk(config(config('cogroupcms.filesystem')))->get($path);
 
     return response($data, 200)
             ->header('Content-Type', $mime)
@@ -40,9 +40,9 @@ class FilesController extends Controller {
 
     if($mime == "image") :
       $path = "thumbs/".$height."_".$width."_".$file->diskname;
-      $data = Storage::disk(config('filesystems.cloud'))->get($file->diskname);
+      $data = Storage::disk(config(config('cogroupcms.filesystem')))->get($file->diskname);
 
-      if(!Storage::disk(config('filesystems.cloud'))->exists("thumbs/" . $height."_".$width."_".$file->diskname)) :
+      if(!Storage::disk(config(config('cogroupcms.filesystem')))->exists("thumbs/" . $height."_".$width."_".$file->diskname)) :
         if($width > $height || $width == $height) :
           $img = \ImageManager::make($data)->widen($width, function ($constraint) {
             $constraint->upsize();
@@ -52,7 +52,7 @@ class FilesController extends Controller {
             $constraint->upsize();
           })->stream($ext, 60);
         endif;
-        Storage::disk(config('filesystems.cloud'))->put($path, $img);
+        Storage::disk(config(config('cogroupcms.filesystem')))->put($path, $img);
       endif;
       return $this->showImage($path, $file->originalname);
     else :
@@ -67,11 +67,11 @@ class FilesController extends Controller {
         // checking file is valid.
         if($file->isValid()) :
           $mime = substr($file->getClientMimeType(), 0, 5);
-          $path = Storage::disk(config('filesystems.cloud'))->exists($file->hashName());
+          $path = Storage::disk(config(config('cogroupcms.filesystem')))->exists($file->hashName());
           if($path == true) :
             $id[] = array('status' => false, 'msg' => 'files.fileexists', "name" => $file->getClientOriginalName());
           endif;
-          $path = $file->store('', config('filesystems.cloud'));
+          $path = $file->store('', config(config('cogroupcms.filesystem')));
           $path = explode("/", $path);
           $path = $path[count($path) - 1];
           $id = $request->input($name.'_id');
@@ -100,11 +100,11 @@ class FilesController extends Controller {
       // checking file is valid.
       if($request->file($name)->isValid()) :
         $mime = substr($request->{$name}->getClientMimeType(), 0, 5);
-        $path = Storage::disk(config('filesystems.cloud'))->exists($request->{$name}->hashName());
+        $path = Storage::disk(config(config('cogroupcms.filesystem')))->exists($request->{$name}->hashName());
         if($path == true) :
           return array('status' => false, 'msg' => 'files.fileexists');
         endif;
-        $path = $request->{$name}->store('', config('filesystems.cloud'));
+        $path = $request->{$name}->store('', config(config('cogroupcms.filesystem')));
         $path = explode("/", $path);
         $path = $path[count($path) - 1];
         $id = $request->input($name.'_id');
@@ -113,7 +113,7 @@ class FilesController extends Controller {
         $filemodel->diskname = $path;
         $filemodel->originalname = $request->{$name}->getClientOriginalName();
         $filemodel->extension = $request->{$name}->extension();
-        $filemodel->size = $request->{$name}->getClientSize();
+        $filemodel->size = Storage::disk(config(config('cogroupcms.filesystem')))->size($request->{$name}->hashName());
         $filemodel->mimetype = $request->{$name}->getClientMimeType();
         $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : cms_settings()->sitename;
         if(stripos($request->{$name}->getClientMimeType(), 'image') !== false) :
@@ -132,7 +132,7 @@ class FilesController extends Controller {
   }
 
   private static function getAttribute($file, $attribute) {
-    $manager = \ImageManager::make(Storage::disk(config('filesystems.cloud'))->get($file->diskname));
+    $manager = \ImageManager::make(Storage::disk(config(config('cogroupcms.filesystem')))->get($file->diskname));
     return $manager->{$attribute}();
   }
 
@@ -162,6 +162,6 @@ class FilesController extends Controller {
   public static function delete($id) {
     $file = Files::find($id);
     Files::where('id', $id)->delete();
-    Storage::disk(config('filesystems.cloud'))->delete($file->diskname);
+    Storage::disk(config(config('cogroupcms.filesystem')))->delete($file->diskname);
   }
 }

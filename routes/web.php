@@ -8,28 +8,44 @@ use Cogroup\Cms\Models\User;
 Route::group(['middleware' => ['web'],
               'namespace' => 'Cogroup\Cms\Http\Controllers'
   ], function () {
-  Auth::routes();
 
+  /*Auth Routes*/
   Route::prefix('login')->group(function () {
+    Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('/', 'Auth\LoginController@login');
     Route::get('{service}', 'Auth\LoginController@redirectToProvider');
     Route::get('{service}/callback', 'Auth\LoginController@handleProviderCallback');
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+  });
+  Route::prefix('password')->group(function () {
+    Route::get('confirm', 'Auth\ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+    Route::post('confirm', 'Auth\ConfirmPasswordController@confirm');
+    Route::post('email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
+    Route::prefix('reset')->group(function() {
+      Route::get('/', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+      Route::post('/', 'Auth\ForgotPasswordController@reset')->name('password.update');
+      Route::get('{token}', 'Auth\ForgotPasswordController@showResetForm')->name('password.reset');
+    });
+  });
+  Route::prefix('register')->group(function() {
+    Route::get('/', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('/', 'Auth\RegisterController@register');
   });
 
-  Route::group(['prefix' => 'files'], function () {
+  Route::prefix('files')->group(function () {
     Route::get('thumb/{id}/{height?}/{width?}', 'FilesController@processFileThumb')->name('thumb');
     Route::get('{id}', 'FilesController@processFile')->name('getFile');
   });
 
-  Route::group(['prefix' => config('cogroupcms.uri', 'cms'),
-                'middleware' => ['auth']
-    ], function () {
+  Route::prefix(config('cogroupcms.uri', 'cms'))->middleware(['auth'])->group(function () {
       Route::get('/','DashboardController@index')->name('cogroupcms.home');
 
-      Route::group(['prefix' => 'settings', 'middleware' => ['admin:settings|view']], function () {
+      Route::prefix('settings')->middleware(['admin:settings|view'])->group(function () {
         Route::get('/', ['uses' => 'DashboardController@settings'])->name('cogroupcms.settings');
         Route::post('/', ['middleware' => ['admin:settings|update'], 'uses' => 'DashboardController@settingstore'])->name('cogroupcms.settingsave');
       });
-      Route::group(['prefix' => 'roles', 'middleware' => ['admin:roles|view']], function () {
+      Route::prefix('roles')->middleware(['admin:roles|view'])->group(function () {
         Route::get('/', ['uses' => 'RolesController@index'])->name('cogroupcms.roleshome');
         Route::get('add', ['middleware' => ['admin:roles|create'], 'uses' => 'RolesController@add'])->name('cogroupcms.roladd');
         Route::post('add', ['middleware' => ['admin:roles|create:update'], 'uses' => 'RolesController@addpost'])->name('cogroupcms.rolpost');
@@ -37,7 +53,7 @@ Route::group(['middleware' => ['web'],
         Route::post('setpermission', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@setPermission'])->name('cogroupcms.rolsetpermission');
         Route::match(['get', 'post'], 'edit', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@edit'])->name('cogroupcms.roledit');
       });
-      Route::group(['prefix' => 'users', 'middleware' => ['admin:users|view']], function () {
+      Route::prefix('users')->middleware(['admin:users|view'])->group(function () {
         Route::get('/', ['uses' => 'UsersController@index'])->name('cogroupcms.usershome');
         Route::get('add', ['middleware' => ['admin:users|create'], 'uses' => 'UsersController@add'])->name('cogroupcms.usersadd');
         Route::post('add',  ['middleware' => ['admin:users|create,update'], 'uses' => 'UsersController@addpost'])->name('cogroupcms.userspost');
@@ -48,32 +64,11 @@ Route::group(['middleware' => ['web'],
       Route::get('profile',  'UsersController@profile')->name('cogroupcms.usersprofile');
       Route::post('profile',  'UsersController@profilesave')->name('cogroupcms.usersprofilesave');
 
-      Route::get('notifications', function () {
-        $notifications = User::find(auth()->user()->id)->notifications;
-        $breadcrumb = [trans('home'), trans('notifications.title')];
-
-        return view('cogroupcms::modules.notifications.notifications')->with(
-          [
-            'user' => auth()->user(),
-            'breadcrumb' => $breadcrumb,
-            'title' => trans('notifications.title'),
-            'notifications' => $notifications
-          ]
-        );
-      })->name('notifications');
-
-      Route::get('notifications/read-all', function () {
-        User::find(auth()->user()->id)->unreadNotifications->markAsRead();
-
-        return back();
-      })->name('notifications.readall');
-
-      Route::get('notifications/{notification}', function (DatabaseNotification $notification) {
-        abort_unless($notification->associatedTo(User::find(auth()->user()->id)), 404);
-
-        $notification->markAsRead();
-
-        return redirect(route('notifications'));
-      })->name('notifications.notification');
+      Route::prefix('notifications')->group(function() {
+        Route::get('/', 'DashboardController@notifications')->name('notifications.home');
+        Route::get('read-all', 'DashboardController@notificationsReadAll')->name('notifications.readall');
+        Route::get('delete', 'DashboardController@notificationsDelete')->name('notifications.delete');
+        Route::get('{notification}', 'DashboardController@notification')->name('notifications.notification');
+      });
   });
 });

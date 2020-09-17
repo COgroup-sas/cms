@@ -1,0 +1,181 @@
+.vertical-accordion-menu,
+.vertical-accordion-menu * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    outline: 0;
+}
+.vertical-accordion-menu {
+    min-width: 100%;
+    float: left;
+    position: relative;
+}
+.vertical-accordion-menu .vertical-accordion-menu-header {
+    height: 66px;
+    line-height: 66px;
+}
+.vertical-accordion-menu .vertical-accordion-menu-footer,
+.vertical-accordion-menu .vertical-accordion-menu-header {
+    width: 100%;
+    float: left;
+    & a {
+        padding: 8px;
+    }
+}
+.vertical-accordion-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.vertical-accordion-menu ul li {
+    width: 100%;
+    display: block;
+    float: left;
+    position: relative;
+}
+.vertical-accordion-menu ul li a {
+    width: 100%;
+    padding: 14px 22px;
+    float: left;
+    text-decoration: none;
+    font-size: 13px;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    -o-transition: color 0.2s linear, background 0.2s linear;
+    -moz-transition: color 0.2s linear, background 0.2s linear;
+    -webkit-transition: color 0.2s linear, background 0.2s linear;
+    transition: color 0.2s linear, background 0.2s linear;
+}
+.vertical-accordion-menu .scrollbar-menu {
+    height: calc(100vh - 100px);
+}
+.vertical-accordion-menu > ul > li.active > a,
+.vertical-accordion-menu > ul > li:hover > a {
+    background: hsla(0,0%,100%,.2);
+}
+.vertical-accordion-menu > ul > li > a {
+    border-bottom: solid 1px hsla(0,0%,100%,.2);
+}
+.vertical-accordion-menu ul li a i {
+    width: 34px;
+    float: left;
+    line-height: 18px;
+    font-size: 16px;
+    text-align: left;
+}
+.vertical-accordion-menu .submenu-indicator {
+    float: right;
+    right: 22px;
+    position: absolute;
+    line-height: 19px;
+    font-size: 20px;
+    -o-transition: transform 0.3s linear;
+    -moz-transition: transform 0.3s linear;
+    -webkit-transition: transform 0.3s linear;
+    -ms-transition: transform 0.3s linear;
+}
+.vertical-accordion-menu ul ul.submenu .submenu-indicator {
+    line-height: 16px;
+}
+.vertical-accordion-menu .submenu-indicator-minus > .submenu-indicator {
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.vertical-accordion-menu ul ul.submenu,
+.vertical-accordion-menu ul ul.submenu li ul.submenu {
+    width: 100%;
+    display: none;
+    position: static;
+}
+.vertical-accordion-menu ul ul.submenu li {
+    clear: both;
+    width: 100%;
+}
+.vertical-accordion-menu ul ul.submenu li a {
+    width: 100%;
+    float: left;
+    font-size: 11px;
+    border-top: none;
+    position: relative;
+    border-left: solid 6px transparent;
+    -o-transition: border 0.2s linear;
+    -moz-transition: border 0.2s linear;
+    -webkit-transition: border 0.2s linear;
+    transition: border 0.2s linear;
+}
+.vertical-accordion-menu ul ul.submenu li:hover > a {
+    border-left-color: hsla(0,0%,100%,.6);
+    background-color: hsla(0,0%,100%,.2);
+}
+.vertical-accordion-menu ul ul.submenu > li > a {
+    padding-left: 30px;
+}
+.vertical-accordion-menu ul ul.submenu > li > ul.submenu > li > a {
+    padding-left: 45px;
+}
+.vertical-accordion-menu ul ul.submenu > li > ul.submenu > li > ul.submenu > li > a {
+    padding-left: 60px;
+}
+.vertical-accordion-menu ul li .vertical-accordion-menu-label,
+.vertical-accordion-menu ul ul.submenu li .vertical-accordion-menu-label {
+    min-width: 20px;
+    padding: 1px 2px 1px 1px;
+    position: absolute;
+    right: 18px;
+    top: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #555;
+    text-align: center;
+    line-height: 18px;
+    background: #f0f0f0;
+    border-radius: 100%;
+}
+.vertical-accordion-menu ul ul.submenu li .vertical-accordion-menu-label {
+    top: 12px;
+}
+.ink {
+    display: block;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+}
+.animate-ink {
+    -webkit-animation: ripple 0.5s linear;
+    -moz-animation: ripple 0.5s linear;
+    -ms-animation: ripple 0.5s linear;
+    -o-animation: ripple 0.5s linear;
+    animation: ripple 0.5s linear;
+}
+@-webkit-keyframes ripple {
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+    }
+}
+@-moz-keyframes ripple {
+    100% {
+        opacity: 0;
+        -moz-transform: scale(2.5);
+    }
+}
+@-o-keyframes ripple {
+    100% {
+        opacity: 0;
+        -o-transform: scale(2.5);
+    }
+}
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}

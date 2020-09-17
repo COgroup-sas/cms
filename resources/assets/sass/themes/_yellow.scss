@@ -1,0 +1,99 @@
+body {
+	&.yellow {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="yellow"]{
+		     @include preloader-color(rgba(203, 200, 61, 1), rgba(173, 171, 46, 1), rgba(153, 151, 41, 1), rgba(125, 123, 33, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(203,200,61) !important;
+			background-color: rgb(203,200,61) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(203,200,61,1) !important;
+			&:hover {
+				color: rgba(203,200,61,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(203,200,61,1);
+			border-color: rgba(203,200,61,1);
+			color: $cog-grey;
+			&:hover {
+				background-color: rgba(203,200,61,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="yellow"] {
+				& {
+					a {
+						color: $cog-grey !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(59,58%,52%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(203,210,61);
+  		& a {
+  			color: $cog-grey !important;
+  			&:hover {
+  				color: $cog-light-grey !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-yellow !important;
+		}
+	}
+}
+
+[data-background-color="yellow"]{
+    background-color: rgba(203, 200, 61) !important;
+}
+
+[filter-background-linear-color="yellow"]{
+    @include linear-gradient(rgba($black,.20), rgba(203, 200, 61, 0.6));
+}
+
+[filter-background-color="yellow"]{
+    background-color: rgba(203, 200, 61, 0.6);
+}
+
+.text-color {
+	&[data-color="yellow"]{
+		color: $cog-yellow !important;
+  }
+}
+
+.md-form {
+  &[data-color="yellow"] > .tagsinput .tag {
+		background: $cog-yellow !important;
+		& .tag-remove {
+			color: $white !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $white !important;
+		}
+  }
+}

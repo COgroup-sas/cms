@@ -1,0 +1,99 @@
+body {
+	&.lightpurple {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="lightpurple"]{
+		     @include preloader-color(rgba(175, 0, 83, 1), rgba(133, 0, 62, 1), rgba(97, 0, 45, 1), rgba(56, 0, 26, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(175,0,83) !important;
+			background-color: rgb(175,0,83) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(175,0,83,1) !important;
+			&:hover {
+				color: rgba(175,0,83,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(175,0,83,1);
+			border-color: rgba(175,0,83,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(175,0,83,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="lightpurple"] {
+				& {
+					a {
+						color: $white !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(332,100%,35%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(185,0,83);
+  		& a {
+  			color: $white !important;
+  			&:hover {
+  				color: rgba(255,255,255,.8) !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-light-purple !important;
+		}
+	}
+}
+
+[data-background-color="lightpurple"]{
+    background-color: rgba(175, 0, 83) !important;
+}
+
+[filter-background-linear-color="lightpurple"]{
+    @include linear-gradient(rgba($black,.20), rgba(175, 0, 83, 0.6));
+}
+
+[filter-background-color="lightpurple"]{
+    background-color: rgba(175, 0, 83, 0.6);
+}
+
+.text-color {
+	&[data-color="lightpurple"]{
+		color: $cog-light-purple !important;
+  }
+}
+
+.md-form {
+  &[data-color="lightpurple"] > .tagsinput .tag {
+		background: $cog-light-purple !important;
+		& .tag-remove {
+			color: $cog-purple !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $cog-purple !important;
+		}
+  }
+}

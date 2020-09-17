@@ -3,6 +3,7 @@
 namespace Cogroup\Cms\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Cogroup\Cms\Models\Roles\Roles;
@@ -30,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'cms';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -50,7 +51,17 @@ class LoginController extends Controller
      */
     public function redirectToProvider($service)
     {
-        return Socialite::driver($service)->redirect();
+        switch($service) :
+            case 'google'   :
+            case 'facebook' :
+            case 'twitter'  :
+            case 'linkedin' :
+                return Socialite::driver($service)->redirect();
+                break;
+            default         :
+                return abort(404);
+            break;
+        endswitch;
     }
 
     /**
@@ -60,22 +71,79 @@ class LoginController extends Controller
      */
     public function handleProviderCallback($service)
     {
-        $social_user = Socialite::driver($service)->user();
+        try {
+            if($service == 'facebook') :
+                $social_user = Socialite::driver($service)->fields(['first_name', 'last_name', 'name', 'email'])->user();
+            else :
+                $social_user = Socialite::driver($service)->user();
+            endif;
 
-        // Comprobamos si el usuario ya existe
-        if ($user = User::where('email', $social_user->email)->first()) { 
-            return $this->authAndRedirect($user); // Login y redirección
-        } else {  
-            // En caso de que no exista creamos un nuevo usuario con sus datos.
-            $user = User::create([
-                'name' => $social_user->user['given_name'],
-                'lastname' => $social_user->user['family_name'],
-                'email' => $social_user->email,
-                'roles_id' => cms_settings()->defaultrol,
-                'avatar' => $social_user->avatar
-            ]);
- 
-            return $this->authAndRedirect($user); // Login y redirección
+            switch($service) :
+                case 'google' :
+                    $name = $social_user->user['given_name'];
+                    $lastname = $social_user->user['family_name'];
+                    $mail = $social_user->getEmail();
+                    break;
+                case 'facebook' :
+                    $name = $social_user->user['first_name'];
+                    $lastname = $social_user->user['last_name'];
+                    $mail = $social_user->getEmail();
+                    break;
+                case 'twitter' :
+                case 'linkedin':
+                    $name = explode(" ", $social_user->name);
+                    switch(count($name)) :
+                    case 1 :
+                        $name = $name[0];
+                        $lastname = '';
+                        break;
+                    case 2 :
+                        $name = $name[0];
+                        $lastname = $name[1];
+                        break;
+                    case 3 :
+                        $name = $name[0];
+                        $lastname = implode(" ", [$name[1], $name[2]]);
+                        break;
+                    case 4 :
+                        $name = implode(" ", [$name[0], $name[1]]);
+                        $lastname = implode(" ", [$name[2], $name[3]]);
+                        break;
+                    default :
+                        $name = implode(" ", [$name[0], $name[1], $name[2]]);
+                        $lastname = implode(" ", [$name[3], $name[4]]);
+                        break;
+                    endswitch;
+                        $mail = $social_user->getEmail();
+                        break;
+            endswitch;
+
+            if(is_null($mail) || empty($mail)) :
+                return abort(403);
+            endif;
+
+            if ($user = User::where('email', $mail)->first()) :
+                if($social_user->avatar != $user->avatar) :
+                    $user->avatar = $social_user->avatar;
+                    $user->social = 'Y';
+                    $user->save();
+                endif;
+                return $this->authAndRedirect($user); // Login y redirección
+            else :
+                // En caso de que no exista creamos un nuevo usuario con sus datos.
+                $user = User::create([
+                    'name' => $name,
+                    'lastname' => $lastname,
+                    'email' => $mail,
+                    'avatar' => $social_user->avatar,
+                    'social' => 'Y'
+                ]);
+
+                return $this->authAndRedirect($user); // Login y redirección
+            endif;
+        } catch(Exception $e) {
+            report($e);
+            return abort(404);
         }
     }
 

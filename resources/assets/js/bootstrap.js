@@ -8,20 +8,43 @@ window.Popper = require('popper.js').default;
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
+  window.Popper = require('popper.js').default;
+  window.$ = window.jQuery = require('jquery');
 
-    window.Popper = require('popper.js').default; //for popper
-    require('bootstrap');
-    require('./plugins/perfect-scrollbar.jquery.min.js');
-    require('./plugins/chartjs.min.js');
-    require('./plugins/bootstrap-notify.js');
-    require('./plugins/bootstrap-switch.js');
-    require('./plugins/nouislider.min.js');
-    require('./plugins/bootstrap-datepicker.js');
-    require('./plugins/jquery.sharrre.js');
-    require('./plugins/jquery-inputmask/jquery.inputmask.bundle.js');
-    require('./now-ui-kit.js');
-    require('./now-ui-dashboard.js');
+  require('bootstrap');
+  require('moment');
+  window.Chart = require('chart.js');
+  require('select2');
+  require('gijgo');
+  require('./plugins/bootstrap-notify');
+  require('./plugins/jquery.sharrre');
+  require('./plugins/jquery-inputmask/jquery.inputmask.bundle');
+
+  //datatables
+  require( 'jszip' );
+  require( 'pdfmake' );
+  require( 'datatables.net-bs4' );
+  require( 'datatables.net-autofill-bs4' );
+  require( 'datatables.net-buttons-bs4' );
+  require( 'datatables.net-buttons/js/buttons.colVis.js' );
+  require( 'datatables.net-buttons/js/buttons.flash.js' );
+  require( 'datatables.net-buttons/js/buttons.html5.js' );
+  require( 'datatables.net-buttons/js/buttons.print.js' );
+  require( 'datatables.net-colreorder-bs4' );
+  require( 'datatables.net-fixedcolumns-bs4' );
+  require( 'datatables.net-fixedheader-bs4' );
+  require( 'datatables.net-keytable-bs4' );
+  require( 'datatables.net-responsive-bs4' );
+  require( 'datatables.net-rowgroup-bs4' );
+  require( 'datatables.net-rowreorder-bs4' );
+  require( 'datatables.net-scroller-bs4' );
+  require( 'datatables.net-searchpanes-bs4' );
+  require( 'datatables.net-select-bs4' );
+
+  require('./validation');
+  require('./plugins/tagsinput');
+  require('./plugins/verticalmenu');
+  require('./cog');
 } catch (e) {}
 
 /**

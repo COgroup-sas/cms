@@ -1,0 +1,99 @@
+body {
+	&.blue {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="blue"]{
+		     @include preloader-color(rgba(73, 80, 151, 1), rgba(58, 65, 152, 1), rgba(48, 54, 126, 1), rgba(36, 41, 96, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(73, 80, 151) !important;
+			background-color: rgb(73, 80, 151) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(73,80,151,1) !important;
+			&:hover {
+				color: rgba(73,80,151,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(73,80,151,1);
+			border-color: rgba(73,80,151,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(58,65,152,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="blue"] {
+				& {
+					a {
+						color: $white !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(234,35%,44%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(73,80,171);
+  		& a {
+  			color: $white !important;
+  			&:hover {
+  				color: rgba(255,255,255,.8) !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-blue !important;
+		}
+	}
+}
+
+[data-background-color="blue"]{
+    background-color: rgba(73, 80, 151) !important;
+}
+
+[filter-background-linear-color="blue"]{
+    @include linear-gradient(rgba($black,.20), rgba(73, 80, 151, 0.6));
+}
+
+[filter-background-color="blue"]{
+    background-color: rgba(73, 80, 151, 0.6);
+}
+
+.text-color {
+	&[data-color="blue"]{
+		color: $cog-blue !important;
+  }
+}
+
+.md-form {
+  &[data-color="blue"] > .tagsinput .tag {
+		background: $cog-blue !important;
+		& .tag-remove {
+			color: $cog-light-blue !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $cog-light-blue !important;
+		}
+  }
+}

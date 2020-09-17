@@ -3,6 +3,7 @@
 namespace Cogroup\Cms\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -25,7 +26,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -34,6 +35,7 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo = config('cogroupcms.uri');
         $this->middleware('guest');
     }
 }

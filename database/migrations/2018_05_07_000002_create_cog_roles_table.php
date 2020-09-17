@@ -15,6 +15,8 @@ class CreateCogRolesTable extends Migration
   {
     $schema = app('db')->connection()->getSchemaBuilder();
 
+    Schema::disableForeignKeyConstraints();
+
     if (!$schema->hasTable('roles')) {
       Schema::create('roles', function (Blueprint $table) {
         $table->increments('id');

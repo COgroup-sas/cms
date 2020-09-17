@@ -79,13 +79,14 @@ class CmsController extends Controller
                       ->whereIn('inmenu', $inmenu)
                       ->orderBy('order', 'asc')
                       ->orderBy('modulename', 'asc')
-                      ->get();
+                      ->get()
+                      ->toArray();
 
     foreach($modules as $key => $module) :
       $tmp = $modules[$key];
       $modules[$key] = new \stdClass();
       $modules[$key] = $tmp;
-      $modules[$key]->submod = self::getModules($tmp->id, implode(",",$inmenu), $idrol, $menu);
+      $modules[$key]['submod'] = self::getModules($tmp['id'], implode(",",$inmenu), $idrol, $menu);
     endforeach;
 
     return $modules;
@@ -107,31 +108,18 @@ class CmsController extends Controller
 
   public static function printSubmenu($submenu, $route) {
     if(!empty($submenu)) :
-      echo '<ul class="nav">';
+      echo '<ul class="submenu">';
       foreach($submenu as $submodule) :
-        if(cms_roles_check(Auth::user(), $submodule->moduleslug) == true) :
+        if(cms_roles_check(Auth::user(), $submodule['moduleslug']) == true) :
           echo '<li';
-          echo (starts_with($route, $submodule->url)) ? ' class="active"' : '';
+          //echo (starts_with($route, $submodule['url'])) ? ' class="active"' : '';
           echo '>';
-          if(!empty($submodule->submod) and count($submodule->submod) > 0) :
-            echo '<a href="#'.str_slug($submodule->moduleslug).'" data-toggle="collapse" aria-expanded="false" aria-controls="'.str_slug($module->moduleslug).'">';
-          else :
-            echo '<a href="' . url($submodule->url) . '">';
-          endif;
-          //echo ($route != $submodule->url) ? 
-          echo '<i class="sidebar-mini-icon ' . $submodule->icon . '"></i>';
-          // : '';
-          echo '<span class="sidebar-normal">';
-          echo $submodule->modulename;
-          if(isset($submodule->submod) and !empty($submodule->submod) and count($submodule->submod) > 0) :
-            echo ' <b class="caret"></b>';
-          endif;
-          echo '</span>';
+          echo '<a href="' . url(config('cogroupcms.uri')."/".$submodule['url']) . '">';
+          echo '<i class="sidebar-mini-icon ' . $submodule['icon'] . '"></i>';
+          echo $submodule['modulename'];
           echo'</a>' ;
-          if(isset($submodule->submod) and !empty($submodule->submod) and count($submodule->submod) > 0) :
-            echo '<div class="collapse" id="'.str_slug($submodule->moduleslug).'">';
-            self::printSubmenu($submodule->submod, $route);
-            echo '</div>';
+          if(isset($submodule['submod']) and !empty($submodule['submod']) and count($submodule['submod']) > 0) :
+            self::printSubmenu($submodule['submod'], $route);
           endif;
           echo '</li>';
         endif;

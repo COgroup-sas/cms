@@ -14,19 +14,19 @@
               </h2>
               <div class="float-right">
                 @if(cms_roles_check($user, 'roles', 'create') == true)
-                  <a id="add" href="{{ route('cogroupcms.roladd') }}" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.add') }}">
+                  <a id="add" href="{{ route('cogroupcms.roladd') }}" class="btn btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.add') }}">
                     <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
                 @if(cms_roles_check($user, 'roles', 'update') == true)
-                  <a id="edit" href="{{ route('cogroupcms.roledit') }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.edit') }}">
+                  <a id="edit" href="{{ route('cogroupcms.roledit') }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.edit') }}">
                     <i class="far fa-edit"></i>
                   </a>
                 @endif
                 @foreach(cms_get_modules('roles', 'N') as $mod)
-                  @if($user->roles_id == 1 || cms_roles_check($user, $mod->modulename, 'view') == true)
-                  <a id="{{ mb_strtolower($mod->modulename) }}" href="{{ URL::to($mod->url) }}" class="btn btnaction btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="tooltip" data-placement="top" title="{{ trans($mod->modulename) }}">
-                    <i class="{{ $mod->icon }}"></i>
+                  @if($user->roles_id == 1 || cms_roles_check($user, $mod['modulename'], 'view') == true)
+                  <a id="{{ mb_strtolower($mod['modulename']) }}" href="{{ URL::to($mod['url']) }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans($mod['modulename']) }}">
+                    <i class="{{ $mod['icon'] }}"></i>
                   </a>
                   @endif
                 @endforeach
@@ -39,13 +39,10 @@
                   <thead>
                     <tr>
                       <th>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input allcheck">
-                            <span class="form-check-sign"></span>
-                          </label>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input allcheck" id="allchecktop">
+                          <label class="custom-control-label" for="allchecktop"></label>
                         </div>
-                        <label for="select_all"></label>
                       </th>
                       <th>{{ trans('moduleroles.name') }}</th>
                       <th>{{ trans('moduleroles.description') }}</th>
@@ -56,11 +53,9 @@
                   <tfoot>
                     <tr>
                       <th>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input allcheck">
-                            <span class="form-check-sign"></span>
-                          </label>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input allcheck" id="allcheckbottom">
+                          <label class="custom-control-label" for="allcheckbottom"></label>
                         </div>
                       </th>
                       <th>{{ trans('moduleroles.name') }}</th>
@@ -75,11 +70,9 @@
                       <th>
                         @if(cms_roles_check($user, 'roles', 'update') == true || 
                         cms_roles_check($user, 'Permisos', 'update') == true)
-                        <div class="form-check">
-                          <label class="form-check-label" for="chk_{{ $rol->id }}">
-                            <input type="checkbox" class="form-check-input check" id="chk_{{ $rol->id }}" name="id" value="{{ $rol->id }}">
-                            <span class="form-check-sign"></span>
-                          </label>
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input check" id="chk_{{ $rol->id }}" name="id" value="{{ $rol->id }}">
+                          <label class="custom-control-label" for="chk_{{ $rol->id }}"></label>
                         </div>
                         @endif
                       </th>

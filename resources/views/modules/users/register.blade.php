@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <!-- Input -->
       <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-5 pb-4">
           <div class="card">
             <div class="card-header">
               <h2>
@@ -88,16 +88,9 @@
                 <div class="form-group">
                   <div class="form-line">
                     @foreach($roles as $rol)
-                      <div class="form-check form-check-radio">
-                        <label class="form-check-label" for="{{ mb_strtolower($rol->rolname) }}">
-                          <input class="form-check-input" required type="radio" name="roles_id" id="{{ mb_strtolower($rol->rolname) }}" value="{{ $rol->id }}" class=""
-                      @if(old('roles_id') == $rol->id || (isset($useredit) and $useredit->roles_id == $rol->id))
-                        checked="checked" 
-                      @endif
-                      >
-                          <span class="form-check-sign"></span>
-                          {{ $rol->rolname }}
-                        </label>
+                      <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input check" id="chk_{{ $rol->id }}" name="roles_id" value="{{ $rol->id }}"{{ ((isset($useredit) and $rol->id == $useredit->roles_id) || old('roles_id') == $rol->id) ? ' checked' : '' }}>
+                        <label class="custom-control-label" for="chk_{{ $rol->id }}">{{ $rol->rolname }}</label>
                       </div>
                     @endforeach
                     @if ($errors->has('roles_id'))

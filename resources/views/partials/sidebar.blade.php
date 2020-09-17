@@ -1,29 +1,24 @@
-<div class="sidebar" data-color="{{ config('cogroupcms.color_theme') }}">
-  <!--
-    Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
--->
-  <div class="logo">
-    <a href="{{ env('APP_URL') }}{{ config('cogroupcms.uri') }}" class="simple-text logo-normal">
-      <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
-    </a>
-  </div>
-  <div class="sidebar-wrapper">
-    <ul class="nav">
-      <li class="{{ ($route == config('cogroupcms.uri', 'cms') || $route == '/') ? 'active' : '' }}">
-        <a href="{{ route('cogroupcms.home') }}"><i class="fa fa-home"></i> {{ trans('cms.home') }}</a>
-      </li>
+<!-- Sidebar navigation -->
+<div id="mySidenav" class="sidenav">
+  <div id="vertical-accordion-menu" class="vertical-accordion-menu">
+    <div class="vertical-accordion-menu-header waves-light ">
+      <a href="{{ config('cogroupcms.uri') }}">
+        <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images//logocmscontraste.png') : route('getFile', cms_settings()->logo) }}" class="img-fluid flex-center mx-auto">
+      </a>
+    </div>
+    <ul class="scrollbar scrollbar-primary scrollbar-menu">
+      <li class="{{ ( \Request::is('/') ) ? 'active' : '' }}"><a href="{{ config('cogroupcms.uri') }}"><i class="fa fa-home"></i>{{ __('cms.home') }} </a></li>
+
       @foreach($modules as $module)
-      <li class="{{ starts_with($route, $module->url) ? 'active' : '' }}">
-        <a{!! (isset($module->submod) and !empty($module->submod) and count($module->submod) > 0) ? 
-        ' data-toggle="collapse"  aria-expanded="'.(starts_with($route, $module->url) ? 'true' : 'false').'" aria-controls="'.str_slug($module->moduleslug).'"' : '' !!} href="{!! (isset($module->submod) and !empty($module->submod) and count($module->submod) > 0) ? "#".str_slug($module->moduleslug) : url($module->url) !!}"><i class="{{ $module->icon }}"></i> <p>{{ $module->modulename }} {!! (isset($module->submod) and !empty($module->submod) and count($module->submod) > 0) ? '<b class="caret"></b>' : '' !!}</p></a>
-        @if(isset($module->submod) and !empty($module->submod) and count($module->submod) > 0)
-        <div class="collapse{{ starts_with($route, $module->url) ? ' show' : '' }}" id="{{ str_slug($module->moduleslug) }}">
-          {{ cms_print_submenu($module->submod, $route) }}
-        </div>
+      <li class="{{ ( \Request::is($module['url']) ) ? 'active' : '' }}">
+        <a href="{{ url(config('cogroupcms.uri')."/".$module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }}</a>
+        @if(isset($module['submod']) and !empty($module['submod']) and count($module['submod']) > 0)
+        {{ cms_print_submenu($module['submod'], $route) }}
         @endif
       </li>
       @endforeach
     </ul>
-    <div class="text-center fs-0-8 version">{{ cms_version() }}</div>
+    <div class="vertical-accordion-menu-footer fixed-bottom fs-0-8 text-center p-1">{{ cms_version() }}</div>
   </div>
 </div>
+<!--/. Sidebar navigation -->

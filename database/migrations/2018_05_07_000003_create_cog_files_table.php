@@ -15,6 +15,8 @@ class CreateCogFilesTable extends Migration
     {
         $schema = app('db')->connection('mysql')->getSchemaBuilder();
 
+        Schema::disableForeignKeyConstraints();
+
         if (!$schema->hasTable('files')) :
             Schema::create('files', function (Blueprint $table) {
                 $table->increments('id');

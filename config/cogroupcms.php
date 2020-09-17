@@ -73,4 +73,15 @@ return [
 
     'via' => ['mail', 'database'],
 
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup Filesystem Default save
+    |--------------------------------------------------------------------------
+    |
+    | This variable set filesystem is save
+    |
+    */
+
+    'filesystem' => env('COGROUPCMS__FILESYSTEM', 'filesystems.default'),
+
 ];

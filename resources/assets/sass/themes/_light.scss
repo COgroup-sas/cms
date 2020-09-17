@@ -1,0 +1,99 @@
+body {
+	&.light {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="light"]{
+		     @include preloader-color(rgba(154, 154, 154, 1), rgba(115, 115, 115, 1), rgba(82, 82, 82, 1), rgba(43, 43, 43, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(154,154,154) !important;
+			background-color: rgb(154,154,154) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $white;
+		}
+
+		a:not(.btn) {
+			color: rgba(154,154,154,1) !important;
+			&:hover {
+				color: rgba(154,154,154,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(154,154,154,1);
+			border-color: rgba(154,154,154,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(154,154,154,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="light"] {
+				& {
+					a {
+						color: $white !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(0,0%,60%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(174,174,174);
+  		& a {
+  			color: $white !important;
+  			&:hover {
+  				color: rgba(255,255,255,.8) !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-light-grey !important;
+		}
+	}
+}
+
+[data-background-color="light"]{
+    background-color: rgba(154, 154, 154) !important;
+}
+
+[filter-background-linear-color="light"]{
+    @include linear-gradient(rgba($black,.20), rgba(154, 154, 154, 0.6));
+}
+
+[filter-background-color="light"]{
+    background-color: rgba(154, 154, 154, 0.6);
+}
+
+.text-color {
+	&[data-color="light"]{
+    color: $cog-light-grey !important;
+  }
+}
+
+.md-form {
+  &[data-color="light"] > .tagsinput .tag {
+    background: $cog-light-grey !important;
+		& .tag-remove {
+			color: $cog-grey !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $cog-grey !important;
+		}
+  }
+}

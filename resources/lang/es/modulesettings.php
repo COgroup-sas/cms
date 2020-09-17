@@ -33,6 +33,7 @@ return [
   'image.title' => 'Imágenes',
   'image.favicon' => 'Favicon',
   'image.logo' => 'Logotipo',
+  'image.logocontraste' => 'Logotipo en negativo',
   'social.title' => 'Acceso a través de redes sociales',
   'social.access' => 'Acceso con redes sociales',
   'social.gmail' => 'GSuite',

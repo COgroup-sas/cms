@@ -23,5 +23,6 @@ return [
     'read' => 'Leídas',
     'all' => 'Todas',
     'markread' => "Marcar todas como leídas",
-    'thanks' => 'Atentamente,'
+    'thanks' => 'Atentamente',
+    'delete' => 'Borrar todas las notificaciones'
 ];

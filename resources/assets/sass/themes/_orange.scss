@@ -1,0 +1,99 @@
+body {
+	&.orange {
+		background-color: $cog-light-grey-2 !important;
+		.preloader {
+			& .loader {
+				&[data-color="orange"]{
+		     @include preloader-color(rgba(219, 150, 18, 1), rgba(217, 114, 18, 1), rgba(217, 87, 18, 1), rgba(198, 62, 16, 1));
+		    }
+			}
+		}
+
+		.custom-control-input:checked ~ .custom-control-label::before {
+			border-color: rgb(219,150,18) !important;
+			background-color: rgb(219,150,18) !important;
+		}
+
+		.vertical-accordion-menu-footer {
+			color: $cog-grey;
+		}
+
+		a:not(.btn) {
+			color: rgba(219,150,18,1) !important;
+			&:hover {
+				color: rgba(219,150,18,.8) !important;
+			}
+		}
+
+		.btn-theme {
+			background-color: rgba(219,150,18,1);
+			border-color: rgba(219,150,18,1);
+			color: $white;
+			&:hover {
+				background-color: rgba(219,150,18,.8);
+			}
+		}
+
+		.navbar {
+			&[data-background-color="orange"] {
+				& {
+					a {
+						color: $cog-grey !important;
+					}
+				}
+				& .dropdown-menu {
+					& a {
+						color: $cog-grey !important;
+						&:hover {
+							background-color: hsla(39,85%,46%,.2) !important;
+						}
+					}
+				}
+			}
+		}
+
+		.sidenav {
+  		background-color: rgb(239,150,18) !important;
+  		& a {
+  			color: $cog-grey !important;
+  			&:hover {
+  				color: $cog-light-grey !important;
+  			}
+  		}
+		}
+
+		.scrollbar-primary::-webkit-scrollbar-thumb {
+			background-color: $cog-orange !important;
+		}
+	}
+}
+
+[data-background-color="orange"]{
+    background-color: rgba(219, 150, 18) !important;
+}
+
+[filter-background-linear-color="orange"]{
+    @include linear-gradient(rgba($black,.20), rgba(219, 150, 18, 0.6));
+}
+
+[filter-background-color="orange"]{
+    background-color: rgba(219, 150, 18, 0.6);
+}
+
+.text-color {
+	&[data-color="orange"]{
+		color: $cog-orange !important;
+  }
+}
+
+.md-form {
+  &[data-color="orange"] > .tagsinput .tag {
+		background: $cog-orange !important;
+		& .tag-remove {
+			color: $white !important;
+		}
+		& .tag-remove:before, & .tag-remove:after {
+			background: $white !important;
+		}
+  }
+}
