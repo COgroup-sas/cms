@@ -8,8 +8,8 @@
 # Cms
 
 ### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
-### For Laravel < 6, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.9)!
-### For Laravel 7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
+### For Laravel < 6, please use the [1.9 branch](https://github.com/COgroup-sas/cms/tree/1.9)!
+### For Laravel >= 6 and < 8, please use the [2.0 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
 ### Laravel 8 is not support yet
 
 COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel 5**.
@@ -362,12 +362,12 @@ Set 1 to info, 0 to danger
 $request->session()->flash('status', '1');
 ```
 
-Set a position (top, middle, bottom)
+Set a position (top, bottom)
 ```php
 $request->session()->flash('msgfrom', {position});
 ```
 
-Set a align (left, middle, right)
+Set a align (left, center, right)
 ```php
 $request->session()->flash('msgfrom', {align});
 ```
