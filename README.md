@@ -8,11 +8,11 @@
 # Cms
 
 ### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
-### For Laravel < 6, please use the [1.9 branch](https://github.com/COgroup-sas/cms/tree/1.9)!
-### For Laravel >= 6 and < 8, please use the [2.0 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
+### For Laravel <= 6, please use the [1.8 branch](https://github.com/COgroup-sas/cms/tree/1.8)!
+### For Laravel > 6, please use the [2.0 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
 ### Laravel 8 is not support yet
 
-COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel 5**.
+COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel**.
 
 ## Contents
 
@@ -45,7 +45,14 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 
 ## Installation
 
-1) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
+1) Run the command to install laravel/ui and generate scaffolding
+
+```shell
+composer require laravel/ui
+php artisan ui bootstrap --auth
+```
+
+2) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
 "cogroup/cms": "2.0"
@@ -53,13 +60,6 @@ COgroup - CMS package is a flexible way to add basic CMS system with Role-based 
 or run the next command:
 ```json
 composer require cogroup/cms
-```
-
-2) Run the command to install laravel/ui and generate scaffolding
-
-```shell
-composer require laravel/ui
-php artisan ui bootstrap --auth
 ```
 
 3) fixed Auth::routes, to avoid Clouser error
