@@ -23,6 +23,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->defineFontPublishing();
         $this->defineErrorViewsPublishing();
         $this->defineMigrationsPublishing();
+        $this->defineSeedersPublishing();
         $this->registerViewComposer();
         $this->registerValidationRules();
     }
@@ -180,6 +181,20 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
+     * Define the asset publishing migrations.
+     *
+     * @return void
+     */
+    public function defineSeedersPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../database/seeders' => base_path('database/seeders'),
+            ], 'cogroupcms-seeders');
+        }
+    }
+
+    /**
      * Define the viewcomposer configuration.
      *
      * @return void
@@ -227,6 +242,7 @@ class CmsServiceProvider extends ServiceProvider
                 Console\PublicErrorViewsCommand::class,
                 Console\TranslationsCommand::class,
                 Console\MigrationsCommand::class,
+                Console\SeedersCommand::class,
             ]);
         }
     }

@@ -26,6 +26,7 @@
           'csrfToken' => csrf_token(),
       ]) !!};
   </script>
+  @if(!is_null(cms_settings()->analyticscode)){{ cms_settings()->analyticscode }}@endif
 </head>
 <body class="{{ config('cogroupcms.color_theme') }}">
   @include('cogroupcms::partials.preloader')
@@ -41,7 +42,12 @@
 
   @if(Session::has('status'))
   <div id="toast-container" class="cogtoast md-toast-{{ Session::has('msgfrom') ? Session::get('msgfrom') : 'top' }}-{{ Session::has('msgalign') ? Session::get('msgalign') : 'right' }}" aria-live="polite" role="alert" data-autohide="true" data-delay="{{ Session::has('msgtime') ? Session::get('msgtime') : 4000 }}">
-    <div class="md-toast md-toast-{{ (Session::get('status') == 1) ? 'success' : 'error' }}" style="">
+    <div class="md-toast md-toast-@switch(Session::get('status'))
+      @case(0){{ 'error' }}@break
+      @case(1){{ 'success' }}@break
+      @case(2){{ 'info' }}@break
+      @case(3){{ 'warning' }}@break
+    @endswitch" style="">
       <div class="md-toast-message">{{ Session::get('msg') }}</div>
     </div>
   </div>
@@ -51,7 +57,7 @@
   <script>
     var lang = '{{ Session::get('applocale') }}';
     var SITE_URL = "{{ URL::to('/') }}/";
-    var CMS_SITE = "{{ config('cogroupcms.uri', 'cms') }}";
+    var CMS_SITE = "{{ route('cogroupcms.home') }}";
   </script>
   <script src="{{ asset('vendor/cogroup/cms/js/app.js?'.time()) }}"></script>
   <script src="{{ asset('vendor/cogroup/cms/js/mdb.min.js') }}"></script>

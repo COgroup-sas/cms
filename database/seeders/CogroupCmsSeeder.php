@@ -1,6 +1,6 @@
 <?php
 
-namespace Cogroup\Cms\Seeds;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +25,7 @@ class CogroupCmsSeeder extends Seeder
       ],
       [
         'setting'       => 'emailaddress',
-        'defaultvalue'  => 'support@cogroupsas.com'
+        'defaultvalue'  => 'soporte@cogroupsas.com'
       ],
       [
         'setting'       => 'timeformat',
@@ -45,7 +45,7 @@ class CogroupCmsSeeder extends Seeder
       ],
       [
         'setting'       => 'analyticscode',
-        'defaultvalue'  => ''
+        'defaultvalue'  => NULL
       ],
       [
         'setting'       => 'phone',

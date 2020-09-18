@@ -1,7 +1,7 @@
 <p align="center"><img src="https://www.cogroupsas.com/gitimages/cogroup.svg"></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version2.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version201.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/license.svg" alt="License"></a>
 </p>
 
@@ -80,7 +80,7 @@ php artisan migrate
 6)  Run the command below to seed
 
 ```php
-php artisan db:seed --class=Cogroup\\Cms\\Seeds\\CogroupCmsSeeder
+php artisan db:seed --class=CogroupCmsSeeder
 ```
 
 7)  Run the command below to re-publish assets, config, custom error views, font, migrations and translations
@@ -91,6 +91,7 @@ php artisan cogroupcms:config
 php artisan cogroupcms:errorviews
 php artisan cogroupcms:fonts
 php artisan cogroupcms:migrations
+php artisan cogroupcms:seeders
 php artisan cogroupcms:translations
 ```
 
@@ -115,11 +116,11 @@ php artisan cogroupcms:translations
 After you have installed Intervention Image, open your Laravel config file `config/app.php` and add the following lines.
 
 In the `$providers` array add the service providers for this package.
-  
+
 `Intervention\Image\ImageServiceProvider::class`
 
 Add the facade of this package to the $aliases array.
-  
+
 `'ImageManager' => Intervention\Image\Facades\Image::class`
 
 Now the Image Class will be auto-loaded by Laravel.
@@ -351,7 +352,7 @@ For send message use `Notification::send( $user, new NewMessage( $from, $message
 
 This configuration to set a float message from Controller
 
-Set 1 to info, 0 to danger
+Set 0 to error, 1 to success, 2 to info, 3 to warning
 ```php
 $request->session()->flash('status', '1');
 ```

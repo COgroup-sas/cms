@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('cogroupcms::layouts.main')
 
 @section('content')
 <div class="container-fluid d-flex align-items-center justify-content-center h-100">

@@ -122,7 +122,7 @@
   <script>
     var lang = '{{ Session::get('applocale') }}';
     var SITE_URL = "{{ URL::to('/') }}/";
-    var CMS_SITE = "{{ config('cogroupcms.uri', 'cms') }}";
+    var CMS_SITE = "{{ route('cogroupcms.home') }}";
   </script>
   <script src="{{ asset('vendor/cogroup/cms/js/app.js?'.time()) }}"></script>
   <script src="{{ asset('vendor/cogroup/cms/js/mdb.min.js') }}"></script>
