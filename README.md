@@ -9,8 +9,7 @@
 
 ### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
 ### For Laravel <= 6, please use the [1.8 branch](https://github.com/COgroup-sas/cms/tree/1.8)!
-### For Laravel > 6, please use the [2.0 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
-### Laravel 8 is not support yet
+### For Laravel 7, please use the [2.0 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
 
 COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel**.
 
@@ -55,21 +54,16 @@ php artisan ui bootstrap --auth
 2) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "2.0"
+"cogroup/cms": "^2.0"
 ```
 or run the next command:
 ```json
-composer require cogroup/cms
+composer require cogroup/cms "2.*"
 ```
 
 3) fixed Auth::routes, to avoid Clouser error
 
 Remove Auth::routes from web.php file
-Fixed auth:api route from api.php file or comment
-Change default route '/' to 
-```php
-Route::view('/', 'welcome');
-```
 
 4) Run the command below to publish the package config file `config/cogroupcms.php`:
 

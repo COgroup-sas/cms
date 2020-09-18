@@ -11,7 +11,7 @@
 
       @foreach($modules as $module)
       <li class="{{ ( \Request::is($module['url']) ) ? 'active' : '' }}">
-        <a href="{{ url(config('cogroupcms.uri')."/".$module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }}</a>
+        <a href="{{ route($module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }}</a>
         @if(isset($module['submod']) and !empty($module['submod']) and count($module['submod']) > 0)
         {{ cms_print_submenu($module['submod'], $route) }}
         @endif

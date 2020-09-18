@@ -1,7 +1,9 @@
 <!--Double navigation-->
 <header>
   <!-- Sidebar navigation -->
+  @if(count($modules) > 0)
   @include('cogroupcms::partials.sidebar')
+  @endif
   <!--/. Sidebar navigation -->
 
   <!--Navbar-->
@@ -10,10 +12,12 @@
     <div class="container">
 
       <!-- Navbar brand -->
-     <a class="navbar-brand open-nav" href="#">
+      @if(count($modules) > 0)
+      <a class="navbar-brand open-nav" href="#">
         <i class="fas fa-bars"></i>
       </a>
-       
+      @endif
+
       <a class="navbar-brand" href="{{ config('app.url') }}">
         <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('getFile', cms_settings()->logo) }}" class="img-fluid flex-center">
       </a>

@@ -19,7 +19,7 @@ return [
     'permissions' => 'Permissions',
     'name' => 'Name',
     'description' => 'Description',
-    'role' => 'Role',
+    'rol' => 'Role',
     'norols' => 'There are no roles',
     'msgaddok' => 'The role was added successfully!',
     'modalerrorpermissions' => 'please select a role to see the associated permissions',

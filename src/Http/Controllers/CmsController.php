@@ -42,17 +42,6 @@ class CmsController extends Controller
         $this->defaultsettings->{$value->setting} = $value->defaultvalue;
       endforeach;
     endif;
-    //$this->defaultsettings->social = Social::whereNull('clients_id')->get();
-  }
-
-  public function registerScripts($script) {
-    $this->scripts[] = $script;
-    return true;
-  }
-
-  public function registerCss($css, $media = 'all') {
-    $this->csss[] = array($css, $media);
-    return true;
   }
 
   public static function getModules($modulename = NULL, $inmenu = 'Y', $idrol = NULL, $menu = true) {
