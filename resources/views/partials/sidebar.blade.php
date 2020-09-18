@@ -3,7 +3,7 @@
   <div id="vertical-accordion-menu" class="vertical-accordion-menu">
     <div class="vertical-accordion-menu-header waves-light ">
       <a href="{{ config('cogroupcms.uri') }}">
-        <img src="{{ (empty(cms_settings()->logocmscontraste)) ? asset('vendor/cogroup/cms/images//logocmscontraste.png') : route('getFile', cms_settings()->logo) }}" class="img-fluid flex-center mx-auto">
+        <img src="{{ (empty(cms_settings()->logocmscontraste)) ? asset('vendor/cogroup/cms/images//logocmscontraste.png') : route('getFile', cms_settings()->logocmscontraste) }}" class="img-fluid flex-center mx-auto">
       </a>
     </div>
     <ul class="scrollbar scrollbar-primary scrollbar-menu">

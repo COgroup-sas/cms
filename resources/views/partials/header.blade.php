@@ -19,7 +19,7 @@
       @endif
 
       <a class="navbar-brand" href="{{ config('app.url') }}">
-        <img src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('getFile', cms_settings()->logo) }}" class="img-fluid flex-center">
+        <img src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('getFile', cms_settings()->logocontraste) }}" class="img-fluid flex-center">
       </a>
 
       <!-- Collapse button -->
