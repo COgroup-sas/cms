@@ -49,7 +49,7 @@ Route::group(['middleware' => ['web'],
         Route::get('/', ['uses' => 'RolesController@index'])->name('cogroupcms.roleshome');
         Route::get('add', ['middleware' => ['admin:roles|create'], 'uses' => 'RolesController@add'])->name('cogroupcms.roladd');
         Route::post('add', ['middleware' => ['admin:roles|create:update'], 'uses' => 'RolesController@addpost'])->name('cogroupcms.rolpost');
-        Route::post('permissions', 'RolesController@permissions')->name('cogroupcms.rolpermissions');
+        Route::post('permissions', 'RolesController@permissions')->name('cogroupcms.rolpermissions')->name('cogroupcms.roles.permissions');
         Route::post('setpermission', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@setPermission'])->name('cogroupcms.rolsetpermission');
         Route::match(['get', 'post'], 'edit', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@edit'])->name('cogroupcms.roledit');
       });
