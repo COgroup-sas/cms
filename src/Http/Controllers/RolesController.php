@@ -73,7 +73,7 @@ class RolesController extends CmsController {
 
     if ($validator->fails()) :
       $url = (is_null($id)) ? 'add' : 'edit';
-      return redirect(route('cogroupcms.rol' . $url))
+      return redirect(route('cogroupcms.roles.' . $url))
               ->withErrors($validator)
               ->withInput();
     endif;
@@ -88,7 +88,7 @@ class RolesController extends CmsController {
     $request->session()->flash('status', '1');
     if(is_null($id)) $request->session()->flash('msg', trans('moduleroles.msgaddok'));
     else $request->session()->flash('msg', trans('moduleroles.msgeditok'));
-    return redirect(route('cogroupcms.roleshome'));
+    return redirect(route('cogroupcms.roles.home'));
   }
 
   /**
@@ -110,7 +110,7 @@ class RolesController extends CmsController {
     if($rol->rolaccess->count() == 0) :
       $request->session()->flash('status', '0');
       $request->session()->flash('msg', trans('moduleroles.msgpermissionsdontexist'));
-      return redirect(route('cogroupcms.roleshome'));
+      return redirect(route('cogroupcms.roles.home'));
     endif;
 
     return view('cogroupcms::modules.roles.permissions')->with(

@@ -14,18 +14,18 @@
               </h2>
               <div class="float-right">
                 @if(cms_roles_check($user, 'roles', 'create') == true)
-                  <a id="add" href="{{ route('cogroupcms.roladd') }}" class="btn btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.add') }}">
+                  <a id="add" href="{{ route('cogroupcms.roles.add') }}" class="btn btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.add') }}">
                     <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
                 @if(cms_roles_check($user, 'roles', 'update') == true)
-                  <a id="edit" href="{{ route('cogroupcms.roledit') }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.edit') }}">
+                  <a id="edit" href="{{ route('cogroupcms.roles.edit') }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.edit') }}">
                     <i class="far fa-edit"></i>
                   </a>
                 @endif
                 @foreach(cms_get_modules('roles', 'N') as $mod)
                   @if($user->roles_id == 1 || cms_roles_check($user, $mod['modulename'], 'view') == true)
-                  <a id="{{ mb_strtolower($mod['modulename']) }}" href="{{ URL::to($mod['url']) }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans($mod['modulename']) }}">
+                  <a id="{{ mb_strtolower($mod['modulename']) }}" href="{{ route($mod['url']) }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans($mod['modulename']) }}">
                     <i class="{{ $mod['icon'] }}"></i>
                   </a>
                   @endif
@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form" id="form_advanced_validation" class="masked-input form" method="POST" action="{{ route('cogroupcms.roleshome')."/" }}">
+              <form role="form" id="form_advanced_validation" class="masked-input form" method="POST" action="{{ route('cogroupcms.roles.home')."/" }}">
                 {{ csrf_field() }}
                 <table class="table table-bordered table-striped table-hover js-basic dataTable">
                   <thead>

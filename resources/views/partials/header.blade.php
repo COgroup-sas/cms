@@ -19,7 +19,7 @@
       @endif
 
       <a class="navbar-brand" href="{{ config('app.url') }}">
-        <img src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('getFile', cms_settings()->logocontraste) }}" class="img-fluid flex-center">
+        <img src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('files.getFile', cms_settings()->logocontraste) }}" class="img-fluid flex-center">
       </a>
 
       <!-- Collapse button -->
@@ -34,7 +34,7 @@
         <ul class="navbar-nav ml-auto nav-flex-icons">
           @auth
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="{{ route('notifications.home') }}">
+            <a class="nav-link waves-effect waves-light" href="{{ route('cogroupcms.notifications.home') }}">
               <i class="fas fa-bell fa-lg"></i> <sup><span class="badge badge-pill badge-warning">{{ cms_get_total_unread_notifications() }}</span></sup>
             </a>
           </li>

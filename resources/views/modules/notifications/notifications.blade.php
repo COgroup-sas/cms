@@ -30,13 +30,13 @@
           </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('notifications.readall') }}">
+        <a class="nav-link" href="{{ route('cogroupcms.notifications.readall') }}">
           <i class="fas fa-check-double"></i>
           {{ trans('notifications.markread') }}
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link fs-0-9" href="{{ route('notifications.delete') }}">
+        <a class="nav-link fs-0-9" href="{{ route('cogroupcms.notifications.delete') }}">
           <i class="fas fa-trash-alt"></i>
           {{ trans('notifications.delete') }}
         </a>
@@ -48,7 +48,7 @@
           @foreach ($notifications as $notification)
             @if(is_null($notification->read_at))
               <li class="list-group-item">
-                <a href="{{ route('notifications.notification', $notification->id) }}">
+                <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                   <div class="row">
                     <div class="col-1 text-color" data-color="{{ config('cogroupcms.color_theme') }}">
                       @php
@@ -57,7 +57,7 @@
                       <img class="rounded-circle img-fluid" src="{{ (is_null($from->image_id) and is_null($from->avatar)) ? 
                     asset('vendor/cogroup/cms/images/default-avatar.png') : 
                     ((!is_null($from->image_id)) ?
-                      route('getFile', [$from->image_id]) :
+                      route('files.getFile', [$from->image_id]) :
                       $from->avatar)
                     }}" alt="{{ $from->full_name }}">
                       {{ $from->full_name }}
@@ -79,7 +79,7 @@
           @foreach ($notifications as $notification)
             @if(!is_null($notification->read_at))
               <li class="list-group-item">
-                <a href="{{ route('notifications.notification', $notification->id) }}">
+                <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                   <div class="row">
                     <div class="col-1 text-color" data-color="{{ config('cogroupcms.color_theme') }}">
                       @php
@@ -88,7 +88,7 @@
                       <img class="rounded-circle img-fluid" src="{{ (is_null($from->image_id) and is_null($from->avatar)) ? 
                     asset('vendor/cogroup/cms/images/default-avatar.png') : 
                     ((!is_null($from->image_id)) ?
-                      route('getFile', [$from->image_id]) :
+                      route('files.getFile', [$from->image_id]) :
                       $from->avatar)
                     }}" alt="{{ $from->full_name }}">
                       {{ $from->full_name }}
@@ -109,7 +109,7 @@
         <ul class="list-group">
           @foreach ($notifications as $notification)
             <li class="list-group-item">
-              <a href="{{ route('notifications.notification', $notification->id) }}">
+              <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                 <div class="row">
                   <div class="col-1 text-color" data-color="{{ config('cogroupcms.color_theme') }}">
                     @php
@@ -118,7 +118,7 @@
                     <img class="rounded-circle img-fluid" src="{{ (is_null($from->image_id) and is_null($from->avatar)) ? 
                   asset('vendor/cogroup/cms/images/default-avatar.png') : 
                   ((!is_null($from->image_id)) ?
-                    route('getFile', [$from->image_id]) :
+                    route('files.getFile', [$from->image_id]) :
                     $from->avatar)
                   }}" alt="{{ $from->full_name }}">
                     {{ $from->full_name }}

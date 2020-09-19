@@ -13,12 +13,12 @@
               </h2>
               <div class="float-right">
                 @if(cms_roles_check($user, 'users', 'create') == true)
-                  <a id="add" href="{{ route('cogroupcms.usersadd') }}" class="btn btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.add') }}">
+                  <a id="add" href="{{ route('cogroupcms.users.add') }}" class="btn btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.add') }}">
                     <i class="fas fa-plus-circle"></i>
                   </a>
                 @endif
                 @if(cms_roles_check($user, 'users', 'update') == true)
-                  <a id="edit" href="{{ route('cogroupcms.usersedit') }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.edit') }}">
+                  <a id="edit" href="{{ route('cogroupcms.users.edit') }}" class="btn btnaction btn-round btn-light" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleusers.edit') }}">
                     <i class="far fa-edit"></i>
                   </a>
                 @endif
@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form" id="form_advanced_validation" class="masked-input form" method="POST" action="{{ route('cogroupcms.usershome')."/" }}">
+              <form role="form" id="form_advanced_validation" class="masked-input form" method="POST" action="{{ route('cogroupcms.users.home')."/" }}">
                 {{ csrf_field() }}
                 <table class="table table-bordered table-striped table-hover js-basic dataTable">
                   <thead>
@@ -85,7 +85,7 @@
                       <td>{{ cms_format_datetime($usr->updated_at) }}</td>
                       <td>
                         @if(cms_roles_check($user, 'users', 'update') == true)
-                        <a class="user-active" data-id="{{ $usr->id }}" data-active="{{ $usr->active }}" href="{{ route('cogroupcms.usersactive') }}">
+                        <a class="user-active" data-id="{{ $usr->id }}" data-active="{{ $usr->active }}" href="{{ route('cogroupcms.users.active') }}">
                           <i class="{{ ($usr->active == 'Y') ? 'far fa-check-circle' : 'far fa-circle' }}"></i>
                         </a>
                         @else

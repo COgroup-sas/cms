@@ -33,42 +33,42 @@ Route::group(['middleware' => ['web'],
     Route::post('/', 'Auth\RegisterController@register');
   });
 
-  Route::prefix('files')->group(function () {
+  Route::name('files.')->prefix('files')->group(function () {
     Route::get('thumb/{id}/{height?}/{width?}', 'FilesController@processFileThumb')->name('thumb');
     Route::get('{id}', 'FilesController@processFile')->name('getFile');
   });
 
-  Route::prefix(config('cogroupcms.uri', 'cms'))->middleware(['auth'])->group(function () {
-      Route::get('/','DashboardController@index')->name('cogroupcms.home');
+  Route::name('cogroupcms.')->prefix(config('cogroupcms.uri', 'cms'))->middleware(['auth'])->group(function () {
+    Route::get('/','DashboardController@index')->name('home');
 
-      Route::prefix('settings')->middleware(['admin:settings|view'])->group(function () {
-        Route::get('/', ['uses' => 'DashboardController@settings'])->name('cogroupcms.settings');
-        Route::post('/', ['middleware' => ['admin:settings|update'], 'uses' => 'DashboardController@settingstore'])->name('cogroupcms.settingsave');
-      });
-      Route::prefix('roles')->middleware(['admin:roles|view'])->group(function () {
-        Route::get('/', ['uses' => 'RolesController@index'])->name('cogroupcms.roleshome');
-        Route::get('add', ['middleware' => ['admin:roles|create'], 'uses' => 'RolesController@add'])->name('cogroupcms.roladd');
-        Route::post('add', ['middleware' => ['admin:roles|create:update'], 'uses' => 'RolesController@addpost'])->name('cogroupcms.rolpost');
-        Route::post('permissions', 'RolesController@permissions')->name('cogroupcms.rolpermissions')->name('cogroupcms.roles.permissions');
-        Route::post('setpermission', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@setPermission'])->name('cogroupcms.rolsetpermission');
-        Route::match(['get', 'post'], 'edit', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@edit'])->name('cogroupcms.roledit');
-      });
-      Route::prefix('users')->middleware(['admin:users|view'])->group(function () {
-        Route::get('/', ['uses' => 'UsersController@index'])->name('cogroupcms.usershome');
-        Route::get('add', ['middleware' => ['admin:users|create'], 'uses' => 'UsersController@add'])->name('cogroupcms.usersadd');
-        Route::post('add',  ['middleware' => ['admin:users|create,update'], 'uses' => 'UsersController@addpost'])->name('cogroupcms.userspost');
-        Route::post('edit',  ['middleware' => ['admin:users|update'], 'uses' => 'UsersController@edit'])->name('cogroupcms.usersedit');
-        Route::post('active',  ['middleware' => ['admin:users|update'], 'uses' => 'UsersController@active'])->name('cogroupcms.usersactive');
-        Route::get('getUsers',  'UsersController@getUsers')->name('cogroupcms.usersajax');
-      });
-      Route::get('profile',  'UsersController@profile')->name('cogroupcms.usersprofile');
-      Route::post('profile',  'UsersController@profilesave')->name('cogroupcms.usersprofilesave');
+    Route::name('settings.')->prefix('settings')->middleware(['admin:settings|view'])->group(function () {
+      Route::get('/', ['uses' => 'DashboardController@settings'])->name('home');
+      Route::post('/', ['middleware' => ['admin:settings|update'], 'uses' => 'DashboardController@settingstore'])->name('save');
+    });
+    Route::name('roles.')->prefix('roles')->middleware(['admin:roles|view'])->group(function () {
+      Route::get('/', ['uses' => 'RolesController@index'])->name('home');
+      Route::get('add', ['middleware' => ['admin:roles|create'], 'uses' => 'RolesController@add'])->name('add');
+      Route::post('add', ['middleware' => ['admin:roles|create:update'], 'uses' => 'RolesController@addpost'])->name('save');
+      Route::post('permissions', 'RolesController@permissions')->name('permissions');
+      Route::post('setpermission', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@setPermission'])->name('setpermission');
+      Route::match(['get', 'post'], 'edit', ['middleware' => ['admin:roles|update'], 'uses' => 'RolesController@edit'])->name('edit');
+    });
+    Route::name('users.')->prefix('users')->middleware(['admin:users|view'])->group(function () {
+      Route::get('/', ['uses' => 'UsersController@index'])->name('home');
+      Route::get('add', ['middleware' => ['admin:users|create'], 'uses' => 'UsersController@add'])->name('add');
+      Route::post('add',  ['middleware' => ['admin:users|create,update'], 'uses' => 'UsersController@addpost'])->name('save');
+      Route::post('edit',  ['middleware' => ['admin:users|update'], 'uses' => 'UsersController@edit'])->name('edit');
+      Route::post('active',  ['middleware' => ['admin:users|update'], 'uses' => 'UsersController@active'])->name('active');
+      Route::get('getUsers',  'UsersController@getUsers')->name('ajax');
+    });
+    Route::get('profile',  'UsersController@profile')->name('usersprofile');
+    Route::post('profile',  'UsersController@profilesave')->name('usersprofilesave');
 
-      Route::prefix('notifications')->group(function() {
-        Route::get('/', 'DashboardController@notifications')->name('notifications.home');
-        Route::get('read-all', 'DashboardController@notificationsReadAll')->name('notifications.readall');
-        Route::get('delete', 'DashboardController@notificationsDelete')->name('notifications.delete');
-        Route::get('{notification}', 'DashboardController@notification')->name('notifications.notification');
-      });
+    Route::name('notifications.')->prefix('notifications')->group(function() {
+      Route::get('/', 'DashboardController@notifications')->name('home');
+      Route::get('read-all', 'DashboardController@notificationsReadAll')->name('readall');
+      Route::get('delete', 'DashboardController@notificationsDelete')->name('delete');
+      Route::get('{notification}', 'DashboardController@notification')->name('notification');
+    });
   });
 });

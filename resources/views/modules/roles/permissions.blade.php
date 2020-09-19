@@ -18,7 +18,7 @@
             <div class="card-body">
               {{ csrf_field() }}
               @foreach($modulesrol as $module)
-              <input type="hidden" id="rolurl" value="{{ route('cogroupcms.rolsetpermission') }}">
+              <input type="hidden" id="rolurl" value="{{ route('cogroupcms.roles.setpermission') }}">
               <div class="demo-switch">
                 <div class="row clearfix">
                   <div class="col-sm-12">

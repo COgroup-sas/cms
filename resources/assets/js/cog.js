@@ -211,7 +211,9 @@ jQuery(function () {
 		jQuery("#vertical-accordion-menu").jqueryAccordionMenu();
 	}
 
-	if(jQuery('.cogtoast').length > 0) {
-		jQuery('.cogtoast').toast('show');
+	if(jQuery('#toast-container').length > 0) {
+		jQuery('#toast-container').toast('show').on('hidden.bs.toast', function () {
+      jQuery(this).remove();
+    });
 	}
 });

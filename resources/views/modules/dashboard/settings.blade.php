@@ -1,7 +1,7 @@
 @extends('cogroupcms::layouts.main')
 
 @section('content')
-  <form action="{{ route('cogroupcms.settingsave') }}" role="form" id="form_advanced_validation" class="masked-input no-gutters mb-5 pb-4" method="POST" autocomplete="off" enctype="multipart/form-data">
+  <form action="{{ route('cogroupcms.settings.save') }}" role="form" id="form_advanced_validation" class="masked-input no-gutters mb-5 pb-4" method="POST" autocomplete="off" enctype="multipart/form-data">
     {{ csrf_field() }}
         <!-- Contact data -->
         <div class="row clearfix mb-4">
@@ -223,7 +223,7 @@
                   </div>
                   <div class="col-sm-3">
                     <div class="bg-primary img-fluid rounded my-0 p-2" data-background-color="{{ config('cogroupcms.color_theme') }}">
-                      <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('getFile', cms_settings()->favicon) }}">
+                      <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('files.getFile', cms_settings()->favicon) }}">
                     </div>
                   </div>
                 </div>
@@ -242,7 +242,7 @@
                   </div>
                   <div class="col-sm-3">
                     <div class="img-fluid rounded my-0 p-2">
-                      <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('getFile', cms_settings()->logo) }}">
+                      <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('files.getFile', cms_settings()->logo) }}">
                     </div>
                   </div>
                 </div>
@@ -261,7 +261,7 @@
                   </div>
                   <div class="col-sm-3">
                     <div class="bg-primary img-fluid rounded my-0 p-2" data-background-color="{{ config('cogroupcms.color_theme') }}">
-                      <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('getFile', cms_settings()->logocontraste) }}">
+                      <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('files.getFile', cms_settings()->logocontraste) }}">
                     </div>
                   </div>
                 </div>

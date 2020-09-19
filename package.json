@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "cogroupcms",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "CMS Styles for laravel",
   "main": "cogroupcms.js",
   "scripts": {

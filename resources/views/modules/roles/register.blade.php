@@ -19,7 +19,7 @@
               </h2>
             </div>
             <div class="card-body">
-              <form role="form" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.rolpost') }}" novalidate>
+              <form role="form" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.roles.save') }}" novalidate>
                 {{ csrf_field() }}
                 @if(isset($roledit))
                 <input name="id" type="hidden" value="{{ $roledit->id }}" />
@@ -48,7 +48,7 @@
                 </div>
                 <div class="row">
                   <div class="col-6 text-right">
-                    <a class="btn btn-danger waves-effect" href="{{ route('cogroupcms.roleshome') }}">{{ trans('cms.txtbtncancel') }} <i class="fas fa-ban"></i></a>
+                    <a class="btn btn-danger waves-effect" href="{{ route('cogroupcms.roles.home') }}">{{ trans('cms.txtbtncancel') }} <i class="fas fa-ban"></i></a>
                   </div>
                   <div class="col-6 text-left">
                     <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fas fa-cloud"></i></button>

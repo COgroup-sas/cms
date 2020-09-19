@@ -18,7 +18,7 @@
               </h2>
             </div>
             <div class="card-body">
-              <form role="form" id="form_advanced_validation" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.userspost') }}" novalidate="novalidate">
+              <form role="form" id="form_advanced_validation" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.users.save') }}" novalidate="novalidate">
                 {{ csrf_field() }}
                 @if(isset($useredit))
                 <input name="id" type="hidden" value="{{ $useredit->id }}" />
@@ -102,7 +102,7 @@
                 </div>
                 <div class="row">
                   <div class="col-6 text-right">
-                    <a class="btn btn-danger waves-effect" href="{{ route('cogroupcms.usershome') }}">{{ trans('cms.txtbtncancel') }} <i class="fas fa-ban"></i></a>
+                    <a class="btn btn-danger waves-effect" href="{{ route('cogroupcms.users.home') }}">{{ trans('cms.txtbtncancel') }} <i class="fas fa-ban"></i></a>
                   </div>
                   <div class="col-6 text-left">
                     <button class="btn btn-success waves-effect" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fa fa-cloud"></i></button>

@@ -76,7 +76,7 @@ class UsersController extends CmsController {
 
     if ($validator->fails()) :
       $url = (is_null($id)) ? 'add' : 'edit';
-      return redirect(route('cogroupcms.users' . $url))
+      return redirect(route('cogroupcms.users.' . $url))
               ->withErrors($validator)
               ->withInput();
     endif;
@@ -96,7 +96,7 @@ class UsersController extends CmsController {
     $request->session()->flash('status', '1');
     if(is_null($id)) $request->session()->flash('msg', trans('moduleusers.msgaddok'));
     else $request->session()->flash('msg', trans('moduleusers.msgeditok'));
-    return redirect(route('cogroupcms.usershome'));
+    return redirect(route('cogroupcms.users.home'));
   }
 
   /**

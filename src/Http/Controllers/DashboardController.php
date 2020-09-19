@@ -94,7 +94,7 @@ class DashboardController extends CmsController
     ]);
 
     if ($validator->fails()) :
-      $url = route('cogroupcms.settings');
+      $url = route('cogroupcms.settings.home');
       return redirect($url)
               ->withErrors($validator)
               ->withInput();
@@ -158,7 +158,7 @@ class DashboardController extends CmsController
 
     $request->session()->flash('status', '1');
     $request->session()->flash('msg', trans('modulesettings.msgaddok'));
-    return redirect(route('cogroupcms.settings'));
+    return redirect(route('cogroupcms.settings.home'));
   }
 
   public function notifications() {
@@ -186,7 +186,7 @@ class DashboardController extends CmsController
 
     $notification->markAsRead();
 
-    return redirect(route('notifications'));
+    return redirect(route('cogroupcms.notifications.home'));
   }
 
   public function notificationsDelete() {
