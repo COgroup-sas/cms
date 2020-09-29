@@ -3,10 +3,10 @@
 @section('content')
 <div class="row clearfix">
   <div class="col-12">
-    <h2>
+    <h4>
       {{ mb_strtoupper(trans('notifications.title')) }}
       <small>{{ mb_strtoupper(trans('cms.list')) }}</small>
-    </h2>
+    </h4>
     <ul class="nav nav-tabs nav-justified" id="myTabJust" role="tablist" data-background-color="dark">
       <li class="nav-item">
         <a class="nav-link active" id="unread-tab" data-toggle="tab" href="#unread" role="tab" aria-controls="unread"

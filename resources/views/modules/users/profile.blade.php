@@ -5,7 +5,7 @@
   <div class="col-12 col-md-8">
     <div class="card">
       <div class="card-header">
-        <h5 class="title">{{ $title }}</h5>
+        <h4>{{ $title }}</h4>
       </div>
       <div class="card-body">
         <form action="{{ route('cogroupcms.usersprofilesave') }}" method="POST" class="form needs-validation" novalidate  enctype="multipart/form-data">

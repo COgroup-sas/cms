@@ -5,10 +5,10 @@
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
       <div class="card-header">
-        <h2 class="float-left">
+        <h4 class="float-left">
           {{ mb_strtoupper(trans('moduleroles.title')) }}
           <small>{{ mb_strtoupper(trans('cms.list')) }}</small>
-        </h2>
+        </h4>
         <div class="float-right">
           @if(cms_roles_check($user, 'roles', 'create') == true)
             <a id="add" href="{{ route('cogroupcms.roles.add') }}" class="btn btn-round btn-blue-grey btn-sm" data-toggle="tooltip" data-placement="top" title="{{ trans('moduleroles.add') }}">

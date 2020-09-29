@@ -5,14 +5,14 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h2>
+        <h4>
           @if(isset($useredit))
           {{ trans('moduleusers.edit') }}
           @else
           {{ trans('moduleusers.add') }}
           @endif
           <small>{{ trans('moduleusers.basicinformation') }}</small>
-        </h2>
+        </h4>
       </div>
       <div class="card-body">
         <form role="form" id="form_advanced_validation" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.users.save') }}" novalidate="novalidate">

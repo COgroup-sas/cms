@@ -5,12 +5,12 @@
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-5 pb-4">
     <div class="card">
       <div class="card-header">
-        <h2>
-            {{ trans('moduleroles.permissions') }}
-            <small>
-              {{ $rolpermissions->rolname }}
-            </small>
-        </h2>
+        <h4>
+          {{ trans('moduleroles.permissions') }}
+          <small>
+            {{ $rolpermissions->rolname }}
+          </small>
+        </h4>
       </div>
       <div class="card-body">
         {{ csrf_field() }}

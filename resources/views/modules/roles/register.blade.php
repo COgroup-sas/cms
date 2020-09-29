@@ -5,13 +5,13 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h2>
+        <h4>
           @if(isset($roledit))
           {{ trans('moduleroles.edit') }}
           @else
           {{ trans('moduleroles.add') }}
           @endif
-        </h2>
+        </h4>
       </div>
       <div class="card-body">
         <form role="form" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.roles.save') }}" novalidate>
