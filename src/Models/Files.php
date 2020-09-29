@@ -73,7 +73,7 @@ class Files extends Model
    */
   public function getUrl()
   {
-    return route('getFile', $this->id);
+    return route('files.getFile', $this->id);
   }
 
   /**
@@ -83,6 +83,6 @@ class Files extends Model
    */
   public function getThumbUrl($width = 240, $height = 360)
   {
-    return route('thumb', $this->id, $height, $width);
+    return route('files.thumb', $this->id, $height, $width);
   }
 }

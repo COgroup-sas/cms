@@ -40,17 +40,36 @@
 
   @include('cogroupcms::partials.footer')
 
-  @if(Session::has('status'))
-  <div id="toast-container" class="cogtoast md-toast-{{ Session::has('msgfrom') ? Session::get('msgfrom') : 'top' }}-{{ Session::has('msgalign') ? Session::get('msgalign') : 'right' }}" aria-live="polite" role="alert" data-autohide="true" data-delay="{{ Session::has('msgtime') ? Session::get('msgtime') : 4000 }}">
-    <div class="md-toast md-toast-@switch(Session::get('status'))
-      @case(0){{ 'error' }}@break
-      @case(1){{ 'success' }}@break
-      @case(2){{ 'info' }}@break
-      @case(3){{ 'warning' }}@break
-    @endswitch" style="">
-      <div class="md-toast-message">{{ Session::get('msg') }}</div>
+  @if(Session::has('status') || Session::has('alert'))
+    <div class="cogtoast md-toast-{{ (Session::has('msgfrom')) ? Session::get('msgfrom') : 'top' }}-{{ (Session::has('msgalign')) ? Session::get('msgalign') : 'right' }}">
+    @if(Session::has('alert'))
+      @foreach(Session::get('alert') as $key => $alert)
+        @switch($alert['status'])
+          @case(0)@php $status = 'error' @endphp@break
+          @case(1)@php $status = 'success' @endphp@break
+          @case(2)@php $status = 'info' @endphp@break
+          @case(3)@php $status = 'warning' @endphp@break
+        @endswitch
+        @include('cogroupcms::partials.toasts', [
+          'msgtime' => (isset($alert['msgtime'])) ? $alert['msgtime'] : 4000,
+          'status' => $status,
+          'msg' => $alert['msg']
+        ])
+      @endforeach
+    @else
+      @switch(Session::get('status'))
+        @case(0)@php $status = 'error' @endphp@break
+        @case(1)@php $status = 'success' @endphp@break
+        @case(2)@php $status = 'info' @endphp@break
+        @case(3)@php $status = 'warning' @endphp@break
+      @endswitch"
+      @include('cogroupcms::partials.toasts', [
+        'msgtime' => (Session::has('msgtime')) ? Session::get('msgtime') : 4000,
+        'status' => $status,
+        'msg' => Session::get('msg')
+      ])
+    @endif
     </div>
-  </div>
   @endif
 
   <!-- Scripts -->

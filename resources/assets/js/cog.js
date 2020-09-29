@@ -2,6 +2,11 @@
 jQuery(function () {
   setTimeout(function () { jQuery('.preloader').fadeOut(); }, 50);
 
+  jQuery('.dataTableCog').DataTable({
+		"pagingType": "numbers"
+	});
+	jQuery('.dataTables_length').addClass('bs-select');
+
   jQuery.ajaxSetup({
     headers: {
       'X-CSRF-Token': jQuery('input[name="_token"]').val()
@@ -140,17 +145,13 @@ jQuery(function () {
 
 	jQuery('[data-toggle="tooltip"]').tooltip();
   jQuery('[data-toggle="popover"]').popover();
-  if(jQuery('#loginModal').length > 0) {
-    jQuery('#loginModal').modal('show');
-  }
+
   if(jQuery('.datepicker').length > 0) {
     jQuery('.datepicker').each(function() {
       jQuery(this).datepicker({
         format: 'yyyy-mm-dd',
         iconsLibrary: 'fontawesome',
-        maxDate: '{{ date("Y-m-d") }}',
         weekStartDay: 0
-        //locale: '{{ app()->getLocale() }}-{{ app()->getLocale() }}'
       });
     });
   }
@@ -158,9 +159,7 @@ jQuery(function () {
     jQuery('.timepicker').each(function () {
       jQuery(this).timepicker({
         format: 'HH:MM',
-        value: '@if(!empty($value)){{ $value }}@else{{ date("H:i") }}@endif',
         weekStartDay: 0
-        //locale: '{{ app()->getLocale() }}-{{ app()->getLocale() }}'
       });
     });
   }
@@ -180,7 +179,6 @@ jQuery(function () {
       jQuery('#' + id).tagsInput({
         'unique': true,
         'minChars': 2,
-        'validationPattern': new RegExp('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
         'placeholder': jQuery(this).attr('placeholder')
       });
     });
@@ -188,7 +186,6 @@ jQuery(function () {
 
   if(jQuery('.button-collapse').length > 0) {
   	jQuery(".button-collapse").sideNav();
-		// SideNav Scrollbar Initialization
 		var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 		var ps = new PerfectScrollbar(sideNavScrollbar);
   }
@@ -211,9 +208,16 @@ jQuery(function () {
 		jQuery("#vertical-accordion-menu").jqueryAccordionMenu();
 	}
 
-	if(jQuery('#toast-container').length > 0) {
-		jQuery('#toast-container').toast('show').on('hidden.bs.toast', function () {
-      jQuery(this).remove();
-    });
+	if(jQuery('.cogtoast').length > 0) {
+		jQuery('.toast').each(function() {
+			jQuery(this).toast({
+				autohide: jQuery(this).data('autohide') || true,
+				delay: jQuery(this).data('delay') || 4000
+			}).on('hidden.bs.toast', function () {
+	      jQuery(this).remove();
+	    }).on('click', function () {
+	      jQuery(this).remove();
+	    });
+	  });
 	}
 });

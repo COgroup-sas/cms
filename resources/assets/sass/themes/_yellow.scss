@@ -25,20 +25,24 @@ body {
 			}
 		}
 
-		.btn-theme {
-			background-color: rgba(203,200,61,1);
-			border-color: rgba(203,200,61,1);
-			color: $cog-grey;
+		.btn-theme, 
+		ul.pagination .page-item.active .page-link, ul.pagination .page-item.active .page-link:focus {
+			background-color: rgba(203,200,61,1) !important;
+			border-color: rgba(203,200,61,1) !important;
+			color: $cog-grey !important;
 			&:hover {
-				background-color: rgba(203,200,61,.8);
+				background-color: rgba(203,200,61,.8) !important;
 			}
 		}
 
-		.navbar {
+		.navbar, .nav-tabs {
 			&[data-background-color="yellow"] {
 				& {
 					a {
 						color: $cog-grey !important;
+						&.active {
+							color: $cog-yellow !important;
+						}
 					}
 				}
 				& .dropdown-menu {
@@ -64,6 +68,36 @@ body {
 
 		.scrollbar-primary::-webkit-scrollbar-thumb {
 			background-color: $cog-yellow !important;
+		}
+
+		.timeline {
+		  &::before {
+			  background: $cog-yellow;
+			  background: -webkit-gradient(left top, left bottom, color-stop(0%, $cog-yellow), color-stop(100%, $white));
+			  background: linear-gradient(to bottom, $cog-yellow 0%, $white 100%);
+			  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="$cog-yellow", endColorstr="$white", GradientType=0 );
+			}
+
+			& li {
+			  & .timeline-badge {
+				  background-color: $cog-yellow;
+				  color: $cog-grey;
+				}
+
+				& .timeline-panel {
+				  border: 1px solid rgba(203,210,61,.5);
+
+				  &::before {
+					  border-left: 0px solid rgba(203,210,61,.5);
+					  border-right: 8px solid rgba(203,210,61,.5);
+					}
+
+					&::after {
+					  border-left: 0 solid $cog-light-grey;
+					  border-right: 8px solid $cog-light-grey;
+					}
+				}
+			}
 		}
 	}
 }
