@@ -1,7 +1,7 @@
 <p align="center"><img src="https://www.cogroupsas.com/gitimages/cogroup.svg"></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version203.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version300.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/license.svg" alt="License"></a>
 </p>
 
@@ -10,6 +10,7 @@
 ### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
 ### For Laravel <= 6, please use the [1.8 branch](https://github.com/COgroup-sas/cms/tree/1.8)!
 ### For Laravel 7, please use the [2.0 branch](https://github.com/COgroup-sas/cms/tree/2.0)!
+### For Laravel 8, please use the [3.0 branch](https://github.com/COgroup-sas/cms/tree/3.0)!
 
 COgroup - CMS package is a flexible way to add basic CMS system with Role-based Permissions to **Laravel**.
 
