@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row clearfix">
-  <div class="col-12 mb-5 pb-4">
+  <div class="col-12">
     <h2>
       {{ mb_strtoupper(trans('notifications.title')) }}
       <small>{{ mb_strtoupper(trans('cms.list')) }}</small>

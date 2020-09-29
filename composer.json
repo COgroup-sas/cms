@@ -16,7 +16,7 @@
         "laravel/socialite": ">=5.0",
         "intervention/image": ">=2.5.1",
         "thedoctor0/laravel-mailjet-driver": ">=1.0",
-        "laravel/ui": ">=2.4"
+        "laravel/ui": ">=3.0"
     },
     "autoload": {
         "psr-4": {
@@ -39,7 +39,7 @@
         }
     },
     "require-dev": {
-        "laravel/framework": "7.x"
+        "laravel/framework": "8.x"
     },
     "config": {
         "sort-packages": true

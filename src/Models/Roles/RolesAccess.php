@@ -17,11 +17,11 @@ class RolesAccess extends Model
   protected $table = 'roles_access';
 
   /**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var bool
-	 */
-	public $timestamps = true;
+   * Indicates if the model should be timestamped.
+   *
+   * @var bool
+   */
+  public $timestamps = true;
 
   /**
    * The attributes that are mass assignable.
@@ -50,9 +50,12 @@ class RolesAccess extends Model
   }
 
   public static function registerRol($idrol) {
+    $modulesrol = RolesAccess::select('modules_id')->where('roles_id', $idrol)->get();
+
     $modules = Modules::select('id')
-                ->where('active', 'Y')
-                ->get();
+                      ->where('active', 'Y')
+                      ->whereNotIn('id', $modulesrol)
+                      ->get();
 
     $modulesRol = array();
 

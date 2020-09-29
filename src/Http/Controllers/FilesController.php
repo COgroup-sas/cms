@@ -72,6 +72,7 @@ class FilesController extends Controller {
             $id[] = array('status' => false, 'msg' => 'files.fileexists', "name" => $file->getClientOriginalName());
           endif;
           $path = $file->store('', config(config('cogroupcms.filesystem')));
+          $orgpath = $path;
           $path = explode("/", $path);
           $path = $path[count($path) - 1];
           $id = $request->input($name.'_id');
@@ -80,7 +81,7 @@ class FilesController extends Controller {
           $filemodel->diskname = $path;
           $filemodel->originalname = $file->getClientOriginalName();
           $filemodel->extension = $file->extension();
-          $filemodel->size = $file->getClientSize();
+          $filemodel->size = Storage::size($orgpath);
           $filemodel->mimetype = $file->getClientMimeType();
           $filemodel->alt = (!empty($request->input('alt'))) ? $request->input('alt') : cms_settings()->sitename;
           if(stripos($file->getClientMimeType(), 'image') !== false) :

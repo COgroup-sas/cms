@@ -13,7 +13,7 @@ use Cogroup\Cms\Models\Roles\RolesAccess;
 use Cogroup\Cms\Models\Modules;
 
 class RolesController extends CmsController {
-	/**
+  /**
    * Create a new controller instance.
    *
    * @return void
@@ -101,8 +101,9 @@ class RolesController extends CmsController {
 
     $rol = Roles::where('id', $request->input('id'))->with('RolAccess')->first();
     //exit(var_dump($user->rolesaccess->count()));
+    $modules = Modules::count();
 
-    if($rol->rolaccess->count() == 0) :
+    if($rol->rolaccess->count() == 0 || $rol->rolaccess->count() < $modules) :
       RolesAccess::registerRol($rol->id);
       $rol = Roles::where('id', $request->input('id'))->with('RolAccess')->first();
     endif;

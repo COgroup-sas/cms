@@ -1,8 +1,8 @@
 <!-- Sidebar navigation -->
 <div id="mySidenav" class="sidenav">
   <div id="vertical-accordion-menu" class="vertical-accordion-menu">
-    <div class="vertical-accordion-menu-header waves-light ">
-      <a href="{{ config('cogroupcms.uri') }}">
+    <div class="vertical-accordion-menu-header waves-light logo-wrapper">
+      <a href="{{ route('cogroupcms.home') }}">
         <img src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('files.getFile', cms_settings()->logocontraste) }}" class="img-fluid flex-center mx-auto">
       </a>
     </div>
