@@ -4,6 +4,18 @@
 //mixins
 @import "mixins";
 
+// 6. Collapsible
+// ==========================================================================
+
+$collapsible-height: 3rem !default;
+$collapsible-line-height: $collapsible-height !default;
+$collapsible-header-color: #fff !default;
+$collapsible-border-color: #ddd !default;
+$gutter-width: 1.5rem !default;
+$element-top-margin: $gutter-width/3 !default;
+$element-bottom-margin: ($gutter-width*2)/3 !default;
+$sidenav-padding: 16px !default;
+@import '~materialize-css/sass/components/collapsible';
 @import '~gijgo/css/gijgo.css';
 @import '~bootstrap/scss/bootstrap';
 @import '~mdbootstrap/scss/mdb-free';
@@ -496,4 +508,10 @@ footer {
 
 ul.pagination {
 	justify-content: flex-end !important;
+}
+
+.collapsible-materialize {
+	list-style-type: none;
+	padding-left: 0;
+	box-shadow: none !important;
 }

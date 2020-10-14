@@ -41,7 +41,8 @@ class DashboardController extends CmsController
               'scripts' => $this->scripts,
               'csss' => $this->csss,
               'breadcrumb' => $breadcrumb,
-              'title' => trans('cms.home')
+              'title' => trans('cms.home'),
+              'notifications' => User::find(auth()->user()->id)->notifications()->limit(10)->get(),
             )
           );
         else :

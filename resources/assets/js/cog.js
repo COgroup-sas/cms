@@ -220,4 +220,8 @@ jQuery(function () {
 	    });
 	  });
 	}
+
+	if(jQuery('.collapsible-materialize').length > 0) {
+		jQuery('.collapsible-materialize').collapsible();
+	}
 });

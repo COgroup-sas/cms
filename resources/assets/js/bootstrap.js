@@ -18,6 +18,8 @@ try {
   require('./plugins/bootstrap-notify');
   require('./plugins/jquery.sharrre');
   require('./plugins/jquery-inputmask/jquery.inputmask.bundle');
+  //Materialize-css
+  require('materialize-css/dist/js/materialize.min');
 
   //datatables
   require( 'jszip' );

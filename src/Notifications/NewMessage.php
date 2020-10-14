@@ -31,14 +31,20 @@ class NewMessage extends Notification
   public $message;
 
   /**
+   * @var  string
+   */
+  public $subject;
+
+  /**
    * Create a new notification instance.
    *
    * @return void
    */
-  public function __construct(User $user, $message)
+  public function __construct(User $user, $message, $subject = NULL)
   {
     $this->fromUser = $user;
     $this->message = $message;
+    $this->subject = $subject;
   }
 
   /**
@@ -60,7 +66,9 @@ class NewMessage extends Notification
    */
   public function toMail($notifiable)
   {
-    $subject = sprintf(trans('notifications.subject'), config('app.name'), $this->fromUser->full_name);
+    $subject = (is_null($this->subject)) ? 
+                sprintf(trans('notifications.subject'), config('app.name'), $this->fromUser->full_name) :
+                $this->subject;
     $greeting = sprintf(trans('notifications.greeting'), $notifiable->full_name);
     $action = trans('notifications.action');
     $thanks = trans('notification.thanks');
@@ -85,7 +93,9 @@ class NewMessage extends Notification
       'from_name' => $this->fromUser->full_name,
       'to_id' => $notifiable->id,
       'to_name' => $notifiable->full_name,
-      'subject' => sprintf(trans('notifications.subject'), config('app.name'), $this->fromUser->full_name),
+      'subject' => (is_null($this->subject)) ? 
+                    sprintf(trans('notifications.subject'), config('app.name'), $this->fromUser->full_name) :
+                    $this->subject,
       'message' => $this->message
     ];
   }

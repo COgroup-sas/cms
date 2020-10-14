@@ -7,11 +7,15 @@
       </a>
     </div>
     <ul class="scrollbar scrollbar-primary scrollbar-menu">
-      <li class="{{ ( \Request::is('/') ) ? 'active' : '' }}"><a href="{{ config('cogroupcms.uri') }}"><i class="fa fa-home"></i>{{ __('cms.home') }} </a></li>
+      <li class="{{ ( \Request::url() == route('cogroupcms.home') ) ? 'active' : '' }}"><a href="{{ route('cogroupcms.home') }}"><i class="fa fa-home"></i>{{ __('cms.home') }}</a></li>
 
       @foreach($modules as $module)
-      <li class="{{ ( \Request::is($module['url']) ) ? 'active' : '' }}">
-        <a href="{{ route($module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }}</a>
+      @php
+        $url = route($module['url'], [], false);
+        $url = substr($url, 1);
+      @endphp
+      <li class="{{ ( \Request::is($url) ) ? 'active' : '' }}">
+        <a href="{{ route($module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }} {{ $url }}</a>
         @if(isset($module['submod']) and !empty($module['submod']) and count($module['submod']) > 0)
         {{ cms_print_submenu($module['submod'], $route) }}
         @endif
