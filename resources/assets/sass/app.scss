@@ -4,7 +4,7 @@
 //mixins
 @import "mixins";
 
-// 6. Collapsible
+// 1. Collapsible Materialize-css
 // ==========================================================================
 
 $collapsible-height: 3rem !default;
@@ -16,6 +16,7 @@ $element-top-margin: $gutter-width/3 !default;
 $element-bottom-margin: ($gutter-width*2)/3 !default;
 $sidenav-padding: 16px !default;
 @import '~materialize-css/sass/components/collapsible';
+
 @import '~gijgo/css/gijgo.css';
 @import '~bootstrap/scss/bootstrap';
 @import '~mdbootstrap/scss/mdb-free';

@@ -15,7 +15,7 @@
         $url = substr($url, 1);
       @endphp
       <li class="{{ ( \Request::is($url) ) ? 'active' : '' }}">
-        <a href="{{ route($module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }} {{ $url }}</a>
+        <a href="{{ route($module['url']) }}"><i class="{{ $module['icon'] }}"></i> {{ $module['modulename'] }}</a>
         @if(isset($module['submod']) and !empty($module['submod']) and count($module['submod']) > 0)
         {{ cms_print_submenu($module['submod'], $route) }}
         @endif

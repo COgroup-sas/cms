@@ -11,6 +11,9 @@ try {
   window.Popper = require('popper.js').default;
   window.$ = window.jQuery = require('jquery');
 
+  //Materialize-css
+  window.M = require('materialize-css/dist/js/materialize.min');
+
   require('bootstrap');
   require('moment');
   window.Chart = require('chart.js');
@@ -18,8 +21,6 @@ try {
   require('./plugins/bootstrap-notify');
   require('./plugins/jquery.sharrre');
   require('./plugins/jquery-inputmask/jquery.inputmask.bundle');
-  //Materialize-css
-  require('materialize-css/dist/js/materialize.min');
 
   //datatables
   require( 'jszip' );
