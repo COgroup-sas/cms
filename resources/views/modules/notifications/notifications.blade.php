@@ -46,7 +46,7 @@
       <div class="tab-pane fade show active" id="unread" role="tabpanel" aria-labelledby="home-tab-just">
         <ul class="list-group">
           @foreach ($notifications as $notification)
-            @if(is_null($notification->read_at))
+            @if(is_null($notification->read_at) and !is_null($notification->data))
               <li class="list-group-item">
                 <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                   <div class="row">
@@ -77,7 +77,7 @@
       <div class="tab-pane fade" id="read" role="tabpanel" aria-labelledby="read-tab">
         <ul class="list-group">
           @foreach ($notifications as $notification)
-            @if(!is_null($notification->read_at))
+            @if(!is_null($notification->read_at) and !is_null($notification->data))
               <li class="list-group-item">
                 <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                   <div class="row">
@@ -108,6 +108,7 @@
       <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
         <ul class="list-group">
           @foreach ($notifications as $notification)
+            @if(!is_null($notification->data))
             <li class="list-group-item">
               <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                 <div class="row">
@@ -131,6 +132,7 @@
                 </div>
               </a>
             </li>
+            @endif
           @endforeach
         </ul>
       </div>
