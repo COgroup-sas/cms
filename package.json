@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/COgroup-sas/cms#readme",
   "devDependencies": {
-    "axios": "^0.19",
+    "axios": "^0.21",
     "bootstrap": "^4.5.3",
     "cross-env": "^7.0",
     "jquery": "^3.2",
