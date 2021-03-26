@@ -5,8 +5,8 @@ object-assign
 */
 
 /*!
-  * Bootstrap v4.5.3 (https://getbootstrap.com/)
-  * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap v4.6.0 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
@@ -57,14 +57,14 @@ object-assign
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.5
+ * Sizzle CSS Selector Engine v2.3.6
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2020-03-14
+ * Date: 2021-02-16
  */
 
 /*!
@@ -82,17 +82,17 @@ object-assign
  */
 
 /*!
- * jQuery JavaScript Library v3.5.1
+ * jQuery JavaScript Library v3.6.0
  * https://jquery.com/
  *
  * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- * Copyright JS Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-05-04T22:49Z
+ * Date: 2021-03-02T17:08Z
  */
 
 /*!
@@ -147,24 +147,20 @@ object-assign
  * ©2016 SpryMedia Ltd - datatables.net/license
  */
 
-/*! Buttons for DataTables 1.6.5
- * ©2016-2020 SpryMedia Ltd - datatables.net/license
+/*! Buttons for DataTables 1.7.0
+ * ©2016-2021 SpryMedia Ltd - datatables.net/license
  */
 
-/*! ColReorder 1.5.2
- * ©2010-2019 SpryMedia Ltd - datatables.net/license
+/*! ColReorder 1.5.3
+ * ©2010-2020 SpryMedia Ltd - datatables.net/license
  */
 
 /*! DataTables 1.10.18
  * ©2008-2018 SpryMedia Ltd - datatables.net/license
  */
 
-/*! DataTables 1.10.21
- * ©2008-2020 SpryMedia Ltd - datatables.net/license
- */
-
-/*! DataTables 1.10.22
- * ©2008-2020 SpryMedia Ltd - datatables.net/license
+/*! DataTables 1.10.24
+ * ©2008-2021 SpryMedia Ltd - datatables.net/license
  */
 
 /*! DataTables Bootstrap 4 integration
@@ -175,16 +171,16 @@ object-assign
  * ©2010-2020 SpryMedia Ltd - datatables.net/license
  */
 
-/*! FixedHeader 3.1.7
- * ©2009-2020 SpryMedia Ltd - datatables.net/license
+/*! FixedHeader 3.1.8
+ * ©2009-2021 SpryMedia Ltd - datatables.net/license
  */
 
-/*! KeyTable 2.5.3
- * ©2009-2020 SpryMedia Ltd - datatables.net/license
+/*! KeyTable 2.6.1
+ * ©2009-2021 SpryMedia Ltd - datatables.net/license
  */
 
-/*! Responsive 2.2.6
- * 2014-2020 SpryMedia Ltd - datatables.net/license
+/*! Responsive 2.2.7
+ * 2014-2021 SpryMedia Ltd - datatables.net/license
  */
 
 /*! RowGroup 1.1.2
@@ -209,7 +205,9 @@ object-assign
 
 /*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
 
-/*! pdfmake v0.1.68, @license MIT, @link http://pdfmake.org */
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/*! pdfmake v0.1.70, @license MIT, @link http://pdfmake.org */
 
 /**
  * @license

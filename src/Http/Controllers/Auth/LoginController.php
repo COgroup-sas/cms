@@ -136,7 +136,8 @@ class LoginController extends Controller
                     'lastname' => $lastname,
                     'email' => $mail,
                     'avatar' => $social_user->avatar,
-                    'social' => 'Y'
+                    'social' => 'Y',
+                    'roles_id' => cms_settings()->defaultrol
                 ]);
 
                 return $this->authAndRedirect($user); // Login y redirección

@@ -39,7 +39,7 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+            <a class="nav-link dropdown-toggle img-avatar" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               @if(Auth::user()->avatar != NULL)
               <img src="{{ Auth::user()->avatar }}" class="rounded-circle z-depth-0" alt="{{ Auth::user()->name }} {{ Auth::user()->lastname }}">
