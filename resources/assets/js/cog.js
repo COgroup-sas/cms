@@ -2,10 +2,21 @@
 jQuery(function () {
   setTimeout(function () { jQuery('.preloader').fadeOut(); }, 50);
 
-  jQuery('.dataTableCog').DataTable({
-		"pagingType": "numbers"
-	});
-	jQuery('.dataTables_length').addClass('bs-select');
+  if(jQuery('.dataTableCog').length > 0) {
+  	if(lang == "es") {
+  		jQuery('.dataTableCog').DataTable({
+				"pagingType": "numbers",
+				"language": {
+					"url" : SITE_URL + "vendor/cogroup/cms/js/i18n/spanish.datatable.json"
+				}
+			});
+  	} else {
+  		jQuery('.dataTableCog').DataTable({
+				"pagingType": "numbers"
+			});
+  	}
+		jQuery('.dataTables_length').addClass('bs-select');
+	}
 
   jQuery.ajaxSetup({
     headers: {
@@ -14,12 +25,12 @@ jQuery(function () {
 	});
 
   if(jQuery('.masked-input').length > 0) {
-    var $MaskedInput = jQuery('.masked-input');
-
     //Mobile Phone Number
-    $MaskedInput.find('.mobile-phone-number').inputmask('(99) 999-999-9999', { placeholder: '(__) ___-___-____' });
+    var mobile = document.getElementsByClassName("mobile-phone-number");
+    Inputmask('(99) 999-999-9999', { placeholder: '(__) ___-___-____' }).mask(mobile);
     //Phone Number
-    $MaskedInput.find('.phone-number').inputmask('(99) 9 999-9999', { placeholder: '(__) _ ___-____' });
+    var phone = document.getElementsByClassName("phone-number");
+    Inputmask('(99) 9 999-9999', { placeholder: '(__) _ ___-____' }).mask(phone);
 	}
 
   if(jQuery(".allcheck").length > 0) {
@@ -210,18 +221,18 @@ jQuery(function () {
 
 	if(jQuery('.cogtoast').length > 0) {
 		jQuery('.toast').each(function() {
-			jQuery(this).toast({
-				autohide: jQuery(this).data('autohide') || true,
-				delay: jQuery(this).data('delay') || 4000
-			}).on('hidden.bs.toast', function () {
-	      jQuery(this).remove();
-	    }).on('click', function () {
+			jQuery(this).toast().on('click', function () {
 	      jQuery(this).remove();
 	    });
+	    var element = jQuery(this);
+	    setTimeout(function () { jQuery(element).remove(); }, jQuery(element).data('delay') || 4000);
 	  });
 	}
 
 	if(jQuery('.collapsible-materialize').length > 0) {
-		jQuery('.collapsible-materialize').collapsible();
+		document.addEventListener('DOMContentLoaded', function() {
+	    var elems = document.querySelectorAll('.collapsible-materialize');
+	    var instances = M.Collapsible.init(elems, options);
+	  });
 	}
 });

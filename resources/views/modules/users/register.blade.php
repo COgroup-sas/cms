@@ -15,7 +15,7 @@
         </h4>
       </div>
       <div class="card-body">
-        <form role="form" id="form_advanced_validation" class="masked-input needs-validation" method="POST" action="{{ route('cogroupcms.users.save') }}" novalidate="novalidate">
+        <form role="form" id="form_advanced_validation" class="needs-validation" method="POST" action="{{ route('cogroupcms.users.save') }}" novalidate="novalidate">
           {{ csrf_field() }}
           @if(isset($useredit))
           <input name="id" type="hidden" value="{{ $useredit->id }}" />
@@ -73,7 +73,7 @@
             <div class="form-line">
               @foreach($roles as $rol)
                 <div class="custom-control custom-radio">
-                  <input type="radio" class="custom-control-input check" id="chk_{{ $rol->id }}" name="roles_id" value="{{ $rol->id }}"{{ ((isset($useredit) and $rol->id == $useredit->roles_id) || old('roles_id') == $rol->id) ? ' checked' : '' }}>
+                  <input type="radio" class="custom-control-input check" id="chk_{{ $rol->id }}" name="roles_id" value="{{ $rol->id }}"{{ ((isset($useredit) and $rol->id == $useredit->roles_id) || old('roles_id') == $rol->id) ? ' checked' : '' }} required>
                   <label class="custom-control-label" for="chk_{{ $rol->id }}">{{ $rol->rolname }}</label>
                 </div>
               @endforeach

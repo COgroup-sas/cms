@@ -59,6 +59,8 @@ class DashboardController extends CmsController
   public function settings(Request $request) {
     $breadcrumb = array('settings');
 
+    $colors = ['blue', 'dark', 'green', 'light', 'lightblue', 'lightgreen', 'lightpurple', 'orange', 'purple', 'yellow'];
+
     return view('cogroupcms::modules.dashboard.settings')->with(
       array(
         'user' => Auth::user(),
@@ -66,6 +68,7 @@ class DashboardController extends CmsController
         'csss' => $this->csss,
         'breadcrumb' => $breadcrumb,
         'roles' => Roles::orderBy('id')->get(),
+        'colors' => $colors,
         'title' => trans('modulesettings.title')
       )
     );

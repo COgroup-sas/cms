@@ -77,7 +77,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" data-background-color="{{ config('cogroupcms.color_theme') }}">
+                                <button type="submit" class="btn btn-primary" data-background-color="{{ cms_settings()->colortheme }}">
                                     {{ __('Register') }}
                                 </button>
                             </div>

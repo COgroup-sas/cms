@@ -66,8 +66,8 @@
           @if(empty($profile->avatar))
           <div class="row">
             <div class="col-md-12">
+              <label>{{ trans('moduleusers.photo') }}</label>
               <div class="md-form">
-                <label>{{ trans('moduleusers.photo') }}</label>
                 <div class="custom-file">
                   <input type="file" class="custom-file-input form-control" id="customFile" accept="image/jpeg,image/gif,image/png,image/svg+xml" name="photo">
                   <label class="custom-file-label" for="customFile">{{ trans('cms.pleaseselectfile') }}</label>
@@ -116,7 +116,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="md-form">
-                <button class="btn btn-theme btn-round" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fa fa-cloud"></i></button>
+                <button class="btn btn-theme btn-round" data-background-color="{{ cms_settings()->colortheme }}" type="submit">{{ trans('cms.textbtnsubmit') }} <i class="fa fa-cloud"></i></button>
               </div>
             </div>
           </div>

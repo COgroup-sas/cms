@@ -43,7 +43,7 @@
     }
   </style>
 </head>
-<body class="{{ config('cogroupcms.color_theme') }} error-page sidebar-collapse">
+<body class="{{ cms_settings()->colortheme }} error-page sidebar-collapse">
   @include('cogroupcms::partials.preloader')
 
   <header>
@@ -51,7 +51,7 @@
     <!--Mask-->
     <div id="intro" class="view h-100">
 
-      <div class="mask" filter-background-linear-color="{{ config('cogroupcms.color_theme') }}">
+      <div class="mask" filter-background-linear-color="{{ cms_settings()->colortheme }}">
 
         <div class="container-fluid d-flex align-items-center justify-content-center h-100 scrollbar-primary">
           <div class="row justify-content-center">

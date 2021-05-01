@@ -7,7 +7,7 @@
   <!--/. Sidebar navigation -->
 
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar" data-background-color="{{ config('cogroupcms.color_theme') }}">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar" data-background-color="{{ cms_settings()->colortheme }}">
 
     <div class="container">
 

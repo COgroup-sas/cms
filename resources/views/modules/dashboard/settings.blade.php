@@ -1,7 +1,7 @@
 @extends('cogroupcms::layouts.main')
 
 @section('content')
-<form action="{{ route('cogroupcms.settings.save') }}" role="form" id="form_advanced_validation" class="masked-input no-gutters" method="POST" autocomplete="off" enctype="multipart/form-data">
+<form action="{{ route('cogroupcms.settings.save') }}" role="form" id="form_advanced_validation" class="masked-input no-gutters needs-validation" method="POST" autocomplete="off" enctype="multipart/form-data" novalidate>
   {{ csrf_field() }}
   <!-- Contact data -->
   <div class="row clearfix mb-4">
@@ -81,7 +81,7 @@
             </div>
           </div>
           <div class="text-right">
-            <button class="btn btn-theme waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+            <button class="btn btn-theme waves-effect" data-background-color="{{ cms_settings()->colortheme }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
           </div>
         </div>
       </div>
@@ -207,8 +207,27 @@
             </div>
           </div>
 
+          <div class="row mt-2">
+            <div class="col-12 col-sm-3">{!! trans('modulesettings.site.colortheme') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-line">
+                @foreach($colors as $color)
+                <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" id="{{ mb_strtolower($color) }}" name="colortheme" value="{{ $color }}"@if(cms_settings()->colortheme == $color) checked @endif>
+                  <label class="custom-control-label" for="{{ mb_strtolower($color) }}">{{ trans('modulesettings.site.colortheme.' . $color) }}</label>
+                </div>
+                @endforeach
+                @if ($errors->has('colortheme'))
+                  <span class="form-text text-danger">
+                    <strong>{{ $errors->first('colortheme') }}</strong>
+                  </span>
+                @endif
+              </div>
+            </div>
+          </div>
+
           <div class="text-right">
-            <button class="btn btn-theme waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+            <button class="btn btn-theme waves-effect" data-background-color="{{ cms_settings()->colortheme }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
           </div>
         </div>
       </div>
@@ -238,7 +257,7 @@
               @endif
             </div>
             <div class="col-sm-3">
-              <div class="img-fluid rounded my-0 p-2" data-background-color="{{ config('cogroupcms.color_theme') }}">
+              <div class="img-fluid rounded my-0 p-2" data-background-color="{{ cms_settings()->colortheme }}">
                 <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->favicon)) ? asset('vendor/cogroup/cms/images/favicon.png') : route('files.getFile', cms_settings()->favicon) }}">
               </div>
             </div>
@@ -258,7 +277,7 @@
             </div>
             <div class="col-sm-3">
               <div class="img-fluid rounded my-0 p-2">
-                <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('files.getFile', cms_settings()->logo) }}">
+                <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.cms_settings()->colortheme.'/logocms.png') : route('files.getFile', cms_settings()->logo) }}">
               </div>
             </div>
           </div>
@@ -276,13 +295,13 @@
               @endif
             </div>
             <div class="col-sm-3">
-              <div class="img-fluid rounded my-0 p-2" data-background-color="{{ config('cogroupcms.color_theme') }}">
+              <div class="img-fluid rounded my-0 p-2" data-background-color="{{ cms_settings()->colortheme }}">
                 <img class="rounded mx-auto d-block img-fluid" src="{{ (empty(cms_settings()->logocontraste)) ? asset('vendor/cogroup/cms/images/logocmscontraste.png') : route('files.getFile', cms_settings()->logocontraste) }}">
               </div>
             </div>
           </div>
           <div class="text-right">
-            <button class="btn btn-theme waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+            <button class="btn btn-theme waves-effect" data-background-color="{{ cms_settings()->colortheme }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
           </div>
         </div>
       </div>
@@ -304,7 +323,7 @@
               <div class="form-group">
                 <div class="material-switch">
                   <input name="socialaccess" type="checkbox" value="1" {{ (cms_settings()->socialaccess == 1) ? 'checked' : '' }} id="socialaccess">
-                  <label for="socialaccess" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                  <label for="socialaccess" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                 </div>
               </div>
             </div>
@@ -315,7 +334,7 @@
               <div class="form-group">
                 <div class="material-switch">
                   <input name="socialaccessgoogle" type="checkbox" value="1" {{ (cms_settings()->socialaccessgoogle == 1) ? 'checked' : '' }} id="socialaccessgoogle">
-                  <label for="socialaccessgoogle" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                  <label for="socialaccessgoogle" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                 </div>
               </div>
             </div>
@@ -326,7 +345,7 @@
               <div class="form-group">
                 <div class="material-switch">
                   <input name="socialaccessfacebook" type="checkbox" value="1" {{ (cms_settings()->socialaccessfacebook == 1) ? 'checked' : '' }} id="socialaccessfacebook">
-                  <label for="socialaccessfacebook" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                  <label for="socialaccessfacebook" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                 </div>
               </div>
             </div>
@@ -337,7 +356,7 @@
               <div class="form-group">
                 <div class="material-switch">
                   <input name="socialaccesstwitter" type="checkbox" value="1" {{ (cms_settings()->socialaccesstwitter == 1) ? 'checked' : '' }} id="socialaccesstwitter">
-                  <label for="socialaccesstwitter" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                  <label for="socialaccesstwitter" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                 </div>
               </div>
             </div>
@@ -348,13 +367,13 @@
               <div class="form-group">
                 <div class="material-switch">
                   <input name="socialaccesslinkedin" type="checkbox" value="1" {{ (cms_settings()->socialaccesslinkedin == 1) ? 'checked' : '' }} id="socialaccesslinkedin">
-                  <label for="socialaccesslinkedin" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                  <label for="socialaccesslinkedin" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                 </div>
               </div>
             </div>
           </div>
           <div class="text-right">
-            <button class="btn btn-theme waves-effect" data-background-color="{{ config('cogroupcms.color_theme') }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
+            <button class="btn btn-theme waves-effect" data-background-color="{{ cms_settings()->colortheme }}" type="submit">{{ trans('cms.txtbtnaccept') }}</button>
           </div>
         </div>
       </div>

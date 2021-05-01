@@ -5,6 +5,16 @@
 <a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/license.svg" alt="License"></a>
 </p>
 
+# Important:
+
+To avoid incompatibilities, it is necessary to remove popper, jquery and bootstrap from webpack; our library already includes the most recent ones.
+
+Comment all require files in:
+
+```shell
+resources/js/bootstrap.js
+```
+
 # Cms
 
 ### For Laravel < 5.7, please use the [1.6 branch](https://github.com/COgroup-sas/cms/tree/1.6)!
@@ -55,11 +65,11 @@ php artisan ui bootstrap --auth
 2) In order to install COgroup - CMS, just add the following to your composer.json. Then run `composer update`:
 
 ```json
-"cogroup/cms": "^2.0"
+"cogroup/cms": "^3.0"
 ```
 or run the next command:
 ```json
-composer require cogroup/cms "2.*"
+composer require cogroup/cms "3.*"
 ```
 
 3) fixed Auth::routes, to avoid Clouser error

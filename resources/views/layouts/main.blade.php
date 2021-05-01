@@ -28,7 +28,7 @@
   </script>
   @if(!is_null(cms_settings()->analyticscode)){{ cms_settings()->analyticscode }}@endif
 </head>
-<body class="{{ config('cogroupcms.color_theme') }}">
+<body class="{{ cms_settings()->colortheme }}">
   @include('cogroupcms::partials.preloader')
   @include('cogroupcms::partials.header')
 
@@ -74,7 +74,7 @@
 
   <!-- Scripts -->
   <script>
-    var lang = '{{ Session::get('applocale') }}';
+    var lang = '{{ Illuminate\Support\Facades\App::currentLocale() }}';
     var SITE_URL = "{{ URL::to('/') }}/";
     var CMS_SITE = "{{ route('cogroupcms.home') }}";
   </script>

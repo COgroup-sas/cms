@@ -49,7 +49,7 @@
     }
   </style>
 </head>
-<body class="{{ config('cogroupcms.color_theme') }} login-page sidebar-collapse">
+<body class="{{ cms_settings()->colortheme }} login-page sidebar-collapse">
   @include('cogroupcms::partials.preloader')
 
   <header>
@@ -57,7 +57,7 @@
     <!--Mask-->
     <div id="intro" class="view h-100">
 
-      <div class="mask" filter-background-linear-color="{{ config('cogroupcms.color_theme') }}">
+      <div class="mask" filter-background-linear-color="{{ cms_settings()->colortheme }}">
 
         <div class="container-fluid d-flex align-items-center justify-content-center h-100 scrollbar-primary">
           <div class="row justify-content-center">
@@ -66,7 +66,7 @@
               <div class="card login opacity-80" data-background-color="white">
 
                 <h5 class="card-header text-center py-3" data-background-color="transparent">
-                  <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.config('cogroupcms.color_theme', 'orange').'/logocms.png') : route('files.getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}" class="img-fluid w-50 m-auto">
+                  <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.cms_settings()->colortheme.'/logocms.png') : route('files.getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}" class="img-fluid w-50 m-auto">
                 </h5>
 
                 <!--Card content-->

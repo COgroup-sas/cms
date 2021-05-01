@@ -13,7 +13,6 @@ return [
   |
   */
 
-
   'title' => 'Settings',
   'contact' => 'Contact details',
   'address' => 'Address',
@@ -30,6 +29,17 @@ return [
   'site.timeformat' => 'Time format',
   'site.dateformat' => 'Date format',
   'site.defaultrol' => 'Default role when registering',
+  'site.colortheme' => 'Theme Color',
+  'site.colortheme.blue' => 'Blue',
+  'site.colortheme.dark' => 'Dark',
+  'site.colortheme.green' => 'Green',
+  'site.colortheme.light' => 'Light',
+  'site.colortheme.lightblue' => 'LightBlue',
+  'site.colortheme.lightgreen' => 'LightGreen',
+  'site.colortheme.lightpurple' => 'LightPurple',
+  'site.colortheme.orange' => 'Orange',
+  'site.colortheme.purple' => 'Purple',
+  'site.colortheme.yellow' => 'Yellow',
   'msgaddok' => 'The settings were saved successfully!',
   'image.title' => 'Images',
   'image.favicon' => 'Favicon',

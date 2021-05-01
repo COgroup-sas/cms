@@ -50,7 +50,7 @@
               <li class="list-group-item">
                 <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                   <div class="row">
-                    <div class="col-1 text-color" data-color="{{ config('cogroupcms.color_theme') }}">
+                    <div class="col-1 text-color" data-color="{{ cms_settings()->colortheme }}">
                       @php
                       $from = Cogroup\Cms\Models\User::find($notification->data['from_id']);
                       @endphp
@@ -63,7 +63,7 @@
                       {{ $from->full_name }}
                     </div>
                     <div class="col-11">
-                      <h6 class="text-color" data-color="{{ config('cogroupcms.color_theme') }}">{{ $notification->data['subject'] }}</h6>
+                      <h6 class="text-color" data-color="{{ cms_settings()->colortheme }}">{{ $notification->data['subject'] }}</h6>
                       <p class="text-color" data-color="light">{!! $notification->data['message'] !!}</p>
                       <small class="text-color" data-color="light"><strong>{{ $notification->created_at->format('Y-m-d h:i a') }}</strong></small>
                     </div>
@@ -81,7 +81,7 @@
               <li class="list-group-item">
                 <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                   <div class="row">
-                    <div class="col-1 text-color" data-color="{{ config('cogroupcms.color_theme') }}">
+                    <div class="col-1 text-color" data-color="{{ cms_settings()->colortheme }}">
                       @php
                       $from = Cogroup\Cms\Models\User::find($notification->data['from_id']);
                       @endphp
@@ -94,7 +94,7 @@
                       {{ $from->full_name }}
                     </div>
                     <div class="col-11">
-                      <h6 class="text-color" data-color="{{ config('cogroupcms.color_theme') }}">{{ $notification->data['subject'] }}</h6>
+                      <h6 class="text-color" data-color="{{ cms_settings()->colortheme }}">{{ $notification->data['subject'] }}</h6>
                       <p class="text-color" data-color="light">{!! $notification->data['message'] !!}</p>
                       <small class="text-color" data-color="light"><strong>{{ $notification->created_at->format('Y-m-d h:i a') }}</strong></small>
                     </div>
@@ -112,7 +112,7 @@
             <li class="list-group-item">
               <a href="{{ route('cogroupcms.notifications.notification', $notification->id) }}">
                 <div class="row">
-                  <div class="col-1 text-color" data-color="{{ config('cogroupcms.color_theme') }}">
+                  <div class="col-1 text-color" data-color="{{ cms_settings()->colortheme }}">
                     @php
                     $from = Cogroup\Cms\Models\User::find($notification->data['from_id']);
                     @endphp
@@ -125,7 +125,7 @@
                     {{ $from->full_name }}
                   </div>
                   <div class="col-11">
-                    <h6 class="text-color" data-color="{{ config('cogroupcms.color_theme') }}">{{ $notification->data['subject'] }}</h6>
+                    <h6 class="text-color" data-color="{{ cms_settings()->colortheme }}">{{ $notification->data['subject'] }}</h6>
                     <p class="text-color" data-color="light">{!! $notification->data['message'] !!}</p>
                     <small class="text-color" data-color="light"><strong>{{ $notification->created_at->format('Y-m-d h:i a') }}</strong></small>
                   </div>

@@ -1,24 +1,137 @@
 {
-	"sProcessing":     "Procesando...",
-	"sLengthMenu":     "Mostrar _MENU_ registros",
-	"sZeroRecords":    "No se encontraron resultados",
-	"sEmptyTable":     "Ningún dato disponible en esta tabla",
-	"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-	"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-	"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-	"sInfoPostFix":    "",
-	"sSearch":         "Buscar:",
-	"sUrl":            "",
-	"sInfoThousands":  ",",
-	"sLoadingRecords": "Cargando...",
-	"oPaginate": {
-		"sFirst":    "Primero",
-		"sLast":     "Último",
-		"sNext":     "Siguiente",
-		"sPrevious": "Anterior"
+	"emptyTable":     "No hay datos disponibles en la tabla",
+	"info":           "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+	"infoEmpty":      "Mostrando 0 a 0 de 0 entradas",
+	"infoFiltered":   "(filtrado de _MAX_ entradas totales)",
+	"infoThousands":  ".",
+	"lengthMenu":     "Mostrar entradas de _MENU_",
+	"loadingRecords": "Cargando...",
+	"processing":     "Procesando...",
+	"search":         "Buscar:",
+	"zeroRecords":    "No se encontraron registros coincidentes",
+	"thousands": ".",
+	"paginate": {
+		"first":    "Primero",
+		"last":     "Último",
+		"next":     "Siguiente",
+		"previous": "Anterior"
 	},
-	"oAria": {
-		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	"aria": {
+		"sortAscending":  ": activar para ordenar la columna ascendente",
+		"sortDescending": ": activar para ordenar la columna descendente"
+	},
+	"autoFill": {
+		"cancel": "Cancelar",
+		"fill": "Rellena todas las celdas con <i>%d</i>",
+		"fillHorizontal": "Rellenar celdas horizontalmente",
+		"fillVertical": "Rellenar celdas verticalmente"
+	},
+	"buttons": {
+		"collection": "Colección <span class='ui-button-icon-primary ui-icon ui-icon-triangle-1-s'/>",
+		"colvis": "Visibilidad de la columna",
+		"colvisRestore": "Restaurar la visibilidad",
+		"copy": "Copiar",
+		"copyKeys": "Presione ctrl or u2318 + C para copiar los datos de la tabla al portapapeles de su sistema.<br><br>Para cancelar, haga clic en este mensaje o presione escape.",
+		"copySuccess": {
+			"1": "Copiada 1 fila al portapapeles",
+			"_": "Copiadas %d filas al portapapeles"
+		},
+		"copyTitle": "Copiar al portapapeles",
+		"csv": "CSV",
+		"excel": "Excel",
+		"pageLength": {
+			"-1": "Mostrar todas las filas",
+			"1": "Mostra 1 fila",
+			"_": "Mostrar %d filas"
+		},
+		"pdf": "PDF",
+		"print": "Imprimir"
+	},
+	"searchBuilder": {
+		"add": "Agregar condición",
+		"button": {
+			"0": "Constructor de búsquedas",
+			"_": "Constructor de búsquedas (%d)"
+		},
+		"clearAll": "Limpiar todo",
+		"condition": "Condición",
+		"conditions": {
+				"date": {
+					"after": "Después",
+					"before": "Antes",
+					"between": "Entre",
+					"empty": "Vacío",
+					"equals": "Iguales",
+					"not": "No",
+					"notBetween": "No entre",
+					"notEmpty": "No vacío"
+				},
+				"moment": {
+					"after": "Después",
+					"before": "Antes",
+					"between": "Entre",
+					"empty": "Vacío",
+					"equals": "Iguales",
+					"not": "No",
+					"notBetween": "No entre",
+					"notEmpty": "No vacío"
+				},
+				"number": {
+					"between": "Entre",
+					"empty": "Vacío",
+					"equals": "Iguales",
+					"gt": "Mas grande que",
+					"gte": "Mas grande que o Igual",
+					"lt": "Menr que",
+					"lte": "Menor que o Igual",
+					"not": "No",
+					"notBetween": "No entre",
+					"notEmpty": "No Vacío"
+				},
+				"string": {
+					"contains": "Contiene",
+					"empty": "Vacío",
+					"endsWith": "Termina con",
+					"equals": "Iguales",
+					"not": "No",
+					"notEmpty": "No Vacío",
+					"startsWith": "Comienza con"
+				}
+			},
+		"data": "Data",
+		"deleteTitle": "Borrar regla de filtrado",
+		"leftTitle": "Criterios de sangrado",
+		"logicAnd": "Y",
+		"logicOr": "O",
+		"rightTitle": "Criterios de sangría",
+		"title": {
+			"0": "Constructor de búsquedas",
+			"_": "Constructor de búsquedas (%d)"
+		},
+		"value": "Valor"
+	},
+	"searchPanes": {
+		"clearMessage": "Limpiar todo",
+		"collapse": {
+			"0": "Paneles de búsqueda",
+			"_": "Paneles de búsqueda (%d)"
+		},
+		"count": "{total}",
+		"countFiltered": "{shown} ({total})",
+		"emptyPanes": "Sin paneles de búsqueda",
+		"loadMessage": "Cargando paneles de búsqueda",
+		"title": "Filtros Activos - %d"
+	},
+	"select": {
+		"1": "%d fila seleccionada",
+		"_": "%d filas seleccionadas",
+		"cells": {
+			"1": "1 celda seleccionada",
+			"_": "%d celdas seleccionadas"
+		},
+		"columns": {
+			"1": "1 columna seleccionada",
+			"_": "%d columnas seleccionadas"
+		}
 	}
 }

@@ -21,6 +21,7 @@
         @endif
       </li>
       @endforeach
+
     </ul>
     <div class="vertical-accordion-menu-footer fixed-bottom fs-0-8 text-center p-1">{{ cms_version() }}</div>
   </div>

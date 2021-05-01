@@ -28,7 +28,7 @@
                       <input id="{{ $module['id'] }}-{{ $perm }}" name="{{ $module['id'] }}-{{ $perm }}" type="checkbox" data-id="{{ $module['id'] }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
                         echo (cms_roles_check($rolpermissions, $module['moduleslug'], $perm)) ? ' checked' : '';
                         ?> id="{{ $module['id'].'-'.$perm }}">
-                      <label for="{{ $module['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                      <label for="{{ $module['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                     </div> {{ trans('cms.txt'.$perm) }}
                   </div>
                 </div>
@@ -45,7 +45,7 @@
                       <input id="{{ $submod['id'] }}-{{ $perm }}" name="{{ $submod['id'] }}-{{ $perm }}" type="checkbox" data-id="{{ $submod['id'] }}" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
                         echo (cms_roles_check($rolpermissions, $submod['moduleslug'], $perm)) ? ' checked' : '';
                         ?> id="{{ $module['id'].'-'.$perm }}">
-                      <label for="{{ $submod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                      <label for="{{ $submod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                     </div> {{ trans('cms.txt'.$perm) }}
                   </div>
                 </div>
@@ -62,7 +62,7 @@
                       <input id="{{ $ssubmod['id'] }}-{{ $perm }}" name="{{ $ssubmod['id'] }}-{{ $perm }}" type="checkbox" data-id="$ssubmod['id']" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
                         echo (cms_roles_check($rolpermissions, $ssubmod['moduleslug'], $perm)) ? ' checked' : '';
                         ?> id="{{ $module['id'].'-'.$perm }}">
-                      <label for="{{ $ssubmod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                      <label for="{{ $ssubmod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                     </div> {{ trans('cms.txt'.$perm) }}
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                         <input id="{{ $sssubmod['id'] }}-{{ $perm }}" name="{{ $sssubmod['id'] }}-{{ $perm }}" type="checkbox" data-id="$sssubmod['id']" data-perm="{{ $perm }}" data-rol-id="{{ $rolpermissions->id }}" class="perm" <?php
                           echo (cms_roles_check($rolpermissions, $sssubmod['moduleslug'], $perm)) ? ' checked' : '';
                           ?> id="{{ $module['id'].'-'.$perm }}">
-                        <label for="{{ $sssubmod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ config('cogroupcms.color_theme') }}"></label>
+                        <label for="{{ $sssubmod['id'] }}-{{ $perm }}" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                       </div> {{ trans('cms.txt'.$perm) }}
                     </div>
                           @endforeach

@@ -1,5 +1,4 @@
 window._ = require('lodash');
-window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -8,8 +7,8 @@ window.Popper = require('popper.js').default;
  */
 
 try {
-  window.Popper = require('popper.js').default;
   window.$ = window.jQuery = require('jquery');
+  window.Popper = require('popper.js').default;
 
   //Materialize-css
   window.M = require('materialize-css/dist/js/materialize.min');
@@ -20,7 +19,7 @@ try {
   require('gijgo');
   require('./plugins/bootstrap-notify');
   require('./plugins/jquery.sharrre');
-  require('./plugins/jquery-inputmask/jquery.inputmask.bundle');
+  require('inputmask');
 
   //datatables
   require( 'jszip' );
@@ -42,6 +41,7 @@ try {
   require( 'datatables.net-scroller-bs4' );
   require( 'datatables.net-searchpanes-bs4' );
   //require( 'datatables.net-select-bs4' );
+  //require('mdbootstrap');
   require('mdbootstrap/js/addons/datatables2.min');
   require('mdbootstrap/js/addons/datatables-select.min');
   require('mdbootstrap/js/addons/datatables-select2.min');
