@@ -1,7 +1,7 @@
 <p align="center"><img src="https://www.cogroupsas.com/gitimages/cogroup.svg"></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version203.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/version20.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/cogroup/cms"><img src="https://www.cogroupsas.com/gitimages/license.svg" alt="License"></a>
 </p>
 
