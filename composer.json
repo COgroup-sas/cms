@@ -3,7 +3,6 @@
     "description": "CMS for all laravel projects",
     "keywords" : ["cms", "admin", "laravel","illuminate","auth","roles","permission"],
     "license": "MIT",
-    "version": "1.8.12",
     "authors": [
         {
             "name": "COgroup",
@@ -12,9 +11,9 @@
         }
     ],
     "require": {
-        "laravel/socialite": ">=3.*",
-        "intervention/image": ">=2.*",
-        "mailjet/laravel-mailjet": ">=2.*"
+        "laravel/socialite": "^3",
+        "intervention/image": "^2",
+        "mailjet/laravel-mailjet": "^2"
     },
     "autoload": {
         "psr-4": {
