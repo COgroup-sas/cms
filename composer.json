@@ -39,7 +39,7 @@
         }
     },
     "require-dev": {
-        "laravel/framework": "7.x"
+        "laravel/framework": "8.x"
     },
     "config": {
         "sort-packages": true

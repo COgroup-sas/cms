@@ -103,7 +103,7 @@ class CmsController extends Controller
           echo '<li';
           //echo (starts_with($route, $submodule['url'])) ? ' class="active"' : '';
           echo '>';
-          echo '<a href="' . url(config('cogroupcms.uri')."/".$submodule['url']) . '">';
+          echo '<a href="' . route($submodule['url']) . '">';
           echo '<i class="sidebar-mini-icon ' . $submodule['icon'] . '"></i>';
           echo $submodule['modulename'];
           echo'</a>' ;

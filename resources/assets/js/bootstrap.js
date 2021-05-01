@@ -14,7 +14,6 @@ try {
   require('bootstrap');
   require('moment');
   window.Chart = require('chart.js');
-  require('select2');
   require('gijgo');
   require('./plugins/bootstrap-notify');
   require('./plugins/jquery.sharrre');
@@ -39,7 +38,14 @@ try {
   require( 'datatables.net-rowreorder-bs4' );
   require( 'datatables.net-scroller-bs4' );
   require( 'datatables.net-searchpanes-bs4' );
-  require( 'datatables.net-select-bs4' );
+  //require( 'datatables.net-select-bs4' );
+  require('mdbootstrap/js/addons/datatables2.min');
+  require('mdbootstrap/js/addons/datatables-select.min');
+  require('mdbootstrap/js/addons/datatables-select2.min');
+  require('mdbootstrap/js/addons/directives.min');
+  require('mdbootstrap/js/addons/flag.min');
+  require('mdbootstrap/js/addons/rating.min');
+  require('select2');
 
   require('./validation');
   require('./plugins/tagsinput');
