@@ -36,6 +36,8 @@ class CreateCogUsersTable extends Migration
                 $table->enum('active', ['Y', 'N'])->default('N');
                 $table->integer('roles_id')->unsigned()->default(1);
                 $table->integer('image_id')->unsigned()->nullable();
+                $table->enum('social', ['Y', 'N'])->default('N');
+                $table->text('avatar')->nullable();
                 
                 $table->foreign('roles_id')->references('id')->on('roles');
                 $table->foreign('image_id')->references('id')->on('files');
