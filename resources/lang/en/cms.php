@@ -13,6 +13,8 @@ return [
   |
   */
 
+  'cms' => env('APP_NAME', "COgroup - CMS"),
+  'cmsshort' => env('APP_NAME_SHORT', "COCMS"),
   'titlesignin' => 'Login to start session',
   'placeholderemail' => 'Please enter your email',
   'placeholderpassword' => 'Please enter your password',
@@ -57,6 +59,8 @@ return [
   'txtbtnaccept' => 'Accept',
   'txtbtncancel' => 'Cancel',
   'txtbtnprint' => 'Print',
+  'txtbtnback' => 'Back',
+  'txtbtnnext' => 'Next',
   'txtview' => 'View',
   'txtcreate' => 'Create',
   'txtedit' => 'Edit',
@@ -101,5 +105,9 @@ return [
   'error.503.title' => 'Service not available',
   'error.503.message' => 'We will be back soon.',
   'sign_in_with' => 'Sign in via',
-  'or' => 'o'
+  'or' => 'o',
+  'register.textwelcome' => 'Thanks for using :appname',
+  'register.textverify' => 'We have sent a verification link to the registered email.',
+  'register.textresendverificationlink' => 'Verification link sent!',
+  'register.resendlinkverification' => 'Resend verification link.'
 ];

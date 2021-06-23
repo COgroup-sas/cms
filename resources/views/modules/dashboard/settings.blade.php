@@ -208,6 +208,18 @@
           </div>
 
           <div class="row mt-2">
+            <div class="col-12 col-sm-3">{!! trans('modulesettings.site.enableregisteruser') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-group">
+                <div class="material-switch">
+                  <input name="enableregisteruser" type="checkbox" value="1" {{ (cms_settings()->enableregisteruser == 1) ? 'checked' : '' }} id="enableregisteruser">
+                  <label for="enableregisteruser" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
             <div class="col-12 col-sm-3">{!! trans('modulesettings.site.colortheme') !!}</div>
             <div class="col-12 col-sm-9">
               <div class="form-line">
@@ -329,18 +341,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-sm-3">{!! trans('modulesettings.social.gmail') !!}</div>
-            <div class="col-12 col-sm-9">
-              <div class="form-group">
-                <div class="material-switch">
-                  <input name="socialaccessgoogle" type="checkbox" value="1" {{ (cms_settings()->socialaccessgoogle == 1) ? 'checked' : '' }} id="socialaccessgoogle">
-                  <label for="socialaccessgoogle" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-sm-3">{!! trans('modulesettings.social.facebook') !!}</div>
+            <div class="col-12 col-sm-3"><i class="fab fa-facebook-f"></i> - {!! trans('modulesettings.social.facebook') !!}</div>
             <div class="col-12 col-sm-9">
               <div class="form-group">
                 <div class="material-switch">
@@ -351,7 +352,51 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-sm-3">{!! trans('modulesettings.social.twitter') !!}</div>
+            <div class="col-12 col-sm-3"><i class="fab fa-google"></i> - {!! trans('modulesettings.social.gmail') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-group">
+                <div class="material-switch">
+                  <input name="socialaccessgoogle" type="checkbox" value="1" {{ (cms_settings()->socialaccessgoogle == 1) ? 'checked' : '' }} id="socialaccessgoogle">
+                  <label for="socialaccessgoogle" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-3"><i class="fab fa-instagram"></i> - {!! trans('modulesettings.social.instagram') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-group">
+                <div class="material-switch">
+                  <input name="socialaccessinstagram" type="checkbox" value="1" {{ (cms_settings()->socialaccessinstagram == 1) ? 'checked' : '' }} id="socialaccessinstagram">
+                  <label for="socialaccessinstagram" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-3"><i class="fab fa-linkedin"></i> - {!! trans('modulesettings.social.linkedin') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-group">
+                <div class="material-switch">
+                  <input name="socialaccesslinkedin" type="checkbox" value="1" {{ (cms_settings()->socialaccesslinkedin == 1) ? 'checked' : '' }} id="socialaccesslinkedin">
+                  <label for="socialaccesslinkedin" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-3"><i class="fab fa-microsoft"></i> - {!! trans('modulesettings.social.graph') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-group">
+                <div class="material-switch">
+                  <input name="socialaccessmicrosoft" type="checkbox" value="1" {{ (cms_settings()->socialaccessmicrosoft == 1) ? 'checked' : '' }} id="socialaccessmicrosoft">
+                  <label for="socialaccessmicrosoft" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-3"><i class="fab fa-twitter"></i> - {!! trans('modulesettings.social.twitter') !!}</div>
             <div class="col-12 col-sm-9">
               <div class="form-group">
                 <div class="material-switch">
@@ -362,12 +407,23 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-sm-3">Linkedin</div>
+            <div class="col-12 col-sm-3"><i class="fab fa-yahoo"></i> - {!! trans('modulesettings.social.yahoo') !!}</div>
             <div class="col-12 col-sm-9">
               <div class="form-group">
                 <div class="material-switch">
-                  <input name="socialaccesslinkedin" type="checkbox" value="1" {{ (cms_settings()->socialaccesslinkedin == 1) ? 'checked' : '' }} id="socialaccesslinkedin">
-                  <label for="socialaccesslinkedin" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                  <input name="socialaccessyahoo" type="checkbox" value="1" {{ (cms_settings()->socialaccessyahoo == 1) ? 'checked' : '' }} id="socialaccessyahoo">
+                  <label for="socialaccessyahoo" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-3"><i class="fas fa-envelope"></i> - {!! trans('modulesettings.social.zoho') !!}</div>
+            <div class="col-12 col-sm-9">
+              <div class="form-group">
+                <div class="material-switch">
+                  <input name="socialaccesszoho" type="checkbox" value="1" {{ (cms_settings()->socialaccesszoho == 1) ? 'checked' : '' }} id="socialaccesszoho">
+                  <label for="socialaccesszoho" class="default-color" data-background-color="{{ cms_settings()->colortheme }}"></label>
                 </div>
               </div>
             </div>

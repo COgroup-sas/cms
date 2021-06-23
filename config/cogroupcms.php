@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'color_theme' => env('COGROUPCMS_COLORTHEME', 'orange'),
+    'color_theme' => env('COGROUPCMS_COLORTHEME', 'blue'),
 
     /*
     |--------------------------------------------------------------------------
@@ -83,5 +83,38 @@ return [
     */
 
     'filesystem' => env('COGROUPCMS__FILESYSTEM', 'filesystems.default'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup api domain
+    |--------------------------------------------------------------------------
+    |
+    | This variable set api domain
+    |
+    */
+
+    'domain' => env('COGROUPCMS_APIDOMAIN', NULL),
+
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup api prefix
+    |--------------------------------------------------------------------------
+    |
+    | This variable set api prefix
+    |
+    */
+
+    'apiprefix' => env('COGROUPCMS_APIPREFIX', 'api'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | COgroup api front url
+    |--------------------------------------------------------------------------
+    |
+    | This variable set url to front where use api routes
+    |
+    */
+
+    'apiurl' => env('COGROUPCMS_APIFRONTURL', env('APP_URL')),
 
 ];

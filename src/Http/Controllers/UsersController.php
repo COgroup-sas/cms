@@ -6,6 +6,8 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 use Cogroup\Cms\Models\User;
 use Cogroup\Cms\Models\Roles\Roles;
 use Cogroup\Cms\Http\Controllers\CmsController;
@@ -67,7 +69,14 @@ class UsersController extends CmsController {
   public function addpost(Request $request) {
     $id = ($request->has('id')) ? $request->input('id') : NULL;
     if(!is_null($id)) User::findOrFail($id);
-    $validator = Validator::make($request->all(), [
+
+    $data = $request->all();
+
+    if(!isset($data['roles_id'])) :
+      $data['roles_id'] = cms_settings()->defaultrol;
+    endif;
+
+    $validator = Validator::make($data, [
         'name' => 'required|max:255',
         'email' => ((is_null($id)) ? 'unique:users|' : '' ) . 'required|email|max:255',
         'password' => (is_null($id)) ? 'required|min:6|confirmed' : 'confirmed',
@@ -75,10 +84,14 @@ class UsersController extends CmsController {
     ]);
 
     if ($validator->fails()) :
-      $url = (is_null($id)) ? 'add' : 'edit';
-      return redirect(route('cogroupcms.users.' . $url))
-              ->withErrors($validator)
-              ->withInput();
+      if($request->expectsJson()) :
+        return ['status' => false, 'error' => $validator->errors()];
+      else :
+        $url = (is_null($id)) ? 'add' : 'edit';
+        return redirect(route('cogroupcms.users.' . $url))
+                ->withErrors($validator)
+                ->withInput();
+      endif;
     endif;
 
     $user = User::firstOrNew(['id' => $id]);
@@ -87,16 +100,24 @@ class UsersController extends CmsController {
     if(empty($data['password']) and !is_null($id)) :
       $data['password'] = $user->password;
     elseif((!empty($data['password']) and !is_null($id)) || is_null($id)) :
-      $data['password'] = bcrypt($data['password']);
+      $data['password'] = Hash::make($data['password']);
     endif;
     $user->fill($data);
     // Guardamos el usuario
     $user->save();
 
-    $request->session()->flash('status', '1');
-    if(is_null($id)) $request->session()->flash('msg', trans('moduleusers.msgaddok'));
-    else $request->session()->flash('msg', trans('moduleusers.msgeditok'));
-    return redirect(route('cogroupcms.users.home'));
+    if(is_null($id)) :
+      event(new Registered($user));
+    endif;
+
+    if($request->wantsJson()) :
+      return ['status' => true, 'user' => $user];
+    else :
+      $request->session()->flash('status', '1');
+      if(is_null($id)) $request->session()->flash('msg', trans('moduleusers.msgaddok'));
+      else $request->session()->flash('msg', trans('moduleusers.msgeditok'));
+      return redirect(route('cogroupcms.users.home'));
+    endif;
   }
 
   /**
@@ -151,10 +172,14 @@ class UsersController extends CmsController {
    *
    * @return \Illuminate\Http\Response
    */
-  public function profile() {
+  public function profile(Request $request) {
     $breadcrumb = array(trans('cms.home'), trans('moduleusers.title'), trans('moduleusers.profile'));
 
     $user = User::with('Roles')->findOrFail(Auth::id());
+
+    if($request->expectsJson()) :
+      return $user;
+    endif;
 
     return view('cogroupcms::modules.users.profile')->with(
       array(
@@ -173,10 +198,13 @@ class UsersController extends CmsController {
     ]);
 
     if ($validator->fails()) :
-      dd($validator->messages());
-      return redirect(route('cogroupcms.usersprofile'))
-              ->withErrors($validator)
-              ->withInput();
+      if($request->expectsJson()) :
+        return ['status' => false, 'error' => $validator->errors()];
+      else :
+        return redirect(route('cogroupcms.usersprofile'))
+                ->withErrors($validator)
+                ->withInput();
+      endif;
     endif;
 
     $user = User::findOrFail(Auth::id());
@@ -184,7 +212,7 @@ class UsersController extends CmsController {
     if(empty($data['password'])) :
       $data['password'] = $user->password;
     elseif(!empty($data['password'])) :
-      $data['password'] = bcrypt($data['password']);
+      $data['password'] = Hash::make($data['password']);
     endif;
     $user->fill($data);
     if ($request->hasFile('photo')) :
@@ -195,6 +223,10 @@ class UsersController extends CmsController {
     endif;
     // Guardamos el usuario
     $user->save();
+
+    if($request->wantsJson()) :
+      return $user;
+    endif;
 
     $request->session()->flash('status', '1');
     $request->session()->flash('msg', trans('moduleusers.profileok'));
@@ -207,12 +239,56 @@ class UsersController extends CmsController {
    * @return \Illuminate\Http\Response
    */
   public function getUsers(Request $request) {
-    if($request->ajax()) :
+    if($request->wantsJson()) :
       $users = User::select(DB::Raw('id As value'), DB::Raw('name AS text'))->where('name', 'like', '%'.$request->input('q').'%')->orderBy('name', 'asc')->get();
 
       return response()->json($users);
     else :
       return abort(403, trans('cms.403'));
     endif;
+  }
+
+
+
+  /**
+  * Show the application's login form.
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function showRegistrationForm()
+  {
+    return view('cogroupcms::auth.register');
+  }
+
+  /**
+   * Api functions
+   */
+
+  /**
+   * function login for api routes
+   * @param  Request $request
+   * @return json response
+   */
+  public function loginApi(Request $request) {
+    $credentials = $request->only('email', 'password') + ['active' => 'Y'];
+
+    if ( !Auth::attempt($credentials) ) :
+      return response()->json([
+        'message' => 'Invalid login details'
+      ], 401);
+    endif;
+
+    $user = User::where('email', $request['email'])->firstOrFail();
+
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+      'access_token' => $token,
+      'token_type' => 'Bearer',
+    ]);
+  }
+
+  public function logoutApi() {
+
   }
 }

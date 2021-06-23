@@ -73,18 +73,18 @@ class CogroupCmsSeeder extends Seeder
       ],
       [
         'setting'       => 'socialaccess',
-        'defaultvalue'  => '1'
-      ],
-      [
-        'setting'       => 'socialaccessgoogle',
-        'defaultvalue'  => '1'
+        'defaultvalue'  => '0'
       ],
       [
         'setting'       => 'socialaccessfacebook',
         'defaultvalue'  => '0'
       ],
       [
-        'setting'       => 'socialaccesstwitter',
+        'setting'       => 'socialaccessgoogle',
+        'defaultvalue'  => '0'
+      ],
+      [
+        'setting'       => 'socialaccessinstagram',
         'defaultvalue'  => '0'
       ],
       [
@@ -92,8 +92,32 @@ class CogroupCmsSeeder extends Seeder
         'defaultvalue'  => '0'
       ],
       [
+        'setting'       => 'socialaccessmicrosoft',
+        'defaultvalue'  => '0'
+      ],
+      [
+        'setting'       => 'socialaccesstwitter',
+        'defaultvalue'  => '0'
+      ],
+      [
+        'setting'       => 'socialaccessyahoo',
+        'defaultvalue'  => '0'
+      ],
+      [
+        'setting'       => 'socialaccesszoho',
+        'defaultvalue'  => '0'
+      ],
+      [
         'setting'       => 'defaultrol',
         'defaultvalue'  => '3'
+      ],
+      [
+        'setting'       => 'colortheme',
+        'defaultvalue'  => 'blue'
+      ],
+      [
+        'setting'       => 'enableregisteruser',
+        'defaultvalue'  => '0'
       ]
     ]);
 

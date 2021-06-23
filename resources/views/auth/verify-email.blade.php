@@ -66,56 +66,42 @@
               <div class="card login opacity-80" data-background-color="white">
 
                 <h5 class="card-header text-center py-3" data-background-color="transparent">
-                  <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.cms_settings()->colortheme.'/logocms.png') : route('files.getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}" class="img-fluid w-50 m-auto">
+                  <img src="{{ (empty(cms_settings()->logo)) ? asset('vendor/cogroup/cms/images/'.cms_settings()->colortheme.'/logocms.png') : route('files.getFile', cms_settings()->logo) }}" alt="{{ cms_settings()->sitename }}" class="img-fluid img-login m-auto">
                 </h5>
 
                 <!--Card content-->
                 <div class="card-body px-lg-4 pt-0">
 
-                  <!-- Form -->
-                  <form class="text-center needs-validation text-color" data-color="dark" novalidate method="POST" action="{{ route('password.update') }}">
-                    @csrf
+                  <h3>{{ __('cms.register.textwelcome', ['appname' => config('app.name')]) }}</h3>
 
-                    <input type="hidden" name="token" value="{{ $token }}">
+                  <p>{{ __('cms.register.textverify') }}</p>
 
-                    <!-- Email -->
-                    <div class="md-form">
-                      <input type="text" id="LoginFormEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ (isset($email)) ? $email : old('email') }}" required autocomplete="email" readonly="readonly">
-                      <label for="LoginFormEmail">{{ __('validation.attributes.email') }}</label>
+                  <div class="d-flex justify-content-around">
+                    <div>
+                      @if (Route::has('login'))
+                        <!-- Login -->
+                        <a href="{{ route('login') }}">{{ __('cms.login') }}</a>
+                      @endif
                     </div>
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-
-                    <!-- Password -->
-                    <div class="md-form">
-                      <input type="password" id="materialLoginFormPassword" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                      <label for="materialLoginFormPassword">@lang('validation.attributes.password')</label>
+                    <div>
+                      @if (Route::has('verification.send'))
+                        <!-- Login -->
+                        <form action="{{ route('verification.send') }}" method="post" class="my-0 py-0">
+                          @csrf
+                          <!-- Resend verification link button -->
+                          <button class="btn btn-theme btn-rounded btn-block waves-effect z-depth-0 my-0" type="submit">{{ __('cms.register.resendlinkverification') }}</button>
+                        </form>
+                      @endif
                     </div>
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
+                  </div>
 
-                    <!-- Password -->
-                    <div class="md-form">
-                      <input type="password" id="materialLoginFormPasswordConfirm" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
-                      <label for="materialLoginFormPassword">@lang('validation.attributes.password')</label>
+                  @if ( isset( $message ) )
+                  <div class="d-flex justify-content-around">
+                    <div>
+                      {{ $message }}
                     </div>
-                    @error('password_confirmation')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-
-                    <!-- Sign in button -->
-                    <button class="btn btn-theme btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">{{ __('cms.textbtnresetpassword') }}</button>
-
-                  </form>
-                  <!-- Form -->
+                  </div>
+                  @endif
 
                 </div>
 

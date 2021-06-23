@@ -12,11 +12,26 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "laravel/socialite": ">=5.0",
+        "php": "^7.3|^7.4|^8.0",
+        "doctrine/dbal": "^3.1",
+        "fideloper/proxy": "^4.4",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.12",
         "intervention/image": ">=2.5.1",
-        "thedoctor0/laravel-mailjet-driver": ">=1.0",
-        "laravel/ui": ">=3.0"
+        "laravel/sanctum": "^2.10",
+        "laravel/socialite": ">=5.0",
+        "predis/predis": "^1.1",
+        "thedoctor0/laravel-mailjet-driver": "^1.0.3",
+        "laravel/ui": "^3.2.1",
+        "socialiteproviders/facebook": "^4.1",
+        "socialiteproviders/google": "^4.1",
+        "socialiteproviders/instagram-basic": "^4.1",
+        "socialiteproviders/linkedin": "^4.1",
+        "socialiteproviders/microsoft-graph": "^4.1",
+        "socialiteproviders/twitter": "^4.1",
+        "socialiteproviders/yahoo": "^4.1",
+        "socialiteproviders/zoho": "^4.1"
     },
     "autoload": {
         "psr-4": {
@@ -32,7 +47,10 @@
             ],
             "aliases": {
                 "Cms": "Cogroup\\Cms\\Facades\\Cms"
-            }
+            },
+            "dont-discover": [
+                "laravel/socialite"
+            ]
         },
         "branch-alias": {
             "dev-master": "2.x-dev"

@@ -180,7 +180,8 @@ jQuery(function () {
       jQuery('#' + id).select2({
         theme: "bootstrap4",
         width: jQuery(this).data('width') ? jQuery(this).data('width') : jQuery(this).hasClass('w-100') ? '100%' : 'style',
-        placeholder: jQuery(this).data('placeholder')
+        placeholder: jQuery(this).data('placeholder'),
+		dropdownParent: (typeof(jQuery(this).data('modal')) != "undefined") ? jQuery(this.data('modal')) : 'body'
       });
     }
   });

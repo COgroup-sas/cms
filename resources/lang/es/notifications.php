@@ -24,5 +24,6 @@ return [
     'all' => 'Todas',
     'markread' => "Marcar todas como leídas",
     'thanks' => 'Atentamente',
-    'delete' => 'Borrar todas las notificaciones'
+    'delete' => 'Borrar todas las notificaciones',
+    'password.reset.subject' => 'Notificación de restablecimiento de contraseña en :appname'
 ];

@@ -24,5 +24,6 @@ return [
     'all' => 'All',
     'markread' => "Mark all as read",
     'thanks' => 'Sincerely',
-    'delete' => 'Delete all notifications'
+    'delete' => 'Delete all notifications',
+    'password.reset.subject' => 'Paasword reset notification in :appname'
 ];

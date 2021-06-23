@@ -3,6 +3,7 @@
 namespace Cogroup\Cms\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
@@ -38,5 +39,18 @@ class ForgotPasswordController extends Controller
     public function showLinkRequestForm()
     {
         return view('cogroupcms::auth.passwords.email');
+    }
+
+    /**
+     * Display the form password to reset
+     * @param string $token
+     * @param  Request $request
+     * @return view
+     */
+    public function showResetForm($token, Request $request) {
+        return view('cogroupcms::auth.passwords.reset')->with([
+            'email' => $request->email,
+            'token' => $token
+        ]);
     }
 }

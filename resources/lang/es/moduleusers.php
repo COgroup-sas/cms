@@ -33,5 +33,7 @@ return [
     'active.fail' => 'El usuario no esta activo',
     'profile' => 'Mi perfil',
     'photo' => 'Foto',
-    'profileok' => 'Su perfil se actualizó correctamente.'
+    'profileok' => 'Su perfil se actualizó correctamente.',
+    'userinactive' => 'El usuario está inactivo',
+    'registerinactive' => 'El registro de usuarios está inactivo'
 ];

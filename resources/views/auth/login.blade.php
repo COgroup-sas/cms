@@ -81,14 +81,6 @@
 
                     <h6>
                       <div class="row justify-content-center">
-                        @if(cms_settings()->socialaccessgoogle == 1)
-                        <div class="col-6 col-sm-3">
-                          <a class="link fs-1-2" href="{{ url('login/google') }}">
-                            <i class="fab fa-google"></i><br>
-                            <small class="fs-0-625">Google</small>
-                          </a>
-                        </div>
-                        @endif
                         @if(cms_settings()->socialaccessfacebook == 1)
                         <div class="col-6 col-sm-3">
                           <a class="link fs-1-2" href="{{ url('login/facebook') }}">
@@ -97,11 +89,19 @@
                           </a>
                         </div>
                         @endif
-                        @if(cms_settings()->socialaccesstwitter == 1)
+                        @if(cms_settings()->socialaccessgoogle == 1)
                         <div class="col-6 col-sm-3">
-                          <a class="link fs-1-2" href="{{ url('login/twitter') }}">
-                            <i class="fab fa-twitter"></i><br>
-                            <small class="fs-0-625">Twitter</small>
+                          <a class="link fs-1-2" href="{{ url('login/google') }}">
+                            <i class="fab fa-google"></i><br>
+                            <small class="fs-0-625">Google</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccessinstagram == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/instagram') }}">
+                            <i class="fab fa-instagram"></i><br>
+                            <small class="fs-0-625">Instagram</small>
                           </a>
                         </div>
                         @endif
@@ -113,6 +113,38 @@
                           </a>
                         </div>
                         @endif
+                        @if(cms_settings()->socialaccessmicrosoft == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/graph') }}">
+                            <i class="fab fa-microsoft"></i><br>
+                            <small class="fs-0-625">Microsoft</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccesstwitter == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/twitter') }}">
+                            <i class="fab fa-twitter"></i><br>
+                            <small class="fs-0-625">Twitter</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccessyahoo == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/yahoo') }}">
+                            <i class="fab fa-yahoo"></i><br>
+                            <small class="fs-0-625">Yahoo</small>
+                          </a>
+                        </div>
+                        @endif
+                        @if(cms_settings()->socialaccesszoho == 1)
+                        <div class="col-6 col-sm-3">
+                          <a class="link fs-1-2" href="{{ url('login/zoho') }}">
+                            <i class="fas fa-envelope"></i><br>
+                            <small class="fs-0-625">Zoho</small>
+                          </a>
+                        </div>
+                        @endif
                       </div>
                     </h6>
 
@@ -121,11 +153,11 @@
 
                     <!-- Email -->
                     <div class="md-form">
-                      <input type="text" id="LoginFormEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                      <input type="email" id="LoginFormEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                       <label for="LoginFormEmail">{{ __('validation.attributes.email') }}</label>
                     </div>
                     @error('email')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback d-block text-left" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
                     @enderror
@@ -136,13 +168,13 @@
                       <label for="materialLoginFormPassword">@lang('validation.attributes.password')</label>
                     </div>
                     @error('password')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback d-block text-left" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
                     @enderror
 
                     <div class="d-flex justify-content-around">
-                      <div>
+                      <div class="mr-3">
                         <!-- Remember me -->
                         <div class="form-check">
                           <input type="checkbox" class="form-check-input" {{ old('remember') ? 'checked' : '' }} name="remember" id="remember">
@@ -162,6 +194,17 @@
 
                   </form>
                   <!-- Form -->
+
+                  @if(cms_settings()->enableregisteruser == 1)
+                  <div class="d-flex justify-content-around">
+                    <div>
+                        @if (Route::has('register'))
+                            <!-- Login -->
+                            <a href="{{ route('register') }}">{{ __('cms.register') }}</a>
+                        @endif
+                    </div>
+                  </div>
+                  @endif
 
                 </div>
 

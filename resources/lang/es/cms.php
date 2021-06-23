@@ -105,5 +105,9 @@ return [
   'error.503.title' => 'Servicio no disponible',
   'error.503.message' => 'Volvemos en seguida.',
   'sign_in_with' => 'Ingresa a través de',
-  'or' => 'o'
+  'or' => 'o',
+  'register.textwelcome' => 'Gracias por usar :appname',
+  'register.textverify' => 'Hemos enviado al correo registrado un link de verificación.',
+  'register.textresendverificationlink' => '¡Enlace de verificación enviado!',
+  'register.resendlinkverification' => 'Reenviar el link de verificación.'
 ];
