@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 window._ = require('lodash');
 
 /**
@@ -49,6 +50,7 @@ try {
   require('mdbootstrap/js/addons/flag.min');
   require('mdbootstrap/js/addons/rating.min');
   require('select2');
+  window.Swal = swal;
 
   require('./validation');
   require('./plugins/tagsinput');
