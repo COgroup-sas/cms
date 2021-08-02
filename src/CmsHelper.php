@@ -11,7 +11,7 @@ if (! function_exists('cms_version')) {
      */
     function cms_version()
     {
-        return "CMS V3.0";
+        return "COGCMS V3.0.7";
     }
 }
 
@@ -82,8 +82,12 @@ if (! function_exists('cms_format_date')) {
      */
     function cms_format_date($date)
     {
-        if(!is_null($date) and !empty($date)) return \Carbon\Carbon::createFromFormat("Y-m-d", $date)->format(cms_settings()->dateformat);
-        else return '';
+        if(!is_null($date) and !empty($date)) :
+            $date = new \Carbon\Carbon($date);
+            return $date->format(cms_settings()->dateformat);
+        else :
+            return '';
+        endif;
     }
 }
 
@@ -96,8 +100,12 @@ if (! function_exists('cms_format_time')) {
      */
     function cms_format_time($time)
     {
-        if(!is_null($time) and !empty($time)) return \Carbon\Carbon::createFromFormat("H:i:s", $time)->format(cms_settings()->timeformat);
-        else return '';
+        if(!is_null($time) and !empty($time)) :
+            $time = new \Carbon\Carbon($time);
+            return $time->format(cms_settings()->timeformat);
+        else :
+            return '';
+        endif;
     }
 }
 
@@ -111,7 +119,8 @@ if (! function_exists('cms_format_datetime')) {
     function cms_format_datetime($datetime)
     {
         if(!is_null($datetime) and !empty($datetime)) :
-            return \Carbon\Carbon::createFromFormat("Y-m-d H:i:s", $datetime)->format(cms_settings()->dateformat." ".cms_settings()->timeformat);
+            $dateTime = new \Carbon\Carbon($datetime);
+            return $dateTime->format(cms_settings()->dateformat." ".cms_settings()->timeformat);
         else :
             return '';
         endif;

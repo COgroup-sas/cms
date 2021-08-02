@@ -160,6 +160,9 @@ class DashboardController extends CmsController
       endif;
     endif;
 
+    $request->session()->forget('settings');
+    $request->session()->put('settings', cms_settings());
+
     $request->session()->flash('status', '1');
     $request->session()->flash('msg', trans('modulesettings.msgaddok'));
     return redirect(route('cogroupcms.settings.home'));
