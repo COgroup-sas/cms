@@ -14,11 +14,11 @@ class Roles extends Model
   protected $table = 'roles';
 
   /**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var bool
-	 */
-	public $timestamps = true;
+   * Indicates if the model should be timestamped.
+   *
+   * @var bool
+   */
+  public $timestamps = true;
 
   /**
    * The attributes that are mass assignable.
@@ -38,7 +38,8 @@ class Roles extends Model
     'id'
   ];
 
-  public function RolAccess() {
+  public function RolAccess()
+  {
     return $this->hasMany('Cogroup\Cms\Models\Roles\RolesAccess', 'roles_id');
   }
 }
