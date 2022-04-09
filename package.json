@@ -65,7 +65,7 @@
     "jszip": "^3.6.0",
     "materialize-css": "^1.0.0",
     "mdbootstrap": "^4.19.2",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "node-waves": "^0.7.6",
     "pdfmake": "^0.1.71",
     "select2": "^4.0.13",
