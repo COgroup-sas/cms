@@ -36,14 +36,18 @@ class CmsController extends Controller
 
   protected function setDefaultSettings() {
     if(!session()->has('settings')) :
-      $tmp = DB::table('settings')->get();
-      if(!empty($tmp)) :
-        $this->defaultsettings = new \stdClass();
-        foreach ($tmp as $value) :
-          $this->defaultsettings->{$value->setting} = $value->defaultvalue;
-        endforeach;
-      endif;
-      session()->put('settings', $this->defaultsettings);
+      try {
+        $tmp = DB::table('settings')->get();
+        if(!empty($tmp)) :
+          $this->defaultsettings = new \stdClass();
+          foreach ($tmp as $value) :
+            $this->defaultsettings->{$value->setting} = $value->defaultvalue;
+          endforeach;
+        endif;
+        session()->put('settings', $this->defaultsettings);
+      } catch() {
+        return null;
+      }
     else :
       $this->defaultsettings = session('settings');
     endif;
